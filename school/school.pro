@@ -26,10 +26,15 @@ CONFIG += c++11
 
 SOURCES += \
         main.cpp \
-        mainwindow.cpp
+        mainwindow.cpp \
+    student.cpp \
+    idgenerator.cpp
 
 HEADERS += \
-        mainwindow.h
+        mainwindow.h \
+    student.h \
+    gender.h \
+    idgenerator.h
 
 FORMS += \
         mainwindow.ui
