@@ -8,9 +8,12 @@ class Student
 {
 public:
     Student(QString firstName, QString lastName, Gender gender);
+
     void addGrade(double grade);
     void editGrade(int whichGrade, double newGrade);
     void removeGrade(int whichGrade);
+
+    double getAverage();
 private:
     unsigned ID;
     QString hisFirstName, hisLastName;
