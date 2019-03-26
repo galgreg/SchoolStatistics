@@ -27,12 +27,16 @@ CONFIG += c++11
 SOURCES += \
         main.cpp \
     student.cpp \
-    idgenerator.cpp
+    idgenerator.cpp \
+    statistics_generator.cpp \
+    studentinfo.cpp
 
 HEADERS += \
     student.h \
     gender.h \
-    idgenerator.h
+    idgenerator.h \
+    statistics_generator.h \
+    studentinfo.h
 
 FORMS +=
 
