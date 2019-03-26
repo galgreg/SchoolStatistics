@@ -26,8 +26,14 @@ void Student::removeGrade(int whichGrade) {
     hisGrades.removeAt(whichGrade);
 }
 
-double Student::getAverage()
+Student::GradesRange Student::getGrades() const
 {
+    auto begin = hisGrades.cbegin();
+    auto end = hisGrades.cend();
+    return std::make_pair(begin, end);
+}
+
+double Student::getGradesAverage() const {
     int howMuchGrades = hisGrades.size();
     double sum = 0.0;
 
@@ -35,4 +41,16 @@ double Student::getAverage()
         sum += grade;
     }
     return sum / howMuchGrades;
+}
+
+QString Student::getFullName() const {
+    return QString("%1 %2").arg(hisFirstName).arg(hisLastName);
+}
+
+Gender Student::getGender() const {
+    return hisGender;
+}
+
+unsigned Student::getID() const {
+    return ID;
 }
