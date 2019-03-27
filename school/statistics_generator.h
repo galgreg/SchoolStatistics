@@ -6,7 +6,7 @@
 class StatisticsGenerator
 {
 public:
-    StatisticsGenerator(const QList<Student> &inputList);
+    explicit StatisticsGenerator(const QList<Student> &inputList);
     double getAverageForStudent(int whichStudent) const;
     double getAverageOfWholeClass() const;
     StudentInfo* getInfoAboutStudent(int whichStudent) const;

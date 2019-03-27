@@ -9,7 +9,7 @@
 class StudentDataManager
 {
 public:
-    StudentDataManager(QString fileName);
+    explicit StudentDataManager(QString fileName);
     QList<Student> read();
     void write(const QList<Student> &students);
 private:
