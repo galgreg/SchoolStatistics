@@ -29,14 +29,16 @@ SOURCES += \
     student.cpp \
     idgenerator.cpp \
     statistics_generator.cpp \
-    studentinfo.cpp
+    studentinfo.cpp \
+    studentlist.cpp
 
 HEADERS += \
     student.h \
     gender.h \
     idgenerator.h \
     statistics_generator.h \
-    studentinfo.h
+    studentinfo.h \
+    studentlist.h
 
 FORMS +=
 
