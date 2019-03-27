@@ -1,6 +1,10 @@
 #include "student.h"
 #include "idgenerator.h"
 
+Student::Student() : hisFirstName(""), hisLastName(""), hisGender(UNKNOWN) {
+
+}
+
 Student::Student(
         QString firstName,
         QString lastName,

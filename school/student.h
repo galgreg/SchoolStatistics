@@ -9,6 +9,7 @@ class Student
 public:
     using GradesRange = std::pair<QList<double>::const_iterator, QList<double>::const_iterator>;
 
+    Student();
     Student(QString firstName, QString lastName, Gender gender);
     void addGrade(double grade);
     void editGrade(int whichGrade, double newGrade);
