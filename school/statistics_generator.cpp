@@ -1,17 +1,16 @@
 #include "statistics_generator.h"
 
-StatisticsGenerator::StatisticsGenerator(QString fileName)
-{
-
+StatisticsGenerator::StatisticsGenerator(const QList<Student> &inputList) {
+    for(const auto &student : inputList) {
+        students.push_back(student);
+    }
 }
 
-double StatisticsGenerator::getAverageForStudent(int whichStudent) const
-{
+double StatisticsGenerator::getAverageForStudent(int whichStudent) const {
     return students.at(whichStudent).getGradesAverage();
 }
 
-double StatisticsGenerator::getAverageOfWholeClass() const
-{
+double StatisticsGenerator::getAverageOfWholeClass() const {
     int numberOfStudents = students.size();
     double sumOfIndividualAverages = 0.0;
 
@@ -22,8 +21,7 @@ double StatisticsGenerator::getAverageOfWholeClass() const
     return sumOfIndividualAverages / numberOfStudents;
 }
 
-StudentInfo *StatisticsGenerator::getInfoAboutStudent(int whichStudent) const
-{
+StudentInfo *StatisticsGenerator::getInfoAboutStudent(int whichStudent) const {
     const auto &student = students.at(whichStudent);
     unsigned studentID = student.getID();
     QString studentName = student.getFullName();
