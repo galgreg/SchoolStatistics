@@ -30,7 +30,8 @@ SOURCES += \
     idgenerator.cpp \
     statistics_generator.cpp \
     studentinfo.cpp \
-    studentlist.cpp
+    studentlist.cpp \
+    studentdatamanager.cpp
 
 HEADERS += \
     student.h \
@@ -38,7 +39,8 @@ HEADERS += \
     idgenerator.h \
     statistics_generator.h \
     studentinfo.h \
-    studentlist.h
+    studentlist.h \
+    studentdatamanager.h
 
 FORMS +=
 
