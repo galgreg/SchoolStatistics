@@ -1,15 +1,16 @@
 #ifndef TESTIDGENERATOR_H
 #define TESTIDGENERATOR_H
 
-#include <QtTest/QtTest>
+#include <QtTest>
 
 class TestIdGenerator : public QObject
 {
     Q_OBJECT
 
 private slots:
-    void testStubPass();
-    void testStubFail();
+    void testInstanceReturnsNotNull();
+    void testInstanceIsAlwaysSame();
+    void testGeneratedValuesAreUnique();
 };
 
 #endif // TESTIDGENERATOR_H
