@@ -1,7 +1,7 @@
 #include "student.h"
 #include "idgenerator.h"
 
-Student::Student() : hisFirstName(""), hisLastName(""), hisGender(UNKNOWN) {
+Student::Student() : ID(0), hisFirstName(""), hisLastName(""), hisGender(UNKNOWN) {
 
 }
 
@@ -39,6 +39,9 @@ Student::GradesRange Student::getGrades() const
 
 double Student::getGradesAverage() const {
     int howMuchGrades = hisGrades.size();
+    if (howMuchGrades == 0) {
+        return 0.0;
+    }
     double sum = 0.0;
 
     for(auto grade : hisGrades) {
@@ -48,7 +51,8 @@ double Student::getGradesAverage() const {
 }
 
 QString Student::getFullName() const {
-    return QString("%1 %2").arg(hisFirstName).arg(hisLastName);
+    QString fullName = QString("%1 %2").arg(hisFirstName).arg(hisLastName);
+    return fullName.trimmed();
 }
 
 Gender Student::getGender() const {
