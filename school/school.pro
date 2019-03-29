@@ -31,7 +31,9 @@ SOURCES += \
     statistics_generator.cpp \
     studentinfo.cpp \
     studentlist.cpp \
-    studentdatamanager.cpp
+    studentdatamanager.cpp \
+    mainwindow.cpp \
+    studentdatawindow.cpp
 
 HEADERS += \
     student.h \
@@ -40,9 +42,13 @@ HEADERS += \
     statistics_generator.h \
     studentinfo.h \
     studentlist.h \
-    studentdatamanager.h
+    studentdatamanager.h \
+    mainwindow.h \
+    studentdatawindow.h
 
-FORMS +=
+FORMS += \
+    mainwindow.ui \
+    studentdatawindow.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
