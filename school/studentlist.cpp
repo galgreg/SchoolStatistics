@@ -1,6 +1,6 @@
 #include "studentlist.h"
 
-StudentList::StudentList()
-{
+StudentList::StudentList(const QString &fileName)
+        : mDataManager(fileName) {
 
 }

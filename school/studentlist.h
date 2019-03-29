@@ -8,7 +8,7 @@
 class StudentList
 {
 public:
-    explicit StudentList(QString fileName);
+    explicit StudentList(const QString &fileName);
 
 private:
     StudentDataManager mDataManager;
