@@ -8,6 +8,7 @@ IDGenerator::~IDGenerator() {
     if(only_copy) {
         delete only_copy;
     }
+    only_copy = nullptr;
 }
 unsigned IDGenerator::next() {
     return ++id;
