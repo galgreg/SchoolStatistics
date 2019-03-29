@@ -60,10 +60,12 @@ test {
 
     SOURCES -= main.cpp
 
-    HEADERS += test/testidgenerator.h
+    HEADERS += test/testidgenerator.h \
+    test/teststudent.h
 
     SOURCES += test/test_main.cpp \
-    test/testidgenerator.cpp
+    test/testidgenerator.cpp \
+    test/teststudent.cpp
 
 } else {
     message(Normal build)
