@@ -1,8 +1,11 @@
-#include <QtTest/QtTest>
 #include "testidgenerator.h"
+#include "teststudent.h"
+#include <QtTest/QtTest>
 
 int main(int argc, char** argv) {
     QApplication app(argc, argv);
     TestIdGenerator testGenerator;
-    return QTest::qExec(&testGenerator, argc, argv);
+    TestStudent testStudent;
+    return QTest::qExec(&testGenerator, argc, argv) |
+            QTest::qExec(&testStudent, argc, argv);
 }
