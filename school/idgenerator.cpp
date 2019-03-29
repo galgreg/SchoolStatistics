@@ -1,22 +1,17 @@
 #include "idgenerator.h"
-IDGenerator* IDGenerator::only_copy;
+std::unique_ptr<IDGenerator> IDGenerator::only_copy(nullptr);
 
 IDGenerator::IDGenerator() : id(0) {
 
 }
-IDGenerator::~IDGenerator() {
-    if(only_copy) {
-        delete only_copy;
-    }
-    only_copy = nullptr;
-}
+
 unsigned IDGenerator::next() {
     return ++id;
 }
 
 IDGenerator* IDGenerator::instance() {
    if (!only_copy) {
-      only_copy = new IDGenerator();
+      only_copy.reset(new IDGenerator());
    }
-   return only_copy;
+   return only_copy.get();
 }
