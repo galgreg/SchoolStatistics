@@ -53,6 +53,22 @@ FORMS += \
     studentdatawindow.ui \
     confirmdialog.ui
 
+test {
+    message(Test build)
+    QT += testlib
+    TARGET = UnitTests
+
+    SOURCES -= main.cpp
+
+    HEADERS += test/testidgenerator.h
+
+    SOURCES += test/test_main.cpp \
+    test/testidgenerator.cpp
+
+} else {
+    message(Normal build)
+}
+
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
