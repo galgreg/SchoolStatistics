@@ -33,7 +33,8 @@ SOURCES += \
     studentlist.cpp \
     studentdatamanager.cpp \
     mainwindow.cpp \
-    studentdatawindow.cpp
+    studentdatawindow.cpp \
+    confirmdialog.cpp
 
 HEADERS += \
     student.h \
@@ -44,11 +45,13 @@ HEADERS += \
     studentlist.h \
     studentdatamanager.h \
     mainwindow.h \
-    studentdatawindow.h
+    studentdatawindow.h \
+    confirmdialog.h
 
 FORMS += \
     mainwindow.ui \
-    studentdatawindow.ui
+    studentdatawindow.ui \
+    confirmdialog.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
