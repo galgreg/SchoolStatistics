@@ -8,20 +8,18 @@
 class Student : public StudentInterface
 {
 public:
-    using GradesRange = std::pair<QList<double>::const_iterator, QList<double>::const_iterator>;
-
     Student();
     Student(QString firstName, QString lastName, Gender gender);
 
-    unsigned getID() const;
-    QString getFullName() const;
-    Gender getGender() const;
-    GradesRange getGrades() const;
-    double getGradesAverage() const;
+    unsigned getID() const override;
+    QString getFullName() const override;
+    Gender getGender() const  override;
+    GradesRange getGrades() const  override;
+    double getGradesAverage() const override;
 
-    void addGrade(double grade);
-    void editGrade(int whichGrade, double newGrade);
-    void removeGrade(int whichGrade);
+    void addGrade(double grade) override;
+    void editGrade(int whichGrade, double newGrade) override;
+    void removeGrade(int whichGrade) override;
 private:
     unsigned ID;
     QString hisFirstName, hisLastName;
