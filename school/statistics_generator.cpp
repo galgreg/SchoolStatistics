@@ -1,13 +1,13 @@
 #include "statistics_generator.h"
 
-StatisticsGenerator::StatisticsGenerator(const QList<Student> &inputList) {
-    for(const auto &student : inputList) {
+StatisticsGenerator::StatisticsGenerator(const QList<StudentInterface*> &inputList) {
+    for(auto student : inputList) {
         students.push_back(student);
     }
 }
 
 double StatisticsGenerator::getAverageForStudent(int whichStudent) const {
-    return students.at(whichStudent).getGradesAverage();
+    return students.at(whichStudent)->getGradesAverage();
 }
 
 double StatisticsGenerator::getAverageOfWholeClass() const {
@@ -15,16 +15,16 @@ double StatisticsGenerator::getAverageOfWholeClass() const {
     double sumOfIndividualAverages = 0.0;
 
     for (auto student : students) {
-        sumOfIndividualAverages += student.getGradesAverage();
+        sumOfIndividualAverages += student->getGradesAverage();
     }
 
     return sumOfIndividualAverages / numberOfStudents;
 }
 
 StudentInfo *StatisticsGenerator::getInfoAboutStudent(int whichStudent) const {
-    const auto &student = students.at(whichStudent);
-    unsigned studentID = student.getID();
-    QString studentName = student.getFullName();
-    Gender studentGender = student.getGender();
+    auto student = students.at(whichStudent);
+    unsigned studentID = student->getID();
+    QString studentName = student->getFullName();
+    Gender studentGender = student->getGender();
     return new StudentInfo(studentID, studentName, studentGender);
 }

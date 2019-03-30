@@ -1,10 +1,11 @@
 #ifndef STUDENT_H
 #define STUDENT_H
+#include "studentinterface.h"
 #include "gender.h"
 #include <QList>
 #include <QString>
 
-class Student
+class Student : public StudentInterface
 {
 public:
     using GradesRange = std::pair<QList<double>::const_iterator, QList<double>::const_iterator>;
