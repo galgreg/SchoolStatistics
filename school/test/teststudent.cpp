@@ -9,9 +9,9 @@ void TestStudent::testCreateStudent_data() {
     QTest::addColumn<int>("expectedNumberOfGrades");
     QTest::addColumn<double>("expectedGradesAverage");
 
-    Student student_1, student_2("Johny", "English", MALE);
-    QTest::addRow("Student without personal data") << student_1 << true << "" << UNKNOWN << 0 << 0.0;
-    QTest::addRow("Student with personal data") << student_2 << false << "Johny English" << MALE << 0 << 0.0;
+    Student student_1, student_2("Jan", "Nowak", MALE);
+    QTest::addRow("Default initialized student") << student_1 << true << "" << UNKNOWN << 0 << 0.0;
+    QTest::addRow("Student initialized with data") << student_2 << false << "Jan Nowak" << MALE << 0 << 0.0;
 }
 
 void TestStudent::testCreateStudent() {
@@ -30,7 +30,7 @@ void TestStudent::testCreateStudent() {
 }
 
 void TestStudent::testAddGrades() {
-    Student student("Maria", "Nowak", FEMALE);
+    Student student("Maria", "Kowalska", FEMALE);
     student.addGrade(5.0);
     student.addGrade(4.5);
     student.addGrade(4.0);
@@ -41,15 +41,38 @@ void TestStudent::testAddGrades() {
 }
 
 void TestStudent::testRemoveGrades() {
-    Student student("Jack", "Black", MALE);
+    Student student("Janusz", "Polak", MALE);
     student.addGrade(3.0);
     student.addGrade(3.5);
     student.addGrade(4.0);
+
+    const int gradesCountBeforeRemove = 3;
+    const double gradesAverageBeforeRemove = 3.5;
+    checkGrades(student, gradesCountBeforeRemove, gradesAverageBeforeRemove);
+
     student.removeGrade(0);
 
-    const int expectedGradesCount = 2;
-    const double expectedGradesAverage = 3.75;
-    checkGrades(student, expectedGradesCount, expectedGradesAverage);
+    const int gradesCountAfterRemove = 2;
+    const double gradesAverageAfterRemove = 3.75;
+    checkGrades(student, gradesCountAfterRemove, gradesAverageAfterRemove);
+}
+
+void TestStudent::testEditGrades() {
+    Student student("Pioter", "Nosacz", MALE);
+    student.addGrade(3.0);
+    student.addGrade(3.0);
+    student.addGrade(3.0);
+
+    const int gradesCountBeforeEdit = 3;
+    const double gradesAverageBeforeEdit = 3.0;
+    checkGrades(student, gradesCountBeforeEdit, gradesAverageBeforeEdit);
+
+    student.editGrade(0, 5.0);
+    student.editGrade(2, 4.0);
+
+    const int gradesCountAfterEdit = 3;
+    const double gradesAverageAfterEdit = 4.0;
+    checkGrades(student, gradesCountAfterEdit, gradesAverageAfterEdit);
 }
 
 void TestStudent::checkGrades(

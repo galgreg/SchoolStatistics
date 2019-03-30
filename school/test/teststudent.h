@@ -12,7 +12,7 @@ private slots:
     void testCreateStudent();
     void testCreateStudent_data();
     void testAddGrades();
-    //void testEditGrades();
+    void testEditGrades();
     void testRemoveGrades();
 private:
     void checkGrades(
