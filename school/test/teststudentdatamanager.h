@@ -14,7 +14,7 @@ public:
 private slots:
     void init();
     void cleanup();
-    //void testRead();
+    void testRead();
     //void testWrite();
 private:
     QString fileName;
