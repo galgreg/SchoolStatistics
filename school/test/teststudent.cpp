@@ -1,6 +1,11 @@
 #include "teststudent.h"
 #include "student.h"
 
+TestStudent::TestStudent(unsigned &passed, unsigned &failed) :
+        TestExecutionCounter(passed, failed) {
+
+}
+
 void TestStudent::testCreateStudent_data() {
     QTest::addColumn<Student>("student");
     QTest::addColumn<bool>("hasDefaultID");
@@ -84,4 +89,12 @@ void TestStudent::checkGrades(
 
     QCOMPARE(actualGradesCount, expectedGradesCount);
     QCOMPARE(student.getGradesAverage(), expectedGradesAverage);
+}
+
+void TestStudent::cleanup() {
+    if(QTest::currentTestFailed()) {
+        incrementFailCounter();
+    } else {
+        incrementPassCounter();
+    }
 }

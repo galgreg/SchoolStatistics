@@ -10,9 +10,9 @@ int main(int argc, char** argv) {
 
     TestIdGenerator testGenerator(passedCounter, failedCounter);
     int result = QTest::qExec(&testGenerator, argc, argv);
-    TestStudent testStudent;//(passedCounter, failedCounter);
+    TestStudent testStudent(passedCounter, failedCounter);
     result |= QTest::qExec(&testStudent, argc, argv);
-    TestStudentInfo testStudentInfo;//(passedCounter, failedCounter);
+    TestStudentInfo testStudentInfo(passedCounter, failedCounter);
     result |= QTest::qExec(&testStudentInfo, argc, argv);
 
     qDebug() << QString("Totals: %1 passed, %2 failed.")

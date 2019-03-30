@@ -3,10 +3,14 @@
 
 #include <QtTest>
 #include "student.h"
+#include "testexecutioncounter.h"
 
-class TestStudent : public QObject
+class TestStudent : public QObject, public TestExecutionCounter
 {
     Q_OBJECT
+
+public:
+    TestStudent(unsigned &passed, unsigned &failed);
 
 private slots:
     void testCreateStudent();
@@ -14,6 +18,7 @@ private slots:
     void testAddGrades();
     void testEditGrades();
     void testRemoveGrades();
+    void cleanup();
 private:
     void checkGrades(
             const Student &student,
