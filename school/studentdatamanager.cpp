@@ -5,51 +5,21 @@ StudentDataManager::StudentDataManager(
 
 }
 
-QList<Student> StudentDataManager::read() {
-    QList<Student> students;
+QList<StudentInterface*> StudentDataManager::read() const {
+    QList<StudentInterface*> students;
     QFile file(mFileName);
     if (file.open(QIODevice::ReadOnly | QIODevice::Text)) {
         QTextStream inputStream(&file);
         while (!inputStream.atEnd()) {
             Student tempStudent;
             inputStream >> tempStudent;
-            students.push_back(std::move(tempStudent));
+            StudentInterface *student = new Student(std::move(tempStudent));
+            students.push_back(student);
         }
         file.close();
     }
     return students;
 }
-
-void StudentDataManager::write(const QList<Student> &students) {
-    QFile file(mFileName);
-    if (file.open(QIODevice::WriteOnly | QIODevice::Text)) {
-        QTextStream outputStream(&file);
-        for(const auto &student : students) {
-            outputStream << student << "\n";
-        }
-        file.close();
-    }
-}
-
-QTextStream &operator<<(QTextStream &stream, const Student &student)
-{
-    stream << student.getFullName() << ' ';
-    if (student.getGender() == FEMALE) {
-        stream << 'F' << ' ';
-    } else if (student.getGender() == MALE) {
-        stream << 'M' << ' ';
-    } else {
-        stream << 'U' << ' ';
-    }
-    auto grades = student.getGrades();
-
-    while(grades.first != grades.second) {
-        stream << *grades.first++ << ' ';
-    }
-    stream << '\n';
-    return stream;
-}
-
 
 QTextStream &operator>>(QTextStream &stream, Student &student)
 {
@@ -73,5 +43,35 @@ QTextStream &operator>>(QTextStream &stream, Student &student)
         stream >> grade;
         student.addGrade(grade);
     }
+    return stream;
+}
+
+void StudentDataManager::write(const QList<StudentInterface*> &students) {
+    QFile file(mFileName);
+    if (file.open(QIODevice::WriteOnly | QIODevice::Text)) {
+        QTextStream outputStream(&file);
+        for(auto student : students) {
+            outputStream << *student << "\n";
+        }
+        file.close();
+    }
+}
+
+QTextStream &operator<<(QTextStream &stream, const StudentInterface &student)
+{
+    stream << student.getFullName() << ' ';
+    if (student.getGender() == FEMALE) {
+        stream << 'F' << ' ';
+    } else if (student.getGender() == MALE) {
+        stream << 'M' << ' ';
+    } else {
+        stream << 'U' << ' ';
+    }
+    auto grades = student.getGrades();
+
+    while(grades.first != grades.second) {
+        stream << *grades.first++ << ' ';
+    }
+    stream << '\n';
     return stream;
 }
