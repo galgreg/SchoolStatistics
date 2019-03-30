@@ -46,7 +46,8 @@ HEADERS += \
     studentdatamanager.h \
     mainwindow.h \
     studentdatawindow.h \
-    confirmdialog.h
+    confirmdialog.h \
+    studentinterface.h
 
 FORMS += \
     mainwindow.ui \
@@ -60,16 +61,20 @@ test {
 
     SOURCES -= main.cpp
 
-    HEADERS += test/testidgenerator.h \
+    HEADERS += test/testexecutioncounter.h \
+    test/testidgenerator.h \
+    test/teststatisticsgenerator.h \
     test/teststudent.h \
     test/teststudentinfo.h \
-    test/testexecutioncounter.h
+    test/studentmock.h
 
     SOURCES += test/test_main.cpp \
+    test/testexecutioncounter.cpp \
     test/testidgenerator.cpp \
+    test/teststatisticsgenerator.cpp \
     test/teststudent.cpp \
     test/teststudentinfo.cpp \
-    test/testexecutioncounter.cpp
+    test/studentmock.cpp
 
 } else {
     message(Normal build)
