@@ -2,6 +2,7 @@
 #include "teststudent.h"
 #include "teststudentinfo.h"
 #include "teststatisticsgenerator.h"
+#include "teststudentdatamanager.h"
 #include <QtTest/QtTest>
 
 int main(int argc, char** argv) {
@@ -17,6 +18,8 @@ int main(int argc, char** argv) {
     result |= QTest::qExec(&testStudentInfo, argc, argv);
     TestStatisticsGenerator testStatsGenerator(passedCounter, failedCounter);
     result |= QTest::qExec(&testStatsGenerator, argc, argv);
+    TestStudentDataManager testDataManager(passedCounter, failedCounter);
+    result |= QTest::qExec(&testDataManager, argc, argv);
 
     qDebug() << QString("Totals: %1 passed, %2 failed.")
                 .arg(passedCounter)

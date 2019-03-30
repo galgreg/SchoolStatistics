@@ -67,7 +67,8 @@ test {
     test/teststatisticsgenerator.h \
     test/teststudent.h \
     test/teststudentinfo.h \
-    test/studentmock.h
+    test/studentmock.h \
+    test/teststudentdatamanager.h
 
     SOURCES += test/test_main.cpp \
     test/testexecutioncounter.cpp \
@@ -75,7 +76,8 @@ test {
     test/teststatisticsgenerator.cpp \
     test/teststudent.cpp \
     test/teststudentinfo.cpp \
-    test/studentmock.cpp
+    test/studentmock.cpp \
+    test/teststudentdatamanager.cpp
 
 } else {
     message(Normal build)
