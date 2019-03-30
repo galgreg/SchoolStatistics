@@ -1,6 +1,12 @@
 #include "testidgenerator.h"
 #include "idgenerator.h"
 
+TestIdGenerator::TestIdGenerator(
+        unsigned &passed,
+        unsigned &failed) : TestExecutionCounter(passed, failed) {
+
+}
+
 void TestIdGenerator::testInstanceReturnsNotNull() {
     IDGenerator *generator = IDGenerator::instance();
     QVERIFY(generator != nullptr);
@@ -18,4 +24,12 @@ void TestIdGenerator::testGeneratedValuesAreUnique() {
     unsigned value2 = generator->next();
     QVERIFY(value1 != value2);
     QVERIFY(value1 < value2);
+}
+
+void TestIdGenerator::cleanup() {
+    if(QTest::currentTestFailed()) {
+        incrementFailCounter();
+    } else {
+        incrementPassCounter();
+    }
 }

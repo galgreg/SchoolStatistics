@@ -5,10 +5,18 @@
 
 int main(int argc, char** argv) {
     QApplication app(argc, argv);
-    TestIdGenerator testGenerator;
-    TestStudent testStudent;
-    TestStudentInfo testStudentInfo;
-    return QTest::qExec(&testGenerator, argc, argv) |
-            QTest::qExec(&testStudent, argc, argv) |
-            QTest::qExec(&testStudentInfo, argc, argv);
+
+    unsigned passedCounter = 0, failedCounter = 0;
+
+    TestIdGenerator testGenerator(passedCounter, failedCounter);
+    int result = QTest::qExec(&testGenerator, argc, argv);
+    TestStudent testStudent;//(passedCounter, failedCounter);
+    result |= QTest::qExec(&testStudent, argc, argv);
+    TestStudentInfo testStudentInfo;//(passedCounter, failedCounter);
+    result |= QTest::qExec(&testStudentInfo, argc, argv);
+
+    qDebug() << QString("Totals: %1 passed, %2 failed.")
+                .arg(passedCounter)
+                .arg(failedCounter);
+    return result;
 }
