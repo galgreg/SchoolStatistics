@@ -47,7 +47,8 @@ HEADERS += \
     mainwindow.h \
     studentdatawindow.h \
     confirmdialog.h \
-    studentinterface.h
+    studentinterface.h \
+    studentdatamanagerinterface.h
 
 FORMS += \
     mainwindow.ui \
