@@ -9,16 +9,16 @@ class TestStudent : public QObject
     Q_OBJECT
 
 private slots:
-    void testCreateDefaultStudent();
     void testCreateStudent();
+    void testCreateStudent_data();
+    void testAddGrades();
+    //void testEditGrades();
+    void testRemoveGrades();
 private:
-    void verifyStudentData(
-        const Student &student,
-        unsigned expectedID,
-        const QString &expectedFullName,
-        Gender expectedGender,
-        int expectedGradesNumber,
-        double expectedGradesAverage);
+    void checkGrades(
+            const Student &student,
+            int expectedGradesCount,
+            double expectedGradesAverage);
 };
 
 #endif // TESTSTUDENT_H

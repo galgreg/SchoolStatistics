@@ -11,21 +11,23 @@ public:
 
     Student();
     Student(QString firstName, QString lastName, Gender gender);
+
+    unsigned getID() const;
+    QString getFullName() const;
+    Gender getGender() const;
+    GradesRange getGrades() const;
+    double getGradesAverage() const;
+
     void addGrade(double grade);
     void editGrade(int whichGrade, double newGrade);
     void removeGrade(int whichGrade);
-
-    GradesRange getGrades() const;
-    double getGradesAverage() const;
-    QString getFullName() const;
-    Gender getGender() const;
-    unsigned getID() const;
 private:
     unsigned ID;
     QString hisFirstName, hisLastName;
     Gender hisGender;
     QList<double> hisGrades;
-    double hisFinalGrade;
 };
+
+Q_DECLARE_METATYPE(Student)
 
 #endif // STUDENT_H

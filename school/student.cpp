@@ -11,23 +11,21 @@ Student::Student(
         Gender gender) :
             hisFirstName(firstName),
             hisLastName(lastName),
-            hisGender(gender),
-            hisFinalGrade(0.0)
-{
+            hisGender(gender) {
     ID = IDGenerator::instance()->next();
 }
 
-void Student::addGrade(double grade)
-{
-    hisGrades.push_back(grade);
+unsigned Student::getID() const {
+    return ID;
 }
 
-void Student::editGrade(int whichGrade, double newGrade) {
-    hisGrades.replace(whichGrade, newGrade);
+QString Student::getFullName() const {
+    QString fullName = QString("%1 %2").arg(hisFirstName).arg(hisLastName);
+    return fullName.trimmed();
 }
 
-void Student::removeGrade(int whichGrade) {
-    hisGrades.removeAt(whichGrade);
+Gender Student::getGender() const {
+    return hisGender;
 }
 
 Student::GradesRange Student::getGrades() const
@@ -50,15 +48,16 @@ double Student::getGradesAverage() const {
     return sum / howMuchGrades;
 }
 
-QString Student::getFullName() const {
-    QString fullName = QString("%1 %2").arg(hisFirstName).arg(hisLastName);
-    return fullName.trimmed();
+void Student::addGrade(double grade)
+{
+    hisGrades.push_back(grade);
 }
 
-Gender Student::getGender() const {
-    return hisGender;
+void Student::editGrade(int whichGrade, double newGrade) {
+    hisGrades.replace(whichGrade, newGrade);
 }
 
-unsigned Student::getID() const {
-    return ID;
+void Student::removeGrade(int whichGrade) {
+    hisGrades.removeAt(whichGrade);
 }
+
