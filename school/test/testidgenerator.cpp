@@ -3,7 +3,7 @@
 
 void TestIdGenerator::testInstanceReturnsNotNull() {
     IDGenerator *generator = IDGenerator::instance();
-    QCOMPARE(generator, nullptr);
+    QVERIFY(generator != nullptr);
 }
 
 void TestIdGenerator::testInstanceIsAlwaysSame() {
