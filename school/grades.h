@@ -12,6 +12,8 @@ public:
     size_t count() const;
     double getGrade(unsigned whichGrade) const;
     size_t maxAllowedCount() const;
+    void remove(size_t whichGrade);
+    void edit(size_t whichGrade, double newValue);
 private:
     std::vector<double> grades;
     const size_t maxCount;
