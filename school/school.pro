@@ -27,11 +27,13 @@ CONFIG += c++11
 SOURCES += main.cpp \
     mainwindow.cpp \
     studentdatawindow.cpp \
-    confirmdialog.cpp
+    confirmdialog.cpp \
+    grades.cpp
 
 HEADERS += mainwindow.h \
     studentdatawindow.h \
-    confirmdialog.h
+    confirmdialog.h \
+    grades.h
 
 FORMS += mainwindow.ui \
     studentdatawindow.ui \
