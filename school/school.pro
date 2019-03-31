@@ -44,10 +44,12 @@ test {
 
     SOURCES -= main.cpp
 
-    HEADERS += test/testexecutioncounter.h
+    HEADERS += test/testexecutioncounter.h \
+    test/testgrades.h
 
     SOURCES += test/test_main.cpp \
-    test/testexecutioncounter.cpp
+    test/testexecutioncounter.cpp \
+    test/testgrades.cpp
 
 } else {
     message(Normal build)
