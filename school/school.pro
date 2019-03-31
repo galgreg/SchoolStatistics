@@ -24,34 +24,16 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 CONFIG += c++11
 
-SOURCES += \
-        main.cpp \
-    student.cpp \
-    idgenerator.cpp \
-    statistics_generator.cpp \
-    studentinfo.cpp \
-    studentlist.cpp \
-    studentdatamanager.cpp \
+SOURCES += main.cpp \
     mainwindow.cpp \
     studentdatawindow.cpp \
     confirmdialog.cpp
 
-HEADERS += \
-    student.h \
-    gender.h \
-    idgenerator.h \
-    statistics_generator.h \
-    studentinfo.h \
-    studentlist.h \
-    studentdatamanager.h \
-    mainwindow.h \
+HEADERS += mainwindow.h \
     studentdatawindow.h \
-    confirmdialog.h \
-    studentinterface.h \
-    studentdatamanagerinterface.h
+    confirmdialog.h
 
-FORMS += \
-    mainwindow.ui \
+FORMS += mainwindow.ui \
     studentdatawindow.ui \
     confirmdialog.ui
 
@@ -62,22 +44,10 @@ test {
 
     SOURCES -= main.cpp
 
-    HEADERS += test/testexecutioncounter.h \
-    test/testidgenerator.h \
-    test/teststatisticsgenerator.h \
-    test/teststudent.h \
-    test/teststudentinfo.h \
-    test/studentmock.h \
-    test/teststudentdatamanager.h
+    HEADERS += test/testexecutioncounter.h
 
     SOURCES += test/test_main.cpp \
-    test/testexecutioncounter.cpp \
-    test/testidgenerator.cpp \
-    test/teststatisticsgenerator.cpp \
-    test/teststudent.cpp \
-    test/teststudentinfo.cpp \
-    test/studentmock.cpp \
-    test/teststudentdatamanager.cpp
+    test/testexecutioncounter.cpp
 
 } else {
     message(Normal build)

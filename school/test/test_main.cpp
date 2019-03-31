@@ -1,25 +1,10 @@
-#include "testidgenerator.h"
-#include "teststudent.h"
-#include "teststudentinfo.h"
-#include "teststatisticsgenerator.h"
-#include "teststudentdatamanager.h"
 #include <QtTest/QtTest>
 
 int main(int argc, char** argv) {
     QApplication app(argc, argv);
 
     unsigned passedCounter = 0, failedCounter = 0;
-
-    TestIdGenerator testGenerator(passedCounter, failedCounter);
-    int result = QTest::qExec(&testGenerator, argc, argv);
-    TestStudent testStudent(passedCounter, failedCounter);
-    result |= QTest::qExec(&testStudent, argc, argv);
-    TestStudentInfo testStudentInfo(passedCounter, failedCounter);
-    result |= QTest::qExec(&testStudentInfo, argc, argv);
-    TestStatisticsGenerator testStatsGenerator(passedCounter, failedCounter);
-    result |= QTest::qExec(&testStatsGenerator, argc, argv);
-    TestStudentDataManager testDataManager(passedCounter, failedCounter);
-    result |= QTest::qExec(&testDataManager, argc, argv);
+    int result = 0;
 
     qDebug() << QString("Totals: %1 passed, %2 failed.")
                 .arg(passedCounter)
