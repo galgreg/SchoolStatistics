@@ -1,7 +1,7 @@
 #include "grades.h"
 #include <stdexcept>
 
-Grades::Grades(size_t count) : maxCount(count) {
+Grades::Grades(size_t maximumCount) : maxCount(maximumCount) {
 
 }
 

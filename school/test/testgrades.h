@@ -19,8 +19,9 @@ private slots:
     void testAddGrade_OK();
     void testAddGrade_GradesOverflow();
     void testRemoveGrade_OK();
-    void testRemoveGrade_ErrorNoSuchGrade();
+    void testRemoveGrade_Error_NoSuchGrade();
     void testEditGrade_OK();
+    void testEditGrade_Error_NoSuchGrade();
 private:
     std::unique_ptr<Grades> grades;
 };

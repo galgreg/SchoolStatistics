@@ -54,7 +54,7 @@ void TestGrades::testRemoveGrade_OK() {
     QCOMPARE(actualCount, expectedCount);
 }
 
-void TestGrades::testRemoveGrade_ErrorNoSuchGrade() {
+void TestGrades::testRemoveGrade_Error_NoSuchGrade() {
     const size_t whichGrade = 0;
     QVERIFY_EXCEPTION_THROWN(grades->remove(whichGrade), std::out_of_range);
 }
@@ -71,3 +71,12 @@ void TestGrades::testEditGrade_OK() {
     const double actualGradeAfterEdit = grades->getGrade(whichGrade);
     QCOMPARE(actualGradeAfterEdit, expectedGradeAfterEdit);
 }
+
+void TestGrades::testEditGrade_Error_NoSuchGrade() {
+    const size_t whichGrade = 2;
+    const double newValue = 4.0;
+    QVERIFY_EXCEPTION_THROWN(
+            grades->edit(whichGrade, newValue),
+            std::out_of_range);
+}
+
