@@ -37,9 +37,6 @@ void TestStudentDataManager::testRead() {
     const int expectedStudentsCount = 2;
     const int actualStudentsCount = students.size();
     QCOMPARE(actualStudentsCount, expectedStudentsCount);
-
-    auto firstStudent = students.at(0);
-    auto secondStudent = students.at(1);
-
-    checkStudentData()
+    // auto firstStudent = students.at(0);
+    // auto secondStudent = students.at(1);
 }

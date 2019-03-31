@@ -13,7 +13,7 @@ QList<StudentInterface*> StudentDataManager::read() const {
         while (!inputStream.atEnd()) {
             Student tempStudent;
             inputStream >> tempStudent;
-            StudentInterface *student = new Student(std::move(tempStudent));
+            StudentInterface *student = new Student(tempStudent);
             students.push_back(student);
         }
         file.close();

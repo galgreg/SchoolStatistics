@@ -8,7 +8,9 @@
 class StudentInterface
 {
 public:
-    using GradesRange = std::pair<QList<double>::const_iterator, QList<double>::const_iterator>;
+    using GradesRange = std::pair<
+            QList<double>::const_iterator,
+            QList<double>::const_iterator>;
 
     virtual ~StudentInterface() = default;
 

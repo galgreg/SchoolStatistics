@@ -1,6 +1,7 @@
 #include "statistics_generator.h"
 
-StatisticsGenerator::StatisticsGenerator(const QList<StudentInterface*> &inputList) {
+StatisticsGenerator::StatisticsGenerator(
+        const QList<StudentInterface*> &inputList) {
     for(auto student : inputList) {
         students.push_back(student);
     }

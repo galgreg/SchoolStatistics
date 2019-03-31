@@ -1,7 +1,11 @@
 #include "student.h"
 #include "idgenerator.h"
 
-Student::Student() : ID(0), hisFirstName(""), hisLastName(""), hisGender(UNKNOWN) {
+Student::Student() :
+        ID(0),
+        hisFirstName(""),
+        hisLastName(""),
+        hisGender(UNKNOWN) {
 
 }
 
