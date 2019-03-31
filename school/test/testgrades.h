@@ -16,6 +16,7 @@ private slots:
     void init();
     void cleanup();
     void testAddGrade_OK();
+    void testAddGrade_GradesOverflow();
 private:
     std::unique_ptr<Grades> grades;
 };
