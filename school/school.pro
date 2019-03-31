@@ -28,13 +28,15 @@ SOURCES += main.cpp \
     mainwindow.cpp \
     studentdatawindow.cpp \
     confirmdialog.cpp \
-    grades.cpp
+    grades.cpp \
+    personaldata.cpp
 
 HEADERS += mainwindow.h \
     studentdatawindow.h \
     confirmdialog.h \
     grades.h \
-    gender.h
+    gender.h \
+    personaldata.h
 
 FORMS += mainwindow.ui \
     studentdatawindow.ui \
@@ -48,11 +50,13 @@ test {
     SOURCES -= main.cpp
 
     HEADERS += test/testexecutioncounter.h \
-    test/testgrades.h
+    test/testgrades.h \
+    test/testpersonaldata.h
 
     SOURCES += test/test_main.cpp \
     test/testexecutioncounter.cpp \
-    test/testgrades.cpp
+    test/testgrades.cpp \
+    test/testpersonaldata.cpp
 
 } else {
     message(Normal build)
