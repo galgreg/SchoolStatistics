@@ -33,7 +33,8 @@ SOURCES += main.cpp \
 HEADERS += mainwindow.h \
     studentdatawindow.h \
     confirmdialog.h \
-    grades.h
+    grades.h \
+    gender.h
 
 FORMS += mainwindow.ui \
     studentdatawindow.ui \
