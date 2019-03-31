@@ -15,6 +15,11 @@ public:
     std::string getFirstName() const;
     std::string getLastName() const;
     Gender getGender() const;
+
+    void setFirstName(const std::string &firstName);
+    void setLastName(const std::string &lastName);
+    void setGender(Gender gender);
+
 private:
     std::string mFirstName, mLastName;
     Gender mGender;

@@ -3,6 +3,8 @@
 
 #include "testexecutioncounter.h"
 #include <QtTest>
+#include "gender.h"
+#include "personaldata.h"
 
 class TestPersonalData : public QObject, public TestExecutionCounter
 {
@@ -12,6 +14,13 @@ public:
 private slots:
     void cleanup();
     void testGetters();
+    void testSetters();
+private:
+    void testPersonalDataState(
+            const PersonalData &actualPersonalData,
+            const std::string &expectedFirstName,
+            const std::string &expectedLastName,
+            Gender expectedGender);
 };
 
 #endif // TESTPERSONALDATA_H

@@ -19,3 +19,15 @@ std::string PersonalData::getLastName() const {
 Gender PersonalData::getGender() const {
     return mGender;
 }
+
+void PersonalData::setFirstName(const std::string &firstName) {
+    mFirstName = firstName;
+}
+
+void PersonalData::setLastName(const std::string &lastName) {
+    mLastName = lastName;
+}
+
+void PersonalData::setGender(Gender gender) {
+    mGender = gender;
+}
