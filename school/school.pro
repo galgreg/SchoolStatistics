@@ -36,7 +36,8 @@ HEADERS += mainwindow.h \
     confirmdialog.h \
     grades.h \
     gender.h \
-    personaldata.h
+    personaldata.h \
+    ipersonaldata.h
 
 FORMS += mainwindow.ui \
     studentdatawindow.ui \
