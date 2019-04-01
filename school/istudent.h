@@ -6,6 +6,8 @@
 
 class IStudent {
 public:
+    virtual ~IStudent() = default;
+
     virtual unsigned getID() const = 0;
     virtual IPersonalData *getPersonalData() const = 0;
     virtual IGrades *getGrades() const = 0;
