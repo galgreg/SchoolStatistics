@@ -35,3 +35,7 @@ void StudentClass::removeStudent(size_t whichStudent) {
 IStudent *StudentClass::getStudent(size_t whichStudent) {
     return students.at(whichStudent).get();
 }
+
+void StudentClass::removeAll() {
+    students.clear();
+}
