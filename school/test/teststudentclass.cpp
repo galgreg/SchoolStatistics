@@ -137,7 +137,18 @@ void TestStudentClass::testEditStudent_Error_NoSuchElement() {
     IStudent *newStudent = new StudentMock;
     QVERIFY_EXCEPTION_THROWN(
             studentClass.editStudent(whichStudent, newStudent),
-            std::out_of_range);
+                std::out_of_range);
+}
+
+void TestStudentClass::testEditStudent_Error_NullPtrStudent() {
+    const size_t maxAllowedCount = 20;
+    StudentClass studentClass(maxAllowedCount);
+    studentClass.addStudent(new StudentMock);
+
+    const size_t whichStudent = 0;
+    QVERIFY_EXCEPTION_THROWN(
+            studentClass.editStudent(whichStudent, nullptr),
+            std::bad_alloc);
 }
 
 void TestStudentClass::testRemoveAll() {

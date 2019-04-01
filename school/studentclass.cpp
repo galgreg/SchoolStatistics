@@ -41,6 +41,10 @@ IStudent *StudentClass::getStudent(size_t whichStudent) {
 }
 
 void StudentClass::editStudent(size_t whichStudent, IStudent *newValue) {
+    if (newValue == nullptr) {
+        throw std::bad_alloc();
+    }
+
     students.at(whichStudent).reset(newValue);
 }
 
