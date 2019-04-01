@@ -99,9 +99,27 @@ void TestStudentClass::testGetStudent_Error_NoSuchElement() {
                 std::out_of_range);
 }
 
+void TestStudentClass::testEditStudent_OK() {
+    const size_t maxAllowedCount = 20;
+    StudentClass studentClass(maxAllowedCount);
+
+    IStudent *expectedStudent_BeforeEdit = new StudentMock;
+    studentClass.addStudent(expectedStudent_BeforeEdit);
+
+    const size_t whichStudent = 0;
+    IStudent *actualStudent_BeforeEdit = studentClass.getStudent(whichStudent);
+    QCOMPARE(actualStudent_BeforeEdit, expectedStudent_BeforeEdit);
+
+    IStudent *expectedStudent_AfterEdit = new StudentMock;
+    studentClass.editStudent(whichStudent, expectedStudent_AfterEdit);
+    IStudent *actualStudent_AfterEdit = studentClass.getStudent(whichStudent);
+    QCOMPARE(actualStudent_AfterEdit, expectedStudent_AfterEdit);
+    QVERIFY(actualStudent_AfterEdit != actualStudent_BeforeEdit);
+}
+
 void TestStudentClass::testRemoveAll() {
     const size_t maxAllowedCount = 20;
-    const size_t  expectedCount_BeforeRemoveAll = maxAllowedCount;
+    const size_t expectedCount_BeforeRemoveAll = maxAllowedCount;
     StudentClass studentClass(maxAllowedCount);
 
     for (size_t i = 0; i !=  expectedCount_BeforeRemoveAll; ++i) {

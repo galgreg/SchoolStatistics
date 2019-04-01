@@ -36,6 +36,10 @@ IStudent *StudentClass::getStudent(size_t whichStudent) {
     return students.at(whichStudent).get();
 }
 
+void StudentClass::editStudent(size_t whichStudent, IStudent *newValue) {
+    students.at(whichStudent).reset(newValue);
+}
+
 void StudentClass::removeAll() {
     students.clear();
 }

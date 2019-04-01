@@ -16,6 +16,7 @@ public:
     void addStudent(IStudent *newStudent);
     void removeStudent(size_t whichStudent);
     IStudent *getStudent(size_t whichStudent);
+    void editStudent(size_t whichStudent, IStudent *newValue);
     void removeAll();
 
 private:
