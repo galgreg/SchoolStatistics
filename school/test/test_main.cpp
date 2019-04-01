@@ -1,6 +1,7 @@
 #include <QtTest/QtTest>
 #include "testgrades.h"
 #include "testpersonaldata.h"
+#include "teststudent.h"
 
 int main(int argc, char** argv) {
     QApplication app(argc, argv);
@@ -12,6 +13,8 @@ int main(int argc, char** argv) {
     result |= QTest::qExec(&testGrades, argc, argv);
     TestPersonalData testPersonalData(passedCounter, failedCounter);
     result |= QTest::qExec(&testPersonalData, argc, argv);
+    TestStudent testStudent(passedCounter, failedCounter);
+    result |= QTest::qExec(&testStudent, argc, argv);
     qDebug() << QString("Totals: %1 passed, %2 failed.")
                 .arg(passedCounter)
                 .arg(failedCounter);

@@ -53,12 +53,14 @@ test {
 
     HEADERS += test/testexecutioncounter.h \
     test/testgrades.h \
-    test/testpersonaldata.h
+    test/testpersonaldata.h \
+    test/teststudent.h
 
     SOURCES += test/test_main.cpp \
     test/testexecutioncounter.cpp \
     test/testgrades.cpp \
-    test/testpersonaldata.cpp
+    test/testpersonaldata.cpp \
+    test/teststudent.cpp
 
 } else {
     message(Normal build)
