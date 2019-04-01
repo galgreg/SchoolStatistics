@@ -18,6 +18,7 @@ private slots:
     void testRemoveStudent_OK();
     void testRemoveStudent_Error_NoSuchElement();
     void testGetStudent_OK();
+    void testGetStudent_Error_NoSuchElement();
 };
 
 #endif // TESTSTUDENTCLASS_H

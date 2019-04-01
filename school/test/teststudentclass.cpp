@@ -84,3 +84,18 @@ void TestStudentClass::testGetStudent_OK() {
     QCOMPARE(actualStudent, expectedStudent);
 }
 
+void TestStudentClass::testGetStudent_Error_NoSuchElement() {
+    const size_t maxAllowedCount = 20;
+    const size_t expectedCount = 0;
+    StudentClass studentClass(maxAllowedCount);
+    const size_t actualCount = studentClass.count();
+
+    QCOMPARE(actualCount, expectedCount);
+    const size_t whichStudent = 10;
+
+    QVERIFY(actualCount < whichStudent);
+    QVERIFY_EXCEPTION_THROWN(
+            studentClass.getStudent(whichStudent),
+            std::out_of_range);
+}
+
