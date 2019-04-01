@@ -124,6 +124,22 @@ void TestStudentClass::testEditStudent_OK() {
     QVERIFY(actualStudent_AfterEdit != actualStudent_BeforeEdit);
 }
 
+void TestStudentClass::testEditStudent_Error_NoSuchElement() {
+    const size_t maxAllowedCount = 20;
+    StudentClass studentClass(maxAllowedCount);
+
+    const size_t expectedCount = 0;
+    const size_t actualCount = studentClass.count();
+    QCOMPARE(actualCount, expectedCount);
+    const size_t whichStudent = 10;
+    QVERIFY(whichStudent > actualCount);
+
+    IStudent *newStudent = new StudentMock;
+    QVERIFY_EXCEPTION_THROWN(
+            studentClass.editStudent(whichStudent, newStudent),
+            std::out_of_range);
+}
+
 void TestStudentClass::testRemoveAll() {
     const size_t maxAllowedCount = 20;
     const size_t expectedCount_BeforeRemoveAll = maxAllowedCount;
