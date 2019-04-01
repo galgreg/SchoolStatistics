@@ -57,14 +57,16 @@ test {
     test/testgrades.h \
     test/testpersonaldata.h \
     test/teststudent.h \
-    test/personaldatamock.h
+    test/personaldatamock.h \
+    test/gradesmock.h
 
     SOURCES += test/test_main.cpp \
     test/testexecutioncounter.cpp \
     test/testgrades.cpp \
     test/testpersonaldata.cpp \
     test/teststudent.cpp \
-    test/personaldatamock.cpp
+    test/personaldatamock.cpp \
+    test/gradesmock.cpp
 
 } else {
     message(Normal build)
