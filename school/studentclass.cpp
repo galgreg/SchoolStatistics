@@ -31,3 +31,7 @@ void StudentClass::removeStudent(size_t whichStudent) {
     long position = static_cast<long>(whichStudent);
     students.erase(students.cbegin() + position);
 }
+
+IStudent *StudentClass::getStudent(size_t whichStudent) {
+    return students.at(whichStudent).get();
+}

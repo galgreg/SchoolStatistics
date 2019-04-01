@@ -70,6 +70,17 @@ void TestStudentClass::testRemoveStudent_Error_NoSuchElement() {
     QVERIFY(actualClass.count() < whichStudentToRemove);
     QVERIFY_EXCEPTION_THROWN(
             actualClass.removeStudent(whichStudentToRemove),
-            std::out_of_range);
+                std::out_of_range);
+}
+
+void TestStudentClass::testGetStudent_OK() {
+    const size_t maxAllowedCount = 20;
+    StudentClass studentClass(maxAllowedCount);
+    IStudent *expectedStudent = new StudentMock;
+    studentClass.addStudent(expectedStudent);
+
+    const size_t whichStudent = 0;
+    IStudent *actualStudent = studentClass.getStudent(whichStudent);
+    QCOMPARE(actualStudent, expectedStudent);
 }
 

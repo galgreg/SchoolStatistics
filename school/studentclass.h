@@ -15,6 +15,7 @@ public:
     size_t count() const;
     void addStudent(IStudent *newStudent);
     void removeStudent(size_t whichStudent);
+    IStudent *getStudent(size_t whichStudent);
 
 private:
     const size_t maxCount;
