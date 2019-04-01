@@ -1,33 +1,22 @@
 #include "personaldatamock.h"
 
-PersonalDataMock::PersonalDataMock(
-        const std::string &firstName,
-        const std::string &lastName,
-        Gender gender) :
-            mFirstName(firstName), mLastName(lastName), mGender(gender) {
-
-}
-
 std::string PersonalDataMock::getFirstName() const {
-    return mFirstName;
+    return "";
 }
 
 std::string PersonalDataMock::getLastName() const {
-    return mLastName;
+    return "";
 }
 
 Gender PersonalDataMock::getGender() const {
-    return mGender;
+    return MALE;
 }
 
-void PersonalDataMock::setFirstName(const std::string &firstName) {
-    mFirstName = firstName;
+void PersonalDataMock::setFirstName(const std::string &) {
 }
 
-void PersonalDataMock::setLastName(const std::string &lastName) {
-    mLastName = lastName;
+void PersonalDataMock::setLastName(const std::string &) {
 }
 
-void PersonalDataMock::setGender(Gender gender) {
-    mGender = gender;
+void PersonalDataMock::setGender(Gender) {
 }
