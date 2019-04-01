@@ -15,6 +15,7 @@ private slots:
     void testStateAfterInitialization();
     void testAddStudent_OK();
     void testAddStudent_Error_ClassOverflow();
+    void testAddStudent_Error_NullPtrStudent();
     void testRemoveStudent_OK();
     void testRemoveStudent_Error_NoSuchElement();
     void testGetStudent_OK();

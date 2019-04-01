@@ -13,6 +13,10 @@ size_t StudentClass::count() const {
 }
 
 void StudentClass::addStudent(IStudent *newStudent) {
+    if (newStudent == nullptr) {
+        throw std::bad_alloc();
+    }
+
     std::unique_ptr<IStudent> tempPtr(newStudent);
 
     if(count() >= maxAllowedCount()) {

@@ -44,6 +44,13 @@ void TestStudentClass::testAddStudent_Error_ClassOverflow() {
                 std::out_of_range);
 }
 
+void TestStudentClass::testAddStudent_Error_NullPtrStudent() {
+    const size_t expectedMaxCount = 2;
+    StudentClass studentClass(expectedMaxCount);
+
+    QVERIFY_EXCEPTION_THROWN(studentClass.addStudent(nullptr), std::bad_alloc);
+}
+
 void TestStudentClass::testRemoveStudent_OK() {
     const size_t maxAllowedCount = 20;
     const size_t expectedCountBeforeRemove = 1;
