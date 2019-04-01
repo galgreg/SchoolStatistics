@@ -63,7 +63,8 @@ test {
     test/personaldatamock.h \
     test/gradesmock.h \
     test/teststudentclass.h \
-    test/studentmock.h
+    test/studentmock.h \
+    test/testclassstatistics.h
 
     SOURCES += test/test_main.cpp \
     test/testexecutioncounter.cpp \
@@ -73,7 +74,8 @@ test {
     test/personaldatamock.cpp \
     test/gradesmock.cpp \
     test/teststudentclass.cpp \
-    test/studentmock.cpp
+    test/studentmock.cpp \
+    test/testclassstatistics.cpp
 
 } else {
     message(Normal build)
