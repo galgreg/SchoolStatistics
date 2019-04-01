@@ -14,7 +14,7 @@ size_t GradesMock::count() const {
 }
 
 double GradesMock::getGrade(unsigned) const {
-    return 0.0;
+    return 4.0;
 }
 
 size_t GradesMock::maxAllowedCount() const {

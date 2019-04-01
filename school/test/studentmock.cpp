@@ -1,4 +1,5 @@
 #include "studentmock.h"
+#include "gradesmock.h"
 
 unsigned StudentMock::getID() const {
     return 0;
@@ -9,7 +10,7 @@ IPersonalData *StudentMock::getPersonalData() const {
 }
 
 IGrades *StudentMock::getGrades() const {
-    return nullptr;
+    return new GradesMock;
 }
 
 void StudentMock::setPersonalData(IPersonalData *) {

@@ -43,7 +43,8 @@ HEADERS += mainwindow.h \
     igrades.h \
     student.h \
     studentclass.h \
-    istudent.h
+    istudent.h \
+    istudentclass.h
 
 FORMS += mainwindow.ui \
     studentdatawindow.ui \
@@ -64,7 +65,8 @@ test {
     test/gradesmock.h \
     test/teststudentclass.h \
     test/studentmock.h \
-    test/testclassstatistics.h
+    test/testclassstatistics.h \
+    test/studentclassmock.h
 
     SOURCES += test/test_main.cpp \
     test/testexecutioncounter.cpp \
@@ -75,7 +77,8 @@ test {
     test/gradesmock.cpp \
     test/teststudentclass.cpp \
     test/studentmock.cpp \
-    test/testclassstatistics.cpp
+    test/testclassstatistics.cpp \
+    test/studentclassmock.cpp
 
 } else {
     message(Normal build)
