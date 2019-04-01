@@ -1,10 +1,11 @@
 #ifndef PERSONALDATA_H
 #define PERSONALDATA_H
 
+#include "ipersonaldata.h"
 #include "gender.h"
 #include <string>
 
-class PersonalData
+class PersonalData : public IPersonalData
 {
 public:
     PersonalData(
@@ -12,13 +13,13 @@ public:
         const std::string &lastName,
         Gender gender);
 
-    std::string getFirstName() const;
-    std::string getLastName() const;
-    Gender getGender() const;
+    std::string getFirstName() const override;
+    std::string getLastName() const override;
+    Gender getGender() const override;
 
-    void setFirstName(const std::string &firstName);
-    void setLastName(const std::string &lastName);
-    void setGender(Gender gender);
+    void setFirstName(const std::string &firstName) override;
+    void setLastName(const std::string &lastName) override;
+    void setGender(Gender gender) override;
 
 private:
     std::string mFirstName, mLastName;
