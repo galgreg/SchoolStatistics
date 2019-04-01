@@ -4,7 +4,7 @@ PersonalData::PersonalData(
         const std::string &firstName,
         const std::string &lastName,
         Gender gender) :
-            mFirstName(firstName), mLastName(lastName),mGender(gender) {
+            mFirstName(firstName), mLastName(lastName), mGender(gender) {
 
 }
 
