@@ -30,7 +30,8 @@ SOURCES += main.cpp \
     confirmdialog.cpp \
     grades.cpp \
     personaldata.cpp \
-    student.cpp
+    student.cpp \
+    studentclass.cpp
 
 HEADERS += mainwindow.h \
     studentdatawindow.h \
@@ -40,7 +41,9 @@ HEADERS += mainwindow.h \
     personaldata.h \
     ipersonaldata.h \
     igrades.h \
-    student.h
+    student.h \
+    studentclass.h \
+    istudent.h
 
 FORMS += mainwindow.ui \
     studentdatawindow.ui \
@@ -58,7 +61,8 @@ test {
     test/testpersonaldata.h \
     test/teststudent.h \
     test/personaldatamock.h \
-    test/gradesmock.h
+    test/gradesmock.h \
+    test/teststudentclass.h
 
     SOURCES += test/test_main.cpp \
     test/testexecutioncounter.cpp \
@@ -66,7 +70,8 @@ test {
     test/testpersonaldata.cpp \
     test/teststudent.cpp \
     test/personaldatamock.cpp \
-    test/gradesmock.cpp
+    test/gradesmock.cpp \
+    test/teststudentclass.cpp
 
 } else {
     message(Normal build)
