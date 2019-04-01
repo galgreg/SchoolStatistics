@@ -3,6 +3,7 @@
 
 #include "igrades.h"
 #include "ipersonaldata.h"
+#include <memory>
 
 class Student
 {
@@ -18,8 +19,8 @@ public:
 
 private:
     unsigned mID;
-    IPersonalData *mPersonalData;
-    IGrades *mGrades;
+    std::unique_ptr<IPersonalData> mPersonalData;
+    std::unique_ptr<IGrades> mGrades;
 };
 
 #endif // STUDENT_H

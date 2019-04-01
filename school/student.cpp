@@ -9,9 +9,9 @@ unsigned Student::getID() const {
 }
 
 IPersonalData *Student::getPersonalData() const {
-    return mPersonalData;
+    return mPersonalData.get();
 }
 
 IGrades *Student::getGrades() const {
-    return mGrades;
+    return mGrades.get();
 }
