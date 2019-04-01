@@ -13,6 +13,7 @@ public:
 private slots:
     void cleanup();
     void testStateAfterInitialization();
+    void testAddStudent();
 };
 
 #endif // TESTSTUDENTCLASS_H

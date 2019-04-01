@@ -1,4 +1,4 @@
-#ifndef STUDENTCLASS_H
+﻿#ifndef STUDENTCLASS_H
 #define STUDENTCLASS_H
 
 #include "istudent.h"
@@ -13,6 +13,7 @@ public:
 
     size_t maxAllowedCount() const;
     size_t count() const;
+    void addStudent(IStudent *newStudent);
 
 private:
     const size_t maxCount;

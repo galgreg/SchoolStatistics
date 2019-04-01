@@ -12,3 +12,7 @@ size_t StudentClass::count() const {
     return students.size();
 }
 
+void StudentClass::addStudent(IStudent *newStudent) {
+    std::unique_ptr<IStudent> tempPtr(newStudent);
+    students.push_back(std::move(tempPtr));
+}
