@@ -2,22 +2,23 @@
 #define STUDENTCLASS_H
 
 #include "istudent.h"
+#include "istudentclass.h"
 #include <cstddef>
 #include <memory>
 #include <vector>
 
-class StudentClass
+class StudentClass : public IStudentClass
 {
 public:
     StudentClass(size_t maximumCount);
 
-    size_t maxAllowedCount() const;
-    size_t count() const;
-    void addStudent(IStudent *newStudent);
-    void removeStudent(size_t whichStudent);
-    IStudent *getStudent(size_t whichStudent);
-    void editStudent(size_t whichStudent, IStudent *newValue);
-    void removeAll();
+    size_t maxAllowedCount() const override;
+    size_t count() const override;
+    void addStudent(IStudent *newStudent) override;
+    void removeStudent(size_t whichStudent) override;
+    IStudent *getStudent(size_t whichStudent) override;
+    void editStudent(size_t whichStudent, IStudent *newValue) override;
+    void removeAll() override;
 
 private:
     const size_t maxCount;
