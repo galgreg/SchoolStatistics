@@ -14,5 +14,10 @@ size_t StudentClass::count() const {
 
 void StudentClass::addStudent(IStudent *newStudent) {
     std::unique_ptr<IStudent> tempPtr(newStudent);
+
+    if(count() >= maxAllowedCount()) {
+        throw std::out_of_range("StudentClass overflow exception");
+    }
+
     students.push_back(std::move(tempPtr));
 }

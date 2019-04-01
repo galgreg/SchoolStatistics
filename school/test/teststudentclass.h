@@ -13,7 +13,8 @@ public:
 private slots:
     void cleanup();
     void testStateAfterInitialization();
-    void testAddStudent();
+    void testAddStudent_OK();
+    void testAddStudent_ClassOverflow();
 };
 
 #endif // TESTSTUDENTCLASS_H

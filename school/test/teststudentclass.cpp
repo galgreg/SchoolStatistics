@@ -23,11 +23,24 @@ void TestStudentClass::testStateAfterInitialization() {
     QCOMPARE(actualClass.maxAllowedCount(), expectedMaxCount);
 }
 
-void TestStudentClass::testAddStudent() {
+void TestStudentClass::testAddStudent_OK() {
     const size_t expectedMaxCount = 20;
     const size_t expectedCount = 1;
     StudentClass actualClass(expectedMaxCount);
     actualClass.addStudent(new StudentMock);
     QCOMPARE(actualClass.count(), expectedCount);
+}
+
+void TestStudentClass::testAddStudent_ClassOverflow() {
+    const size_t expectedCountBeforeOverflow = 2;
+    StudentClass actualClass(expectedCountBeforeOverflow);
+
+    for(size_t i = 0; i != expectedCountBeforeOverflow; ++i) {
+        actualClass.addStudent(new StudentMock);
+    }
+    QCOMPARE(actualClass.count(), expectedCountBeforeOverflow);
+    QVERIFY_EXCEPTION_THROWN(
+            actualClass.addStudent(new StudentMock),
+            std::out_of_range);
 }
 
