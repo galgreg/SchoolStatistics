@@ -29,7 +29,8 @@ SOURCES += main.cpp \
     studentdatawindow.cpp \
     confirmdialog.cpp \
     grades.cpp \
-    personaldata.cpp
+    personaldata.cpp \
+    student.cpp
 
 HEADERS += mainwindow.h \
     studentdatawindow.h \
@@ -38,7 +39,8 @@ HEADERS += mainwindow.h \
     gender.h \
     personaldata.h \
     ipersonaldata.h \
-    igrades.h
+    igrades.h \
+    student.h
 
 FORMS += mainwindow.ui \
     studentdatawindow.ui \

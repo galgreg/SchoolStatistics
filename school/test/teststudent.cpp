@@ -1,4 +1,7 @@
 #include "teststudent.h"
+#include "igrades.h"
+#include "ipersonaldata.h"
+#include "student.h"
 
 TestStudent::TestStudent(
         unsigned &passed,
@@ -12,4 +15,16 @@ void TestStudent::cleanup() {
     } else {
         incrementPassCounter();
     }
+}
+
+void TestStudent::testState_DefaultInitialized() {
+    const unsigned expectedID = 1;
+    IPersonalData* expectedPersonalData = nullptr;
+    IGrades *expectedGrades = nullptr;
+
+    Student actualStudent(expectedID);
+
+    QCOMPARE(actualStudent.getID(), expectedID);
+    QCOMPARE(actualStudent.getPersonalData(), expectedPersonalData);
+    QCOMPARE(actualStudent.getGrades(), expectedGrades);
 }
