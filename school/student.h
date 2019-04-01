@@ -16,6 +16,8 @@ public:
     unsigned getID() const;
     IPersonalData *getPersonalData() const;
     IGrades *getGrades() const;
+    void setPersonalData(IPersonalData *newData);
+    void setGrades(IGrades *newGrades);
 
 private:
     unsigned mID;

@@ -15,3 +15,11 @@ IPersonalData *Student::getPersonalData() const {
 IGrades *Student::getGrades() const {
     return mGrades.get();
 }
+
+void Student::setPersonalData(IPersonalData *newData) {
+    mPersonalData.reset(newData);
+}
+
+void Student::setGrades(IGrades *newGrades) {
+    mGrades.reset(newGrades);
+}
