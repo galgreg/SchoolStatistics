@@ -31,7 +31,7 @@ void TestStudentClass::testAddStudent_OK() {
     QCOMPARE(actualClass.count(), expectedCount);
 }
 
-void TestStudentClass::testAddStudent_ClassOverflow() {
+void TestStudentClass::testAddStudent_Error_ClassOverflow() {
     const size_t expectedCountBeforeOverflow = 2;
     StudentClass actualClass(expectedCountBeforeOverflow);
 
@@ -41,6 +41,19 @@ void TestStudentClass::testAddStudent_ClassOverflow() {
     QCOMPARE(actualClass.count(), expectedCountBeforeOverflow);
     QVERIFY_EXCEPTION_THROWN(
             actualClass.addStudent(new StudentMock),
-            std::out_of_range);
+                std::out_of_range);
+}
+
+void TestStudentClass::testRemoveStudent_OK() {
+    const size_t maxAllowedCount = 20;
+    const size_t expectedCountBeforeRemove = 1;
+    StudentClass actualClass(maxAllowedCount);
+    actualClass.addStudent(new StudentMock);
+    QCOMPARE(actualClass.count(), expectedCountBeforeRemove);
+
+    const size_t whichStudent = 0;
+    actualClass.removeStudent(whichStudent);
+    const size_t expectedCountAfterRemove = 0;
+    QCOMPARE(actualClass.count(), expectedCountAfterRemove);
 }
 

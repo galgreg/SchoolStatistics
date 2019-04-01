@@ -14,7 +14,8 @@ private slots:
     void cleanup();
     void testStateAfterInitialization();
     void testAddStudent_OK();
-    void testAddStudent_ClassOverflow();
+    void testAddStudent_Error_ClassOverflow();
+    void testRemoveStudent_OK();
 };
 
 #endif // TESTSTUDENTCLASS_H

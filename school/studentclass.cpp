@@ -21,3 +21,8 @@ void StudentClass::addStudent(IStudent *newStudent) {
 
     students.push_back(std::move(tempPtr));
 }
+
+void StudentClass::removeStudent(size_t whichStudent) {
+    long position = static_cast<long>(whichStudent);
+    students.erase(students.cbegin() + position);
+}
