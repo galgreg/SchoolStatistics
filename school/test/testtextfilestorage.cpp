@@ -45,7 +45,10 @@ void TestTextFileStorage::testRead_Error_NoSuchFile() {
     bool expectedDoesFileExist = false;
     bool actualDoesFileExist = fileStorage.exist();
     QCOMPARE(actualDoesFileExist, expectedDoesFileExist);
-    QVERIFY_EXCEPTION_THROWN(fileStorage.read(), std::ios_base::failure);
+    const size_t maxStudentCount = 1, maxGradesCount = 1;
+    QVERIFY_EXCEPTION_THROWN(
+            fileStorage.read(
+                maxStudentCount, maxGradesCount), std::ios_base::failure);
 }
 
 void TestTextFileStorage::testRead_OK() {
@@ -55,6 +58,7 @@ void TestTextFileStorage::testRead_OK() {
             makeStudent(2, "Maria", "Nowak", FEMALE, {4.0, 3.5, 3.0});
 
     const size_t maximumStudentsCount = 3;
+    const size_t maximumGradesCount = 3;
     IStudentClass *expectedStudentClass =
             new StudentClass(maximumStudentsCount);
 
@@ -62,7 +66,8 @@ void TestTextFileStorage::testRead_OK() {
     expectedStudentClass->addStudent(expectedStudent_2);
 
     TextFileStorage fileStorage(testFilePath);
-    IStudentClass *actualStudentClass = fileStorage.read();
+    IStudentClass *actualStudentClass =
+            fileStorage.read(maximumStudentsCount, maximumGradesCount);
 
     QVERIFY(actualStudentClass != nullptr);
     compareClasses(actualStudentClass, expectedStudentClass);

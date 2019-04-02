@@ -1,4 +1,5 @@
 #include "textfilestorage.h"
+#include "studentclass.h"
 #include <QFile>
 
 TextFileStorage::TextFileStorage(
@@ -6,10 +7,14 @@ TextFileStorage::TextFileStorage(
 
 }
 
-IStudentClass *TextFileStorage::read() {
+IStudentClass *TextFileStorage::read(
+        size_t maxStudentCount,
+        size_t maxGradesCount) {
     if (!exist()) {
         throw std::ios_base::failure("Cannot open file " + getPath());
     }
+
+
     return nullptr;
 }
 
