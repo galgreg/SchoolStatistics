@@ -7,13 +7,13 @@ class IDataRepository
 {
 public:
     explicit IDataRepository(const std::string &repositoryPath);
-    virtual ~IDataRepository() = default;
+    virtual ~IDataRepository();
+
     virtual IStudentClass *read() = 0;
     virtual void write(IStudentClass *studentClass) = 0;
+    virtual bool exist() = 0;
 
-    std::string getPath() {
-        return mRepositoryPath;
-    }
+    std::string getPath();
 private:
     const std::string mRepositoryPath;
 };
