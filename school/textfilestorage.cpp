@@ -1,5 +1,5 @@
 #include "textfilestorage.h"
-#include <fstream>
+#include <QFile>
 
 TextFileStorage::TextFileStorage(
         const std::string &filePath) : IDataRepository(filePath) {
@@ -18,5 +18,7 @@ void TextFileStorage::write(IStudentClass * /* studentClass */) {
 }
 
 bool TextFileStorage::exist() {
-    return static_cast<bool>(std::ifstream(getPath()));
+    QString filePath = QString::fromStdString(getPath());
+    QFile tempFile(filePath);
+    return tempFile.exists();
 }
