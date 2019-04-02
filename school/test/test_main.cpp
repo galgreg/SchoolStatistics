@@ -4,6 +4,7 @@
 #include "teststudent.h"
 #include "teststudentclass.h"
 #include "testclassstatistics.h"
+#include "testtextfilestorage.h"
 
 int main(int argc, char** argv) {
     QApplication app(argc, argv);
@@ -21,6 +22,8 @@ int main(int argc, char** argv) {
     result |= QTest::qExec(&testStudentClass, argc, argv);
     TestClassStatistics testClassStatistics(passedCounter, failedCounter);
     result |= QTest::qExec(&testClassStatistics, argc, argv);
+    TestTextFileStorage testTextFileStorage(passedCounter, failedCounter);
+    result |= QTest::qExec(&testTextFileStorage, argc, argv);
     qDebug() << QString("Totals: %1 passed, %2 failed.")
                 .arg(passedCounter)
                 .arg(failedCounter);
