@@ -46,7 +46,8 @@ HEADERS += mainwindow.h \
     studentclass.h \
     istudent.h \
     istudentclass.h \
-    classstatistics.h
+    classstatistics.h \
+    idatarepository.h
 
 FORMS += mainwindow.ui \
     studentdatawindow.ui \
