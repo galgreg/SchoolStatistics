@@ -10,7 +10,7 @@
 class StudentClass : public IStudentClass
 {
 public:
-    StudentClass(size_t maximumCount);
+    StudentClass(size_t maximumCount = 20);
 
     size_t maxAllowedCount() const override;
     size_t count() const override;
