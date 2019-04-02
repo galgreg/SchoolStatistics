@@ -12,6 +12,8 @@ public:
     TestTextFileStorage(unsigned &passed, unsigned &failed);
 private slots:
     void cleanup();
+    void testDefaultState();
+    void testRead_Error_NoSuchFile();
 };
 
 #endif // TESTTEXTFILESTORAGE_H

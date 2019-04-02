@@ -22,7 +22,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
-QMAKE_CXXFLAGS += -std=c++14
+QMAKE_CXXFLAGS += -std=c++17
 
 SOURCES += main.cpp \
     mainwindow.cpp \
@@ -32,7 +32,9 @@ SOURCES += main.cpp \
     personaldata.cpp \
     student.cpp \
     studentclass.cpp \
-    classstatistics.cpp
+    classstatistics.cpp \
+    textfilestorage.cpp \
+    idatarepository.cpp
 
 HEADERS += mainwindow.h \
     studentdatawindow.h \
@@ -47,7 +49,8 @@ HEADERS += mainwindow.h \
     istudent.h \
     istudentclass.h \
     classstatistics.h \
-    idatarepository.h
+    idatarepository.h \
+    textfilestorage.h
 
 FORMS += mainwindow.ui \
     studentdatawindow.ui \
