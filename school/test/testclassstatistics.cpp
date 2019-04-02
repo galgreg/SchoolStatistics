@@ -1,6 +1,7 @@
 #include "testclassstatistics.h"
 #include "istudentclass.h"
 #include "studentclassmock.h"
+#include "classstatistics.h"
 
 TestClassStatistics::TestClassStatistics(
         unsigned &passed,
@@ -13,6 +14,17 @@ void TestClassStatistics::cleanup() {
     } else {
         incrementPassCounter();
     }
+}
+
+void TestClassStatistics::testGetStudentAverage() {
+    const double expectedStudentAverage = 4.0;
+    ClassStatistics statistics;
+    IStudentClass *studentClass = new StudentClassMock;
+
+    const size_t whichStudent = 3;
+    const double actualStudentAverage =
+            statistics.getStudentAverage(studentClass, whichStudent);
+    QCOMPARE(actualStudentAverage, expectedStudentAverage);
 }
 
 void TestClassStatistics::testGetClassAverage() {

@@ -2,6 +2,7 @@
 #define GRADESMOCK_H
 
 #include "igrades.h"
+#include <array>
 
 class GradesMock : public IGrades
 {
@@ -12,6 +13,8 @@ public:
     size_t count() const override;
     double getGrade(unsigned whichGrade) const override;
     size_t maxAllowedCount() const override;
+private:
+    std::array<double, 3> grades = {3.5, 4.0, 4.5};
 };
 
 #endif // GRADESMOCK_H

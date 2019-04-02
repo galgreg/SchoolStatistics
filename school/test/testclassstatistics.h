@@ -12,6 +12,7 @@ public:
     TestClassStatistics(unsigned &passed, unsigned &failed);
 private slots:
     void cleanup();
+    void testGetStudentAverage();
     void testGetClassAverage();
 };
 

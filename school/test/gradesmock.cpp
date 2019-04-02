@@ -10,15 +10,15 @@ void GradesMock::edit(size_t, double) {
 }
 
 size_t GradesMock::count() const {
-    return 0;
+    return 3;
 }
 
-double GradesMock::getGrade(unsigned) const {
-    return 4.0;
+double GradesMock::getGrade(unsigned whichGrade) const {
+    return grades.at(whichGrade);
 }
 
 size_t GradesMock::maxAllowedCount() const {
-    return 0;
+    return 3;
 }
 
 

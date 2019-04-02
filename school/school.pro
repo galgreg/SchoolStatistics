@@ -31,7 +31,8 @@ SOURCES += main.cpp \
     grades.cpp \
     personaldata.cpp \
     student.cpp \
-    studentclass.cpp
+    studentclass.cpp \
+    classstatistics.cpp
 
 HEADERS += mainwindow.h \
     studentdatawindow.h \
@@ -44,7 +45,8 @@ HEADERS += mainwindow.h \
     student.h \
     studentclass.h \
     istudent.h \
-    istudentclass.h
+    istudentclass.h \
+    classstatistics.h
 
 FORMS += mainwindow.ui \
     studentdatawindow.ui \
