@@ -6,7 +6,7 @@ Grades::Grades(size_t maximumCount) : maxCount(maximumCount) {
 }
 
 void Grades::add(double grade) {
-    if (count() == maxAllowedCount()) {
+    if (count() >= maxAllowedCount()) {
         throw std::out_of_range("Cannot add new grade!");
     }
     grades.push_back(grade);
