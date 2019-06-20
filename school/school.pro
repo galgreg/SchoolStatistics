@@ -34,7 +34,8 @@ SOURCES += main.cpp \
     studentclass.cpp \
     classstatistics.cpp \
     textfilestorage.cpp \
-    idatarepository.cpp
+    idatarepository.cpp \
+    studentfactory.cpp
 
 HEADERS += mainwindow.h \
     studentdatawindow.h \
@@ -50,7 +51,8 @@ HEADERS += mainwindow.h \
     istudentclass.h \
     classstatistics.h \
     idatarepository.h \
-    textfilestorage.h
+    textfilestorage.h \
+    studentfactory.h
 
 FORMS += mainwindow.ui \
     studentdatawindow.ui \
@@ -73,7 +75,8 @@ test {
     test/studentmock.h \
     test/testclassstatistics.h \
     test/studentclassmock.h \
-    test/testtextfilestorage.h
+    test/testtextfilestorage.h \
+    test/teststudentfactory.h
 
     SOURCES += test/test_main.cpp \
     test/testexecutioncounter.cpp \
@@ -86,7 +89,8 @@ test {
     test/studentmock.cpp \
     test/testclassstatistics.cpp \
     test/studentclassmock.cpp \
-    test/testtextfilestorage.cpp
+    test/testtextfilestorage.cpp \
+    test/teststudentfactory.cpp
 
 } else {
     message(Normal build)
