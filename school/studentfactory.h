@@ -1,14 +1,14 @@
 #ifndef STUDENTFACTORY_H
 #define STUDENTFACTORY_H
 #include "gender.h"
-#include "istudent.h"
+#include "student.h"
 #include <string>
 #include <vector>
 
 class StudentFactory
 {
 public:
-    static IStudent* create(
+    static Student* create(
         unsigned ID,
         const std::string &firstName,
         const std::string &lastName,

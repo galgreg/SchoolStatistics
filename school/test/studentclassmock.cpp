@@ -15,7 +15,7 @@ void StudentClassMock::addStudent(IStudent *) {
 void StudentClassMock::removeStudent(size_t) {
 }
 
-IStudent *StudentClassMock::getStudent(size_t) {
+IStudent *StudentClassMock::getStudent(size_t) const {
     return new StudentMock;
 }
 

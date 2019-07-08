@@ -10,7 +10,7 @@ public:
     size_t count() const override;
     void addStudent(IStudent *newStudent) override;
     void removeStudent(size_t whichStudent) override;
-    IStudent *getStudent(size_t whichStudent) override;
+    IStudent *getStudent(size_t whichStudent) const override;
     void editStudent(size_t whichStudent, IStudent *newValue) override;
     void removeAll() override;
 };

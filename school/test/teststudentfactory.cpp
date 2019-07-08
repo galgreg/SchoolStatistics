@@ -1,6 +1,7 @@
 #include "teststudentfactory.h"
 #include "gender.h"
 #include "studentfactory.h"
+#include <memory>
 
 TestStudentFactory::TestStudentFactory(unsigned &passed, unsigned &failed) :
     TestExecutionCounter(passed, failed) {
@@ -15,12 +16,12 @@ void TestStudentFactory::test_createStudent() {
     size_t expectedGradesCount = 3;
     std::vector<double> expectedGrades = {3.5, 4.5, 5.0};
 
-    IStudent *actualStudent = StudentFactory::create(
+    std::unique_ptr<IStudent> actualStudent(StudentFactory::create(
             expectedID,
             expectedFirstName,
             expectedLastName,
             expectedGender,
-            expectedGrades);
+            expectedGrades));
     IPersonalData *actualPersonalData = actualStudent->getPersonalData();
     IGrades *actualGrades = actualStudent->getGrades();
 
@@ -39,7 +40,7 @@ void TestStudentFactory::test_createStudent() {
     size_t actualGradesCount = actualGrades->count();
     QCOMPARE(actualGradesCount, expectedGradesCount);
 
-    for (size_t i = 0; i < actualGradesCount; ++i) {
+    for (unsigned i = 0; i < actualGradesCount; ++i) {
         double expectedGrade = expectedGrades.at(i);
         double actualGrade = actualGrades->getGrade(i);
         QCOMPARE(actualGrade, expectedGrade);

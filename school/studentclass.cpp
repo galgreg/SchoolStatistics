@@ -36,7 +36,7 @@ void StudentClass::removeStudent(size_t whichStudent) {
     students.erase(students.cbegin() + position);
 }
 
-IStudent *StudentClass::getStudent(size_t whichStudent) {
+IStudent *StudentClass::getStudent(size_t whichStudent) const {
     return students.at(whichStudent).get();
 }
 
