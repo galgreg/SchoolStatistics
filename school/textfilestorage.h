@@ -9,7 +9,7 @@ public:
     TextFileStorage(const std::string &filePath);
 
     IStudentClass *read(size_t maxStudentCount, size_t maxGradesCount) override;
-    void write(IStudentClass *studentClass) override;
+    void write(const IStudentClass& studentClass) override;
     bool exist() override;
 };
 
