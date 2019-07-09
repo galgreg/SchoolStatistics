@@ -17,6 +17,7 @@ private slots:
     void testDefaultState();
     void testRead_Error_NoSuchFile();
     void testRead_OK();
+    void testWrite_OK();
 private:
     void compareClasses(
         const IStudentClass &actualClass,

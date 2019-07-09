@@ -23,7 +23,7 @@ IStudentClass *TextFileStorage::read(
         QTextStream textStream(&textFile);
         QString line;
         while (textStream.readLineInto(&line)) {
-            unsigned maxGradesPerStudent = maxGradesCount;
+            size_t maxGradesPerStudent = maxGradesCount;
             QStringList words = line.split(" ");
             unsigned studentID = words.takeFirst().toUInt();
             QString firstName = words.takeFirst();
@@ -64,8 +64,45 @@ IStudentClass *TextFileStorage::read(
     }
 }
 
-void TextFileStorage::write(const IStudentClass& /* studentClass */) {
+void TextFileStorage::write(const IStudentClass& studentClass) {
+    QFile fileStorage(QString::fromStdString(getPath()));
+    if (fileStorage.open(QIODevice::WriteOnly | QIODevice::Text)) {
+        QTextStream outputStream(&fileStorage);
+        for (size_t i = 0; i < studentClass.count(); ++i) {
+            const auto& student = studentClass.getStudent(i);
+            const auto& studentPersonalData = student.getPersonalData();
+            const auto& studentGrades = student.getGrades();
 
+            QString studentFirstName =
+                    QString::fromStdString(studentPersonalData.getFirstName());
+            QString studentLastName =
+                    QString::fromStdString(studentPersonalData.getLastName());
+            Gender studentGender = studentPersonalData.getGender();
+            QString studentGenderSymbol;
+
+            if (studentGender == MALE) {
+                studentGenderSymbol = "M";
+            } else if (studentGender == FEMALE) {
+                studentGenderSymbol = "F";
+            } else {
+                studentGenderSymbol = "U";
+            }
+
+            QString studentGradeList = "";
+            for (unsigned k = 0; k < studentGrades.count(); ++k) {
+                studentGradeList +=
+                        QString::number(studentGrades.getGrade(k), 'f', 1) + " ";
+            }
+
+            QString outputLine = QString("%1 %2 %3 %4 %5\n")
+                    .arg(student.getID())
+                    .arg(studentFirstName)
+                    .arg(studentLastName)
+                    .arg(studentGenderSymbol)
+                    .arg(studentGradeList);
+            outputStream << outputLine;
+        }
+    }
 }
 
 bool TextFileStorage::exist() {
