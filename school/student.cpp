@@ -1,25 +1,30 @@
 #include "student.h"
 
-Student::Student(unsigned ID, IPersonalData *personalData, IGrades *grades) :
-    mID(ID), mPersonalData(personalData), mGrades(grades) {
+Student::Student(
+        unsigned ID,
+        const IPersonalData& personalData,
+        const IGrades& grades) :
+                mID(ID),
+                mPersonalData(new PersonalData(personalData)),
+                mGrades(new Grades(grades)) {
 }
 
 unsigned Student::getID() const {
     return mID;
 }
 
-IPersonalData *Student::getPersonalData() const {
-    return mPersonalData.get();
+const IPersonalData& Student::getPersonalData() const {
+    return *mPersonalData;
 }
 
-IGrades *Student::getGrades() const {
-    return mGrades.get();
+const IGrades& Student::getGrades() const {
+    return *mGrades;
 }
 
-void Student::setPersonalData(IPersonalData *newData) {
-    mPersonalData.reset(newData);
+void Student::setPersonalData(const IPersonalData& newData) {
+    mPersonalData.reset(new PersonalData(newData));
 }
 
-void Student::setGrades(IGrades *newGrades) {
-    mGrades.reset(newGrades);
+void Student::setGrades(const IGrades& newGrades) {
+    mGrades.reset(new Grades(newGrades));
 }

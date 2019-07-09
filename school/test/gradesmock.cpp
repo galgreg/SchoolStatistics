@@ -1,4 +1,13 @@
 #include "gradesmock.h"
+#include <stdexcept>
+
+GradesMock::GradesMock(const std::initializer_list<double> &grades) :
+        mGrades(grades) {
+    if (mGrades.size() != 3) {
+        throw std::length_error("GradesMock constructor error: mGrades.size() "
+                "must be equal to 3!");
+    }
+}
 
 void GradesMock::add(double) {
 }
@@ -14,7 +23,7 @@ size_t GradesMock::count() const {
 }
 
 double GradesMock::getGrade(unsigned whichGrade) const {
-    return grades.at(whichGrade);
+    return mGrades.at(whichGrade);
 }
 
 size_t GradesMock::maxAllowedCount() const {

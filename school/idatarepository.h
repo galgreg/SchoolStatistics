@@ -9,9 +9,9 @@ public:
     explicit IDataRepository(const std::string &repositoryPath);
     virtual ~IDataRepository();
 
-    virtual IStudentClass *read(
+    virtual IStudentClass* read(
             size_t maxStudentCount, size_t maxGradesCount) = 0;
-    virtual void write(IStudentClass *studentClass) = 0;
+    virtual void write(const IStudentClass& studentClass) = 0;
     virtual bool exist() = 0;
 
     std::string getPath();

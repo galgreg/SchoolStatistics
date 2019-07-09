@@ -22,8 +22,8 @@ private:
     void checkObjectState(
         const Student &actualStudent,
         unsigned expectedID,
-        IPersonalData *expectedPersonalData,
-        IGrades *expectedGrades);
+        const IPersonalData& expectedPersonalData,
+        const IGrades& expectedGrades);
 };
 
 #endif // TESTSTUDENT_H

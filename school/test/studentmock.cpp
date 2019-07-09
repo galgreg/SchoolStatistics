@@ -1,21 +1,26 @@
 #include "studentmock.h"
 #include "gradesmock.h"
 
+StudentMock::StudentMock() :
+        mPersonalData(new PersonalDataMock),
+        mGrades(new GradesMock({3.5, 4.0, 4.5})) {
+}
+
 unsigned StudentMock::getID() const {
     return 0;
 }
 
-IPersonalData *StudentMock::getPersonalData() const {
-    return nullptr;
+const IPersonalData& StudentMock::getPersonalData() const {
+    return *mPersonalData;
 }
 
-IGrades *StudentMock::getGrades() const {
-    return new GradesMock;
+const IGrades& StudentMock::getGrades() const {
+    return *mGrades;
 }
 
-void StudentMock::setPersonalData(IPersonalData *) {
+void StudentMock::setPersonalData(const IPersonalData &) {
 }
 
-void StudentMock::setGrades(IGrades *) {
+void StudentMock::setGrades(const IGrades&) {
 
 }

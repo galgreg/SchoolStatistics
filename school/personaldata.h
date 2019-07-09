@@ -12,7 +12,7 @@ public:
         const std::string &firstName,
         const std::string &lastName,
         Gender gender);
-
+    PersonalData(const IPersonalData &);
     std::string getFirstName() const override;
     std::string getLastName() const override;
     Gender getGender() const override;

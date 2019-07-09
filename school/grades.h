@@ -7,7 +7,10 @@
 class Grades : public IGrades
 {
 public:
-    explicit Grades(size_t maximumCount = 3);
+    Grades(const IGrades &);
+    explicit Grades(
+        size_t maximumCount = 3,
+        const std::initializer_list<double> &grades = {});
 
     void add(double grade) override;
     void remove(size_t whichGrade) override;
@@ -16,8 +19,8 @@ public:
     double getGrade(unsigned whichGrade) const override;
     size_t maxAllowedCount() const override;
 private:
-    std::vector<double> grades;
-    const size_t maxCount;
+    std::vector<double> mGrades;
+    const size_t mMaxCount;
 };
 
 #endif // GRADES_H

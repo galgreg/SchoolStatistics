@@ -9,7 +9,7 @@ std::string PersonalDataMock::getLastName() const {
 }
 
 Gender PersonalDataMock::getGender() const {
-    return MALE;
+    return UNKNOWN;
 }
 
 void PersonalDataMock::setFirstName(const std::string &) {

@@ -8,6 +8,12 @@ PersonalData::PersonalData(
 
 }
 
+PersonalData::PersonalData(const IPersonalData& originalData) {
+    mFirstName = originalData.getFirstName();
+    mLastName = originalData.getLastName();
+    mGender = originalData.getGender();
+}
+
 std::string PersonalData::getFirstName() const {
     return mFirstName;
 }

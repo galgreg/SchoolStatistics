@@ -10,15 +10,13 @@ Student* StudentFactory::create(
         Gender gender,
         const std::vector<double> &grades) {
     Student *student = new Student(ID);
-    IPersonalData *personalData =
-            new PersonalData(firstName, lastName, gender);
-    IGrades *studentGrades = new Grades(grades.size());
 
+    std::unique_ptr<IGrades> studentGrades(new Grades(grades.size()));
     for(auto grade : grades) {
         studentGrades->add(grade);
     }
 
-    student->setPersonalData(personalData);
-    student->setGrades(studentGrades);
+    student->setPersonalData(PersonalData(firstName, lastName, gender));
+    student->setGrades(*studentGrades);
     return student;
 }

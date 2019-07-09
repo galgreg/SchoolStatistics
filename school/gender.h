@@ -3,7 +3,8 @@
 
 enum Gender {
     MALE,
-    FEMALE
+    FEMALE,
+    UNKNOWN
 };
 
 #endif // GENDER_H

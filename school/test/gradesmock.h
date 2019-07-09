@@ -2,11 +2,12 @@
 #define GRADESMOCK_H
 
 #include "igrades.h"
-#include <array>
+#include <vector>
 
 class GradesMock : public IGrades
 {
 public:
+    explicit GradesMock(const std::initializer_list<double> &grades = {0.0, 0.0, 0.0});
     void add(double grade) override;
     void remove(size_t whichGrade) override;
     void edit(size_t whichGrade, double newValue) override;
@@ -14,7 +15,7 @@ public:
     double getGrade(unsigned whichGrade) const override;
     size_t maxAllowedCount() const override;
 private:
-    std::array<double, 3> grades = {3.5, 4.0, 4.5};
+    const std::vector<double> mGrades;
 };
 
 #endif // GRADESMOCK_H

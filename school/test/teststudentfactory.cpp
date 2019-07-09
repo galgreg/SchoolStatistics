@@ -22,27 +22,27 @@ void TestStudentFactory::test_createStudent() {
             expectedLastName,
             expectedGender,
             expectedGrades));
-    IPersonalData *actualPersonalData = actualStudent->getPersonalData();
-    IGrades *actualGrades = actualStudent->getGrades();
+    const IPersonalData& actualPersonalData = actualStudent->getPersonalData();
+    const IGrades& actualGrades = actualStudent->getGrades();
 
     unsigned actualID = actualStudent->getID();
     QCOMPARE(actualID, expectedID);
 
-    std::string actualFirstName = actualPersonalData->getFirstName();
+    std::string actualFirstName = actualPersonalData.getFirstName();
     QCOMPARE(actualFirstName, expectedFirstName);
 
-    std::string actualLastName = actualPersonalData->getLastName();
+    std::string actualLastName = actualPersonalData.getLastName();
     QCOMPARE(actualLastName, expectedLastName);
 
-    Gender actualGender = actualPersonalData->getGender();
+    Gender actualGender = actualPersonalData.getGender();
     QCOMPARE(actualGender, expectedGender);
 
-    size_t actualGradesCount = actualGrades->count();
+    size_t actualGradesCount = actualGrades.count();
     QCOMPARE(actualGradesCount, expectedGradesCount);
 
     for (unsigned i = 0; i < actualGradesCount; ++i) {
         double expectedGrade = expectedGrades.at(i);
-        double actualGrade = actualGrades->getGrade(i);
+        double actualGrade = actualGrades.getGrade(i);
         QCOMPARE(actualGrade, expectedGrade);
     }
 }
