@@ -6,8 +6,8 @@
 class ClassStatistics
 {
 public:
-    double getClassAverage(IStudentClass *studentClass);
-    double getStudentAverage(IStudentClass *studentClass, size_t whichStudent);
+    double getClassAverage(const IStudentClass& studentClass);
+    double getStudentAverage(const IStudentClass& studentClass, size_t whichStudent);
 };
 
 #endif // CLASSSTATISTICS_H

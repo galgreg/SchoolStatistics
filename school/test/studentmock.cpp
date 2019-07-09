@@ -1,9 +1,9 @@
 #include "studentmock.h"
 #include "gradesmock.h"
 
-StudentMock::StudentMock() :
+StudentMock::StudentMock(const std::initializer_list<double>& grades) :
         mPersonalData(new PersonalDataMock),
-        mGrades(new GradesMock({3.5, 4.0, 4.5})) {
+        mGrades(new GradesMock(grades)) {
 }
 
 unsigned StudentMock::getID() const {

@@ -8,7 +8,7 @@
 class StudentMock : public IStudent
 {
 public:
-    StudentMock();
+    StudentMock(const std::initializer_list<double>& grades = {3.5, 4.0, 4.5});
     unsigned getID() const override;
     const IPersonalData& getPersonalData() const override;
     const IGrades& getGrades() const override;

@@ -1,5 +1,8 @@
 #include "studentclassmock.h"
-#include "studentmock.h"
+
+StudentClassMock::StudentClassMock() : mStudent(new StudentMock) {
+
+}
 
 size_t StudentClassMock::maxAllowedCount() const {
     return 100;
@@ -15,8 +18,8 @@ void StudentClassMock::addStudent(IStudent *) {
 void StudentClassMock::removeStudent(size_t) {
 }
 
-IStudent *StudentClassMock::getStudent(size_t) const {
-    return new StudentMock;
+const IStudent& StudentClassMock::getStudent(size_t) const {
+    return *mStudent;
 }
 
 void StudentClassMock::editStudent(size_t, IStudent *) {

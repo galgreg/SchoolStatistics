@@ -1,7 +1,7 @@
 #include "classstatistics.h"
 
-double ClassStatistics::getClassAverage(IStudentClass *studentClass) {
-    const size_t classCount = studentClass->count();
+double ClassStatistics::getClassAverage(const IStudentClass& studentClass) {
+    const size_t classCount = studentClass.count();
     double gradesSum = 0.0;
 
     for (size_t i = 0; i != classCount; ++i) {
@@ -11,10 +11,10 @@ double ClassStatistics::getClassAverage(IStudentClass *studentClass) {
 }
 
 double ClassStatistics::getStudentAverage(
-        IStudentClass *studentClass,
+        const IStudentClass& studentClass,
         size_t whichStudent) {
-    auto student = studentClass->getStudent(whichStudent);
-    const IGrades& grades = student->getGrades();
+    const IStudent& student = studentClass.getStudent(whichStudent);
+    const IGrades& grades = student.getGrades();
     double gradesSum = 0.0;
     const size_t gradesCount = grades.count();
 

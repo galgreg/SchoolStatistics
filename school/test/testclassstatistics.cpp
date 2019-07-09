@@ -19,18 +19,18 @@ void TestClassStatistics::cleanup() {
 void TestClassStatistics::testGetStudentAverage() {
     const double expectedStudentAverage = 4.0;
     ClassStatistics statistics;
-    IStudentClass *studentClass = new StudentClassMock;
+    std::unique_ptr<IStudentClass> studentClass(new StudentClassMock);
 
     const size_t whichStudent = 3;
     const double actualStudentAverage =
-            statistics.getStudentAverage(studentClass, whichStudent);
+            statistics.getStudentAverage(*studentClass, whichStudent);
     QCOMPARE(actualStudentAverage, expectedStudentAverage);
 }
 
 void TestClassStatistics::testGetClassAverage() {
     const double expectedClassAverage = 4.0;
     ClassStatistics statistics;
-    IStudentClass *studentClass = new StudentClassMock;
-    const double actualClassAverage = statistics.getClassAverage(studentClass);
+    std::unique_ptr<IStudentClass> studentClass(new StudentClassMock);
+    const double actualClassAverage = statistics.getClassAverage(*studentClass);
     QCOMPARE(actualClassAverage, expectedClassAverage);
 }

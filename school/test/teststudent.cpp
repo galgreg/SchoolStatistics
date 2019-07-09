@@ -31,15 +31,15 @@ void TestStudent::testState_DefaultInitialized() {
 
 void TestStudent::testState_DataInitialized() {
     const unsigned expectedID = 1;
-    std::unique_ptr<IPersonalData> expectedPersonalData(new PersonalDataMock);
-    std::unique_ptr<IGrades> expectedGrades(new GradesMock);
-    Student actualStudent(expectedID, *expectedPersonalData, *expectedGrades);
+    const IPersonalData& expectedPersonalData = PersonalDataMock();
+    const IGrades& expectedGrades = GradesMock();
+    Student actualStudent(expectedID, expectedPersonalData, expectedGrades);
 
     checkObjectState(
             actualStudent,
             expectedID,
-            *expectedPersonalData,
-            *expectedGrades);
+            expectedPersonalData,
+            expectedGrades);
 }
 
 void TestStudent::testChangeStateBySetters() {

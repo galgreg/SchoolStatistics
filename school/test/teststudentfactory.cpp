@@ -13,8 +13,19 @@ void TestStudentFactory::test_createStudent() {
     std::string expectedFirstName = "Jan";
     std::string expectedLastName = "Kowalski";
     Gender expectedGender = MALE;
-    size_t expectedGradesCount = 3;
-    std::vector<double> expectedGrades = {3.5, 4.5, 5.0};
+    std::initializer_list<double> expectedGrades = {3.5, 4.5, 5.0};
+
+    std::unique_ptr<IPersonalData> expectedPersonalData(
+            new PersonalData(
+                    expectedFirstName,
+                    expectedLastName,
+                    expectedGender));
+    std::unique_ptr<IGrades> expectedGradesObject(new Grades(3, expectedGrades));
+    std::unique_ptr<IStudent> expectedStudent(
+            new Student(
+                    expectedID,
+                    *expectedPersonalData,
+                    *expectedGradesObject));
 
     std::unique_ptr<IStudent> actualStudent(StudentFactory::create(
             expectedID,
@@ -22,29 +33,7 @@ void TestStudentFactory::test_createStudent() {
             expectedLastName,
             expectedGender,
             expectedGrades));
-    const IPersonalData& actualPersonalData = actualStudent->getPersonalData();
-    const IGrades& actualGrades = actualStudent->getGrades();
-
-    unsigned actualID = actualStudent->getID();
-    QCOMPARE(actualID, expectedID);
-
-    std::string actualFirstName = actualPersonalData.getFirstName();
-    QCOMPARE(actualFirstName, expectedFirstName);
-
-    std::string actualLastName = actualPersonalData.getLastName();
-    QCOMPARE(actualLastName, expectedLastName);
-
-    Gender actualGender = actualPersonalData.getGender();
-    QCOMPARE(actualGender, expectedGender);
-
-    size_t actualGradesCount = actualGrades.count();
-    QCOMPARE(actualGradesCount, expectedGradesCount);
-
-    for (unsigned i = 0; i < actualGradesCount; ++i) {
-        double expectedGrade = expectedGrades.at(i);
-        double actualGrade = actualGrades.getGrade(i);
-        QCOMPARE(actualGrade, expectedGrade);
-    }
+    QCOMPARE(*actualStudent, *expectedStudent);
 }
 
 void TestStudentFactory::cleanup() {

@@ -87,8 +87,8 @@ void TestStudentClass::testGetStudent_OK() {
     studentClass.addStudent(expectedStudent);
 
     const size_t whichStudent = 0;
-    IStudent *actualStudent = studentClass.getStudent(whichStudent);
-    QCOMPARE(actualStudent, expectedStudent);
+    const IStudent& actualStudent = studentClass.getStudent(whichStudent);
+    QCOMPARE(actualStudent, *expectedStudent);
 }
 
 void TestStudentClass::testGetStudent_Error_NoSuchElement() {
@@ -110,18 +110,19 @@ void TestStudentClass::testEditStudent_OK() {
     const size_t maxAllowedCount = 20;
     StudentClass studentClass(maxAllowedCount);
 
-    IStudent *expectedStudent_BeforeEdit = new StudentMock;
+    IStudent *expectedStudent_BeforeEdit = new StudentMock({3.0, 3.0, 3.0});
     studentClass.addStudent(expectedStudent_BeforeEdit);
 
     const size_t whichStudent = 0;
-    IStudent *actualStudent_BeforeEdit = studentClass.getStudent(whichStudent);
-    QCOMPARE(actualStudent_BeforeEdit, expectedStudent_BeforeEdit);
+    const IStudent& actualStudent_BeforeEdit = studentClass.getStudent(whichStudent);
+    QCOMPARE(actualStudent_BeforeEdit, *expectedStudent_BeforeEdit);
 
-    IStudent *expectedStudent_AfterEdit = new StudentMock;
+    IStudent *expectedStudent_AfterEdit = new StudentMock({5.0, 5.0, 5.0});
+    QVERIFY(*expectedStudent_BeforeEdit != *expectedStudent_AfterEdit);
+
     studentClass.editStudent(whichStudent, expectedStudent_AfterEdit);
-    IStudent *actualStudent_AfterEdit = studentClass.getStudent(whichStudent);
-    QCOMPARE(actualStudent_AfterEdit, expectedStudent_AfterEdit);
-    QVERIFY(actualStudent_AfterEdit != actualStudent_BeforeEdit);
+    const IStudent& actualStudent_AfterEdit = studentClass.getStudent(whichStudent);
+    QCOMPARE(actualStudent_AfterEdit, *expectedStudent_AfterEdit);
 }
 
 void TestStudentClass::testEditStudent_Error_NoSuchElement() {
