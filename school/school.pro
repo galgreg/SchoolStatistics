@@ -77,7 +77,8 @@ test {
     test/studentclassmock.h \
     test/testtextfilestorage.h \
     test/teststudentfactory.h \
-    test/testmainwindow.h
+    test/testmainwindow.h \
+    test/datarepositorymock.h
 
     SOURCES += test/test_main.cpp \
     test/testexecutioncounter.cpp \
@@ -92,7 +93,8 @@ test {
     test/studentclassmock.cpp \
     test/testtextfilestorage.cpp \
     test/teststudentfactory.cpp \
-    test/testmainwindow.cpp
+    test/testmainwindow.cpp \
+    test/datarepositorymock.cpp
 
 } else {
     message(Normal build)

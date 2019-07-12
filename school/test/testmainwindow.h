@@ -14,11 +14,11 @@ public:
 private slots:
     void init();
     void cleanup();
+    void testReadDataFromRepository();
 private:
-    void prepareTestFile();
-
-    std::unique_ptr<MainWindow> mMainWindow;
-    QString mPathToTestFile = "TEST_MAIN_WINDOW_FILE.txt";
+    MainWindow *mMainWindow;
+    std::unique_ptr<IStudentClass> mStudentClassData;
+    QString mPathToTestRepository = "TEST_MAIN_WINDOW_FILE.txt";
 };
 
 #endif // TESTMAINWINDOW_H

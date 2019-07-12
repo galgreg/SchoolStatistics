@@ -20,3 +20,23 @@ Student* StudentFactory::create(
     student->setGrades(*studentGrades);
     return student;
 }
+
+Student *StudentFactory::copy(const IStudent &studentToCopy) {
+    unsigned studentID = studentToCopy.getID();
+    std::string studentFirstName = studentToCopy.getPersonalData().getFirstName();
+    std::string studentLastName = studentToCopy.getPersonalData().getLastName();
+    Gender studentGender = studentToCopy.getPersonalData().getGender();
+
+    std::vector<double> studentGrades;
+    const IGrades& gradesToCopy = studentToCopy.getGrades();
+    for (unsigned i = 0; i < gradesToCopy.count(); ++i) {
+        studentGrades.push_back(gradesToCopy.getGrade(i));
+    }
+
+    return StudentFactory::create(
+            studentID,
+            studentFirstName,
+            studentLastName,
+            studentGender,
+            studentGrades);
+}

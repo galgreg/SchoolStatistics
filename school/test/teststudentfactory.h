@@ -12,6 +12,7 @@ public:
 private slots:
     void cleanup();
     void test_createStudent();
+    void test_copyStudent();
 };
 
 #endif // TESTSTUDENTFACTORY_H

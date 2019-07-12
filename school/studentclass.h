@@ -10,8 +10,7 @@
 class StudentClass : public IStudentClass
 {
 public:
-    StudentClass(size_t maximumCount = 20);
-
+    explicit StudentClass(size_t maximumCount = 20);
     size_t maxAllowedCount() const override;
     size_t count() const override;
     void addStudent(IStudent *newStudent) override;
@@ -21,8 +20,8 @@ public:
     void removeAll() override;
 
 private:
-    const size_t maxCount;
-    std::vector<std::unique_ptr<IStudent>> students;
+    const size_t mMaxCount;
+    std::vector<std::unique_ptr<IStudent>> mStudents;
 };
 
 #endif // STUDENTCLASS_H

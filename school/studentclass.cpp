@@ -1,15 +1,15 @@
 #include "studentclass.h"
 
-StudentClass::StudentClass(size_t maximumCount) : maxCount(maximumCount) {
+StudentClass::StudentClass(size_t maximumCount) : mMaxCount(maximumCount) {
 
 }
 
 size_t StudentClass::maxAllowedCount() const {
-    return maxCount;
+    return mMaxCount;
 }
 
 size_t StudentClass::count() const {
-    return students.size();
+    return mStudents.size();
 }
 
 void StudentClass::addStudent(IStudent *newStudent) {
@@ -24,7 +24,7 @@ void StudentClass::addStudent(IStudent *newStudent) {
                 "StudentClass::addStudent() : StudentClass overflow");
     }
 
-    students.push_back(std::move(tempPtr));
+    mStudents.push_back(std::move(tempPtr));
 }
 
 void StudentClass::removeStudent(size_t whichStudent) {
@@ -33,20 +33,20 @@ void StudentClass::removeStudent(size_t whichStudent) {
                 "StudentClass::removeStudent() : No such element");
     }
     long position = static_cast<long>(whichStudent);
-    students.erase(students.cbegin() + position);
+    mStudents.erase(mStudents.cbegin() + position);
 }
 
 const IStudent& StudentClass::getStudent(size_t whichStudent) const {
-    return *students.at(whichStudent);
+    return *mStudents.at(whichStudent);
 }
 
 void StudentClass::editStudent(size_t whichStudent, IStudent *newValue) {
     if (newValue == nullptr) {
         throw std::bad_alloc();
     }
-    students.at(whichStudent).reset(newValue);
+    mStudents.at(whichStudent).reset(newValue);
 }
 
 void StudentClass::removeAll() {
-    students.clear();
+    mStudents.clear();
 }

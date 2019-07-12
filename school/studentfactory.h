@@ -14,6 +14,7 @@ public:
         const std::string &lastName,
         Gender gender,
         const std::vector<double> &grades);
+    static Student* copy(const IStudent &studentToCopy);
 };
 
 #endif // STUDENTFACTORY_H
