@@ -3,12 +3,69 @@
 
 StudentDataWindow::StudentDataWindow(QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::StudentDataWindow)
+    ui(nullptr)
 {
+    ui.reset(new Ui::StudentDataWindow);
     ui->setupUi(this);
 }
 
 StudentDataWindow::~StudentDataWindow()
 {
-    delete ui;
+
 }
+
+void StudentDataWindow::showWidget() {
+    this->show();
+}
+
+QString StudentDataWindow::getID() {
+    return ui->studentIDValue->text();
+}
+
+QString StudentDataWindow::getFirstName() {
+    return ui->firstNameValue->text();
+}
+
+QString StudentDataWindow::getLastName() {
+    return ui->lastNameValue->text();
+}
+
+QString StudentDataWindow::getGender() {
+    return ui->genderValue->text();
+}
+
+QString StudentDataWindow::getGrades() {
+    return ui->gradesValue->text();
+}
+
+QString StudentDataWindow::getGradesAverage() {
+    return ui->gradesAverageValue->text();
+}
+
+void StudentDataWindow::setID(const QString &newStudentID) {
+    ui->studentIDValue->setText(newStudentID);
+}
+
+void StudentDataWindow::setFirstName(const QString &newFirstName) {
+    ui->firstNameValue->setText(newFirstName);
+}
+
+void StudentDataWindow::setLastName(const QString &newLastName) {
+    ui->lastNameValue->setText(newLastName);
+}
+
+void StudentDataWindow::setGender(const QString &newGender) {
+    ui->genderValue->setText(newGender);
+}
+
+void StudentDataWindow::setGrades(const QString &newGrades) {
+    ui->gradesValue->setText(newGrades);
+}
+
+void StudentDataWindow::setGradesAverage(const QString &newGradesAverage) {
+    ui->gradesAverageValue->setText(newGradesAverage);
+}
+
+
+
+
