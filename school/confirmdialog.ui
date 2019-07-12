@@ -27,7 +27,7 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <widget class="QLabel" name="label_2">
+    <widget class="QLabel" name="dialogMessage">
      <property name="text">
       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;You asked to NONE1 data about NONE2. &lt;/p&gt;&lt;p align=&quot;center&quot;&gt;Are you sure?&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>

@@ -4,6 +4,7 @@
 #include <QWidget>
 #include "idatarepository.h"
 #include "istudentclass.h"
+#include "istudentdatawidget.h"
 #include <memory>
 
 class TestMainWindow;
@@ -26,6 +27,9 @@ public:
 
 private:
     void readDataFromRepository();
+    void prepareStudentDataWidgetToDisplay(
+            IStudentDataWidget *dataWidget,
+            size_t studentIndex);
 
     std::unique_ptr<Ui::MainWindow> ui;
     std::unique_ptr<IDataRepository> mDataRepository;

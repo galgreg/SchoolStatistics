@@ -5,6 +5,7 @@
 
 class PersonalDataMock : public IPersonalData
 {
+public:
     std::string getFirstName() const override;
     std::string getLastName() const override;
     Gender getGender() const override;

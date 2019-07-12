@@ -1,6 +1,7 @@
 #include "testmainwindow.h"
 #include "datarepositorymock.h"
 #include "studentclass.h"
+#include "studentdatawidgetmock.h"
 #include "studentfactory.h"
 #include "ui_mainwindow.h"
 
@@ -65,9 +66,42 @@ void TestMainWindow::testReadDataFromRepository() {
     QList<QString> actualStudentListContent;
     const auto& studentList = *(mMainWindow->ui->studentList);
 
+
     for (int i = 0; i < studentList.count(); ++i) {
         const auto& item = studentList.item(i);
         actualStudentListContent.append(item->text());
     }
     QCOMPARE(actualStudentListContent, expectedStudentListContent);
+}
+
+void TestMainWindow::testPrepareStudentDataWidgetToDisplay() {
+    std::unique_ptr<IStudentDataWidget> studentDataWidget(
+            new StudentDataWidgetMock);
+    unsigned studentIndex = 1;
+    mMainWindow->prepareStudentDataWidgetToDisplay(
+            studentDataWidget.get(),
+            studentIndex);
+    QString expectedStudentID = "2";
+    QString actualStudentID = studentDataWidget->getID();
+    QCOMPARE(actualStudentID, expectedStudentID);
+
+    QString expectedFirstName = "Maria";
+    QString actualFirstName = studentDataWidget->getFirstName();
+    QCOMPARE(actualFirstName, expectedFirstName);
+
+    QString expectedLastName = "Nowak";
+    QString actualLastName = studentDataWidget->getLastName();
+    QCOMPARE(actualLastName, expectedLastName);
+
+    QString expectedGender = "Female";
+    QString actualGender = studentDataWidget->getGender();
+    QCOMPARE(actualGender, expectedGender);
+
+    QString expectedGrades = "3.0, 3.0, 3.0";
+    QString actualGrades = studentDataWidget->getGrades();
+    QCOMPARE(actualGrades, expectedGrades);
+
+    QString expectedGradesAverage = "3.0";
+    QString actualGradesAverage = studentDataWidget->getGradesAverage();
+    QCOMPARE(actualGradesAverage, expectedGradesAverage);
 }
