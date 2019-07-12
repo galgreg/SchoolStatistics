@@ -9,18 +9,19 @@ DataRepositoryMock::DataRepositoryMock(const std::string &repositoryPath) :
 IStudentClass *DataRepositoryMock::read(
         size_t maxStudentCount,
         size_t maxGradesCount) {
-    IStudentClass *classFromFile = new StudentClass(maxStudentCount);
-    for (size_t i = 0; i < maxStudentCount; ++i) {
-        IStudent *studentCopy
-                = StudentFactory::copy(mStudentClass.getStudent(i));
+    std::unique_ptr<IStudentClass> classFromFile(
+            new StudentClass(maxStudentCount));
+    for (size_t i = 0; i < maxStudentCount && i < mStudentClass.count(); ++i) {
+        std::unique_ptr<IStudent> studentCopy(
+                StudentFactory::copy(mStudentClass.getStudent(i)));
         std::unique_ptr<IGrades> studentGrades(new Grades(maxGradesCount));
         for (unsigned k = 0; k < maxGradesCount; ++k) {
             studentGrades->add(studentCopy->getGrades().getGrade(k));
         }
         studentCopy->setGrades(*studentGrades);
-        classFromFile->addStudent(studentCopy);
+        classFromFile->addStudent(studentCopy.release());
     }
-    return classFromFile;
+    return classFromFile.release();
 }
 
 void DataRepositoryMock::write(const IStudentClass &studentClass) {

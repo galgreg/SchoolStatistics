@@ -1,4 +1,4 @@
-Grzegorz Galios M 5.0 4.0 3.5 4.5
-Jan Kowalski M 3.5 2.0 3.0 4.0 5.0
-Maria Konopnicka F 5.0 5.0 3.0 4.0
-Janina Ochódzka F 4.0 4.0 3.0
+1 Grzegorz Galios M 5.0 4.0 3.5 4.5
+9 Jan Kowalski M 3.5 2.0 3.0 4.0 5.0
+13 Maria Konopnicka F 5.0 5.0 3.0 4.0
+25 Janina Ochódzka F 4.0 4.0 3.0

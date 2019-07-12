@@ -16,7 +16,7 @@ private slots:
     void cleanup();
     void testReadDataFromRepository();
 private:
-    MainWindow *mMainWindow;
+    std::unique_ptr<MainWindow> mMainWindow;
     std::unique_ptr<IStudentClass> mStudentClassData;
     QString mPathToTestRepository = "TEST_MAIN_WINDOW_FILE.txt";
 };

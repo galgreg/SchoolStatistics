@@ -2,6 +2,7 @@
 #include "datarepositorymock.h"
 #include "studentclass.h"
 #include "studentfactory.h"
+#include "ui_mainwindow.h"
 
 TestMainWindow::TestMainWindow(
         unsigned &passed,
@@ -31,10 +32,7 @@ void TestMainWindow::init() {
     IDataRepository *dataRepository = new DataRepositoryMock;
     dataRepository->write(*mStudentClassData);
 
-    if (mMainWindow) {
-        delete mMainWindow;
-    }
-    mMainWindow = new MainWindow(dataRepository, new StudentClass);
+    mMainWindow.reset(new MainWindow(dataRepository));
 }
 
 void TestMainWindow::cleanup() {
@@ -46,5 +44,30 @@ void TestMainWindow::cleanup() {
 }
 
 void TestMainWindow::testReadDataFromRepository() {
+    mMainWindow->readDataFromRepository();
+    const IStudentClass& expectedStudentClass = *mStudentClassData;
+    const IStudentClass& actualStudentClass = *mMainWindow->mStudentClass;
 
+    QCOMPARE(actualStudentClass, expectedStudentClass);
+
+    QString expectedStudentNumberValueText = "3";
+    QString actualStudentNumberValueText =
+            mMainWindow->ui->studentsNumberValue->text();
+    QCOMPARE(actualStudentNumberValueText, expectedStudentNumberValueText);
+
+    QString expectedClassAverageValue = "3.0";
+    QString actualClassAverageValue =
+            mMainWindow->ui->classAverageValue->text();
+    QCOMPARE(actualClassAverageValue, expectedClassAverageValue);
+
+    QList<QString> expectedStudentListContent =
+            {"Jan Kowalski", "Maria Nowak", "Gal Anonim"};
+    QList<QString> actualStudentListContent;
+    const auto& studentList = *(mMainWindow->ui->studentList);
+
+    for (int i = 0; i < studentList.count(); ++i) {
+        const auto& item = studentList.item(i);
+        actualStudentListContent.append(item->text());
+    }
+    QCOMPARE(actualStudentListContent, expectedStudentListContent);
 }
