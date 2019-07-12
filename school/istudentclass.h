@@ -8,6 +8,7 @@ class IStudentClass
 {
 public:
     virtual ~IStudentClass() = default;
+    bool operator==(const IStudentClass &classToCompare) const;
     virtual size_t maxAllowedCount() const = 0;
     virtual size_t count() const = 0;
     virtual void addStudent(IStudent *newStudent) = 0;

@@ -7,14 +7,8 @@
 class IStudent {
 public:
     virtual ~IStudent() = default;
-    bool operator==(const IStudent& studentToCompare) const {
-        return this->getID() == studentToCompare.getID() &&
-                this->getPersonalData() == studentToCompare.getPersonalData() &&
-                this->getGrades() == studentToCompare.getGrades();
-    }
-    bool operator!=(const IStudent& studentToCompare) const {
-        return !(*this == studentToCompare);
-    }
+    bool operator==(const IStudent& studentToCompare) const;
+    bool operator!=(const IStudent& studentToCompare) const;
 
     virtual unsigned getID() const = 0;
     virtual const IPersonalData& getPersonalData() const = 0;
