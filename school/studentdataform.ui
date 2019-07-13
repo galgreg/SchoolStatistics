@@ -2,6 +2,9 @@
 <ui version="4.0">
  <class>StudentDataForm</class>
  <widget class="QWidget" name="StudentDataForm">
+  <property name="windowModality">
+   <enum>Qt::ApplicationModal</enum>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -27,9 +30,9 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_4">
    <item>
-    <layout class="QGridLayout" name="gridLayout">
+    <layout class="QGridLayout" name="studentNameLayout">
      <item row="0" column="0">
-      <widget class="QLabel" name="label_2">
+      <widget class="QLabel" name="firstNameLabel">
        <property name="text">
         <string>First Name:</string>
        </property>
@@ -52,17 +55,17 @@
       </spacer>
      </item>
      <item row="1" column="0">
-      <widget class="QLabel" name="label_3">
+      <widget class="QLabel" name="lastNameLabel">
        <property name="text">
         <string>Last Name:</string>
        </property>
       </widget>
      </item>
      <item row="0" column="2">
-      <widget class="QLineEdit" name="lineEdit"/>
+      <widget class="QLineEdit" name="firstNameLineEdit"/>
      </item>
      <item row="1" column="2">
-      <widget class="QLineEdit" name="lineEdit_2"/>
+      <widget class="QLineEdit" name="lastNameLineEdit"/>
      </item>
      <item row="1" column="1">
       <spacer name="horizontalSpacer_2">
@@ -85,7 +88,7 @@
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_4">
      <item>
-      <widget class="QGroupBox" name="groupBox">
+      <widget class="QGroupBox" name="genderBox">
        <property name="title">
         <string>Gender</string>
        </property>
@@ -94,7 +97,7 @@
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_3">
         <item>
-         <widget class="QRadioButton" name="radioButton">
+         <widget class="QRadioButton" name="femaleButton">
           <property name="text">
            <string>Female</string>
           </property>
@@ -104,14 +107,14 @@
          </widget>
         </item>
         <item>
-         <widget class="QRadioButton" name="radioButton_2">
+         <widget class="QRadioButton" name="maleButton">
           <property name="text">
            <string>Male</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QRadioButton" name="radioButton_3">
+         <widget class="QRadioButton" name="unknownGenderButton">
           <property name="text">
            <string>Unknown</string>
           </property>
@@ -134,18 +137,18 @@
       </widget>
      </item>
      <item>
-      <widget class="QGroupBox" name="groupBox_2">
+      <widget class="QGroupBox" name="gradesBox">
        <property name="title">
         <string>Grades</string>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_2">
         <item>
-         <widget class="QListWidget" name="listWidget"/>
+         <widget class="QListWidget" name="gradesList"/>
         </item>
         <item>
          <layout class="QVBoxLayout" name="verticalLayout">
           <item>
-           <widget class="QSlider" name="horizontalSlider">
+           <widget class="QSlider" name="gradesSlider">
             <property name="minimum">
              <number>4</number>
             </property>
@@ -259,21 +262,21 @@
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout">
           <item>
-           <widget class="QPushButton" name="pushButton_3">
+           <widget class="QPushButton" name="addGradeButton">
             <property name="text">
              <string>Add</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="pushButton_4">
+           <widget class="QPushButton" name="editGradeButton">
             <property name="text">
              <string>Edit</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="pushButton_5">
+           <widget class="QPushButton" name="deleteGradeButton">
             <property name="text">
              <string>Delete</string>
             </property>
@@ -315,14 +318,14 @@
       </spacer>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton">
+      <widget class="QPushButton" name="okButton">
        <property name="text">
         <string>OK</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton_2">
+      <widget class="QPushButton" name="cancelButton">
        <property name="text">
         <string>Cancel</string>
        </property>
