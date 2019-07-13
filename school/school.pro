@@ -59,7 +59,9 @@ HEADERS += mainwindow.h \
     studentfactory.h \
     test/datarepositorymock.h \
     istudentdatawidget.h \
-    studentdataform.h
+    studentdataform.h \
+    confirmaction.h \
+    iconfirmdialog.h
 
 FORMS += mainwindow.ui \
     studentdatawindow.ui \
@@ -86,7 +88,8 @@ test {
     test/testtextfilestorage.h \
     test/teststudentfactory.h \
     test/testmainwindow.h \
-    test/studentdatawidgetmock.h
+    test/studentdatawidgetmock.h \
+    test/confirmdialogmock.h
 
 
     SOURCES += test/test_main.cpp \
@@ -103,7 +106,8 @@ test {
     test/testtextfilestorage.cpp \
     test/teststudentfactory.cpp \
     test/testmainwindow.cpp \
-    test/studentdatawidgetmock.cpp
+    test/studentdatawidgetmock.cpp \
+    test/confirmdialogmock.cpp
 
 } else {
     message(Normal build)

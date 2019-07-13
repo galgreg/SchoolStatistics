@@ -15,8 +15,10 @@ private slots:
     void init();
     void cleanup();
     void testReadDataFromRepository();
-    void testPrepareStudentDataWidgetToDisplay();
     void testDeleteStudent();
+    void testPrepareStudentDataWidgetToDisplay();
+    void testPrepareConfirmDialogToDisplay_data();
+    void testPrepareConfirmDialogToDisplay();
 private:
     std::unique_ptr<MainWindow> mMainWindow;
     std::unique_ptr<IStudentClass> mStudentClassData;

@@ -2,6 +2,8 @@
 #define MAINWINDOW_H
 
 #include <QWidget>
+#include "confirmaction.h"
+#include "iconfirmdialog.h"
 #include "idatarepository.h"
 #include "istudentclass.h"
 #include "istudentdatawidget.h"
@@ -23,6 +25,7 @@ public:
     MainWindow(
         IDataRepository *dataRepository,
         IStudentDataWidget *studentDataWidget,
+        IConfirmDialog *confirmDialog,
         QWidget *parent = nullptr);
     ~MainWindow();
 
@@ -31,13 +34,18 @@ private slots:
 
 private:
     void readDataFromRepository();
-    void prepareStudentDataWidgetToDisplay(size_t studentIndex);
     void deleteStudent(size_t studentIndex);
+
+    void prepareStudentDataWidgetToDisplay(size_t studentIndex);
+    void prepareConfirmDialogToDisplay(
+            ConfirmAction actionToConfirm,
+            QString studentName);
 
     std::unique_ptr<Ui::MainWindow> ui;
     std::unique_ptr<IDataRepository> mDataRepository;
     std::unique_ptr<IStudentClass> mStudentClass;
     std::unique_ptr<IStudentDataWidget> mStudentDataWidget;
+    std::unique_ptr<IConfirmDialog> mConfirmDialog;
 };
 
 #endif // MAINWINDOW_H

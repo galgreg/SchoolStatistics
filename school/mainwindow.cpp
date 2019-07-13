@@ -7,11 +7,13 @@
 MainWindow::MainWindow(
         IDataRepository *dataRepository,
         IStudentDataWidget *studentDataWidget,
+        IConfirmDialog *confirmDialog,
         QWidget *parent) :
             QWidget(parent),
             mDataRepository(dataRepository),
             mStudentClass(nullptr),
-            mStudentDataWidget(studentDataWidget) {
+            mStudentDataWidget(studentDataWidget),
+            mConfirmDialog(confirmDialog) {
     ui.reset(new Ui::MainWindow);
     ui->setupUi(this);
 
@@ -49,6 +51,12 @@ void MainWindow::readDataFromRepository() {
                 personalData.getFirstName() + " " + personalData.getLastName();
         studentList->addItem(QString::fromStdString(studentFullName));
     }
+}
+
+void MainWindow::deleteStudent(size_t studentIndex) {
+    mStudentClass->removeStudent(studentIndex);
+    mDataRepository->write(*mStudentClass);
+    readDataFromRepository();
 }
 
 void MainWindow::prepareStudentDataWidgetToDisplay(size_t studentIndex) {
@@ -94,8 +102,19 @@ void MainWindow::prepareStudentDataWidgetToDisplay(size_t studentIndex) {
     mStudentDataWidget->setGradesAverage(gradesAverage);
 }
 
-void MainWindow::deleteStudent(size_t studentIndex) {
-    mStudentClass->removeStudent(studentIndex);
-    mDataRepository->write(*mStudentClass);
-    readDataFromRepository();
+void MainWindow::prepareConfirmDialogToDisplay(
+        ConfirmAction actionToConfirm,
+        QString studentName) {
+    QString actionString;
+
+    if (actionToConfirm == ADD_STUDENT) {
+        actionString = "add";
+    } else if (actionToConfirm == EDIT_STUDENT) {
+        actionString = "edit";
+    } else if (actionToConfirm == DELETE_STUDENT) {
+        actionString = "delete";
+    }
+    mConfirmDialog->setAction(actionString);
+    mConfirmDialog->setStudentName(studentName);
 }
+

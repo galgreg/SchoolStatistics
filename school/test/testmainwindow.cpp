@@ -1,4 +1,5 @@
 #include "testmainwindow.h"
+#include "confirmdialogmock.h"
 #include "datarepositorymock.h"
 #include "studentclass.h"
 #include "studentdatawidgetmock.h"
@@ -33,7 +34,11 @@ void TestMainWindow::init() {
     IDataRepository *dataRepository = new DataRepositoryMock;
     dataRepository->write(*mStudentClassData);
 
-    mMainWindow.reset(new MainWindow(dataRepository, new StudentDataWidgetMock));
+    mMainWindow.reset(
+            new MainWindow(
+                    dataRepository,
+                    new StudentDataWidgetMock,
+                    new ConfirmDialogMock));
 }
 
 void TestMainWindow::cleanup() {
@@ -74,6 +79,20 @@ void TestMainWindow::testReadDataFromRepository() {
     QCOMPARE(actualStudentListContent, expectedStudentListContent);
 }
 
+void TestMainWindow::testDeleteStudent() {
+    size_t studentIndex = 1;
+    const auto& expectedStudentClassBeforeDelete = *mStudentClassData;
+    const auto& actualStudentClassBeforeDelete = *mMainWindow->mStudentClass;
+    QCOMPARE(actualStudentClassBeforeDelete, expectedStudentClassBeforeDelete);
+
+    mStudentClassData->removeStudent(studentIndex);
+    mMainWindow->deleteStudent(studentIndex);
+
+    const auto& expectedStudentClassAfterDelete = *mStudentClassData;
+    const auto& actualStudentClassAfterDelete = *mMainWindow->mStudentClass;
+    QCOMPARE(actualStudentClassAfterDelete, expectedStudentClassAfterDelete);
+}
+
 void TestMainWindow::testPrepareStudentDataWidgetToDisplay() {
     size_t studentIndex = 1;
     mMainWindow->prepareStudentDataWidgetToDisplay(studentIndex);
@@ -103,16 +122,29 @@ void TestMainWindow::testPrepareStudentDataWidgetToDisplay() {
     QCOMPARE(actualGradesAverage, expectedGradesAverage);
 }
 
-void TestMainWindow::testDeleteStudent() {
-    size_t studentIndex = 1;
-    const auto& expectedStudentClassBeforeDelete = *mStudentClassData;
-    const auto& actualStudentClassBeforeDelete = *mMainWindow->mStudentClass;
-    QCOMPARE(actualStudentClassBeforeDelete, expectedStudentClassBeforeDelete);
+void TestMainWindow::testPrepareConfirmDialogToDisplay_data() {
+    QTest::addColumn<ConfirmAction>("actionToConfirm");
+    QTest::addColumn<QString>("studentName");
+    QTest::addColumn<QString>("expectedActionString");
 
-    mStudentClassData->removeStudent(studentIndex);
-    mMainWindow->deleteStudent(studentIndex);
+    QTest::newRow("add_jan_kowalski")
+            << ADD_STUDENT << "Jan Kowalski" << "add";
+    QTest::newRow("edit_maria_nowak")
+            << EDIT_STUDENT << "Maria Nowak" << "edit";
+    QTest::newRow("delete_gal_anonim")
+            << DELETE_STUDENT << "Gal Anonim" << "delete";
+}
 
-    const auto& expectedStudentClassAfterDelete = *mStudentClassData;
-    const auto& actualStudentClassAfterDelete = *mMainWindow->mStudentClass;
-    QCOMPARE(actualStudentClassAfterDelete, expectedStudentClassAfterDelete);
+void TestMainWindow::testPrepareConfirmDialogToDisplay() {
+    QFETCH(ConfirmAction, actionToConfirm);
+    QFETCH(QString, studentName);
+    mMainWindow->prepareConfirmDialogToDisplay(actionToConfirm, studentName);
+
+    QFETCH(QString, expectedActionString);
+    QString actualActionString = mMainWindow->mConfirmDialog->getAction();
+    QCOMPARE(actualActionString, expectedActionString);
+
+    QString expectedStudentName = studentName;
+    QString actualStudentName = mMainWindow->mConfirmDialog->getStudentName();
+    QCOMPARE(actualStudentName, expectedStudentName);
 }
