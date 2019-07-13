@@ -15,7 +15,9 @@ IStudentClass *TextFileStorage::read(
         size_t maxStudentCount,
         size_t maxGradesCount) {
     if (!exist()) {
-        throw std::ios_base::failure("Cannot open file " + getPath());
+        throw std::ios_base::failure("TextFileStorage::read() error: "
+                "Cannot open file " + getPath() +
+                " (file does not exist)");
     }
     QFile textFile(QString::fromStdString(getPath()));
     if (textFile.open(QIODevice::ReadOnly | QIODevice::Text)) {

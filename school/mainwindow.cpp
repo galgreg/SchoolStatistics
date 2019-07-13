@@ -10,11 +10,11 @@ MainWindow::MainWindow(
         IConfirmDialog *confirmDialog,
         QWidget *parent) :
             QWidget(parent),
+            ui(new Ui::MainWindow),
             mDataRepository(dataRepository),
             mStudentClass(nullptr),
             mStudentDataWidget(studentDataWidget),
             mConfirmDialog(confirmDialog) {
-    ui.reset(new Ui::MainWindow);
     ui->setupUi(this);
 
     connect(ui->showStudentButton, &QPushButton::clicked,
@@ -35,7 +35,21 @@ void MainWindow::showStudentDataWidget() {
 }
 
 void MainWindow::readDataFromRepository() {
-    mStudentClass.reset(mDataRepository->read(20, 3));
+    try {
+        mStudentClass.reset(mDataRepository->read(20, 3));
+        ui->errorLabel->setText("");
+    } catch (...) {
+        mStudentClass.reset(new StudentClass(20));
+        ui->studentsNumberValue->setText("0");
+        ui->classAverageValue->setText("0.0");
+        ui->studentList->clear();
+        ui->errorLabel->setText(
+                "<html><head/><body>"
+                "<p><span style=\" font-weight:600; color:#cc0000;\">"
+                "Cannot open data storage!</span></p>"
+                "</body></html>");
+        return;
+    }
     size_t studentClassCount = mStudentClass->count();
     ui->studentsNumberValue->setText(QString::number(studentClassCount));
     double studentClassAverage =
