@@ -89,7 +89,8 @@ test {
     test/teststudentfactory.h \
     test/testmainwindow.h \
     test/studentdatawidgetmock.h \
-    test/confirmdialogmock.h
+    test/confirmdialogmock.h \
+    test/testconfirmdialog.h
 
 
     SOURCES += test/test_main.cpp \
@@ -107,7 +108,8 @@ test {
     test/teststudentfactory.cpp \
     test/testmainwindow.cpp \
     test/studentdatawidgetmock.cpp \
-    test/confirmdialogmock.cpp
+    test/confirmdialogmock.cpp \
+    test/testconfirmdialog.cpp
 
 } else {
     message(Normal build)

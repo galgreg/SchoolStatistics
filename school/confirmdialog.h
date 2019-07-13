@@ -5,6 +5,8 @@
 #include "iconfirmdialog.h"
 #include <memory>
 
+class TestConfirmDialog;
+
 namespace Ui {
 class ConfirmDialog;
 }
@@ -14,6 +16,8 @@ class ConfirmDialog : public QWidget, public IConfirmDialog
     Q_OBJECT
 
 public:
+    friend TestConfirmDialog;
+
     explicit ConfirmDialog(QWidget *parent = nullptr);
     ~ConfirmDialog() override;
     void showDialog() override;
