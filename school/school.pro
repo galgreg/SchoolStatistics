@@ -38,7 +38,8 @@ SOURCES += main.cpp \
     studentfactory.cpp \
     istudentclass.cpp \
     istudent.cpp \
-    test/datarepositorymock.cpp
+    test/datarepositorymock.cpp \
+    studentdataform.cpp
 
 HEADERS += mainwindow.h \
     studentdatawindow.h \
@@ -57,11 +58,13 @@ HEADERS += mainwindow.h \
     textfilestorage.h \
     studentfactory.h \
     test/datarepositorymock.h \
-    istudentdatawidget.h
+    istudentdatawidget.h \
+    studentdataform.h
 
 FORMS += mainwindow.ui \
     studentdatawindow.ui \
-    confirmdialog.ui
+    confirmdialog.ui \
+    studentdataform.ui
 
 test {
     message(Test build)
