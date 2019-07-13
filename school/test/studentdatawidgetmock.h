@@ -8,6 +8,7 @@ class StudentDataWidgetMock : public IStudentDataWidget
 {
 public:
     void showWidget() override;
+    void hideWidget() override;
 
     QString getID() override;
     QString getFirstName() override;

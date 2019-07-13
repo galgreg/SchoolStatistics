@@ -18,6 +18,10 @@ void StudentDataWindow::showWidget() {
     this->show();
 }
 
+void StudentDataWindow::hideWidget() {
+    this->hide();
+}
+
 QString StudentDataWindow::getID() {
     return ui->studentIDValue->text();
 }

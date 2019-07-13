@@ -22,18 +22,21 @@ public:
 
     MainWindow(
         IDataRepository *dataRepository,
+        IStudentDataWidget *studentDataWidget,
         QWidget *parent = nullptr);
     ~MainWindow();
 
+private slots:
+    void showStudentDataWidget();
+
 private:
     void readDataFromRepository();
-    void prepareStudentDataWidgetToDisplay(
-            IStudentDataWidget *dataWidget,
-            size_t studentIndex);
+    void prepareStudentDataWidgetToDisplay(size_t studentIndex);
 
     std::unique_ptr<Ui::MainWindow> ui;
     std::unique_ptr<IDataRepository> mDataRepository;
     std::unique_ptr<IStudentClass> mStudentClass;
+    std::unique_ptr<IStudentDataWidget> mStudentDataWidget;
 };
 
 #endif // MAINWINDOW_H

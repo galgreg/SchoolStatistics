@@ -7,6 +7,7 @@ class IStudentDataWidget {
 public:
     virtual ~IStudentDataWidget() = default;
     virtual void showWidget() = 0;
+    virtual void hideWidget() = 0;
 
     virtual QString getID() = 0;
     virtual QString getFirstName() = 0;

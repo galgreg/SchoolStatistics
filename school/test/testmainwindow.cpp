@@ -33,7 +33,7 @@ void TestMainWindow::init() {
     IDataRepository *dataRepository = new DataRepositoryMock;
     dataRepository->write(*mStudentClassData);
 
-    mMainWindow.reset(new MainWindow(dataRepository));
+    mMainWindow.reset(new MainWindow(dataRepository, new StudentDataWidgetMock));
 }
 
 void TestMainWindow::cleanup() {
@@ -75,33 +75,30 @@ void TestMainWindow::testReadDataFromRepository() {
 }
 
 void TestMainWindow::testPrepareStudentDataWidgetToDisplay() {
-    std::unique_ptr<IStudentDataWidget> studentDataWidget(
-            new StudentDataWidgetMock);
     unsigned studentIndex = 1;
-    mMainWindow->prepareStudentDataWidgetToDisplay(
-            studentDataWidget.get(),
-            studentIndex);
+    mMainWindow->prepareStudentDataWidgetToDisplay(studentIndex);
     QString expectedStudentID = "2";
-    QString actualStudentID = studentDataWidget->getID();
+    QString actualStudentID = mMainWindow->mStudentDataWidget->getID();
     QCOMPARE(actualStudentID, expectedStudentID);
 
     QString expectedFirstName = "Maria";
-    QString actualFirstName = studentDataWidget->getFirstName();
+    QString actualFirstName = mMainWindow->mStudentDataWidget->getFirstName();
     QCOMPARE(actualFirstName, expectedFirstName);
 
     QString expectedLastName = "Nowak";
-    QString actualLastName = studentDataWidget->getLastName();
+    QString actualLastName = mMainWindow->mStudentDataWidget->getLastName();
     QCOMPARE(actualLastName, expectedLastName);
 
     QString expectedGender = "Female";
-    QString actualGender = studentDataWidget->getGender();
+    QString actualGender = mMainWindow->mStudentDataWidget->getGender();
     QCOMPARE(actualGender, expectedGender);
 
     QString expectedGrades = "3.0, 3.0, 3.0";
-    QString actualGrades = studentDataWidget->getGrades();
+    QString actualGrades = mMainWindow->mStudentDataWidget->getGrades();
     QCOMPARE(actualGrades, expectedGrades);
 
     QString expectedGradesAverage = "3.0";
-    QString actualGradesAverage = studentDataWidget->getGradesAverage();
+    QString actualGradesAverage =
+            mMainWindow->mStudentDataWidget->getGradesAverage();
     QCOMPARE(actualGradesAverage, expectedGradesAverage);
 }

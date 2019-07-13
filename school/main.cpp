@@ -1,8 +1,9 @@
+#include "mainwindow.h"
+#include "studentclass.h"
+#include "studentdatawindow.h"
+#include "textfilestorage.h"
 #include <QApplication>
 #include <QDir>
-#include "mainwindow.h"
-#include "textfilestorage.h"
-#include "studentclass.h"
 
 int main(int argc, char *argv[])
 {
@@ -10,7 +11,9 @@ int main(int argc, char *argv[])
     QDir tempDir;
     QString fileStorageDirLocation = tempDir.absolutePath() + "/../school/";
     const QString PATH_TO_STORAGE = fileStorageDirLocation + "students.txt";
-    MainWindow w(new TextFileStorage(PATH_TO_STORAGE.toStdString()));
+    MainWindow w(
+            new TextFileStorage(PATH_TO_STORAGE.toStdString()),
+            new StudentDataWindow);
     w.show();
     return a.exec();
 }

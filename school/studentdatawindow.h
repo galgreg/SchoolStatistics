@@ -17,6 +17,7 @@ public:
     explicit StudentDataWindow(QWidget *parent = nullptr);
     ~StudentDataWindow() override;
     void showWidget() override;
+    void hideWidget() override;
 
     QString getID() override;
     QString getFirstName() override;

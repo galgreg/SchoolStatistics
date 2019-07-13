@@ -4,6 +4,10 @@ void StudentDataWidgetMock::showWidget() {
 
 }
 
+void StudentDataWidgetMock::hideWidget() {
+
+}
+
 QString StudentDataWidgetMock::getID() {
     return mStudentID;
 }

@@ -6,16 +6,30 @@
 
 MainWindow::MainWindow(
         IDataRepository *dataRepository,
+        IStudentDataWidget *studentDataWidget,
         QWidget *parent) :
             QWidget(parent),
             mDataRepository(dataRepository),
-            mStudentClass(nullptr) {
+            mStudentClass(nullptr),
+            mStudentDataWidget(studentDataWidget) {
     ui.reset(new Ui::MainWindow);
     ui->setupUi(this);
+
+    connect(ui->showStudentButton, &QPushButton::clicked,
+            this, &MainWindow::showStudentDataWidget);
     readDataFromRepository();
 }
 
 MainWindow::~MainWindow() {
+}
+
+void MainWindow::showStudentDataWidget() {
+    int studentIndex = ui->studentList->currentRow();
+
+    if (studentIndex > -1) {
+        prepareStudentDataWidgetToDisplay(static_cast<size_t>(studentIndex));
+        mStudentDataWidget->showWidget();
+    }
 }
 
 void MainWindow::readDataFromRepository() {
@@ -37,19 +51,17 @@ void MainWindow::readDataFromRepository() {
     }
 }
 
-void MainWindow::prepareStudentDataWidgetToDisplay(
-        IStudentDataWidget *dataWidget,
-        size_t studentIndex) {
+void MainWindow::prepareStudentDataWidgetToDisplay(size_t studentIndex) {
     const auto& student = mStudentClass->getStudent(studentIndex);
     QString studentID = QString::number(student.getID());
-    dataWidget->setID(studentID);
+    mStudentDataWidget->setID(studentID);
     const auto& studentPersonalData = student.getPersonalData();
     QString studentFirstName =
             QString::fromStdString(studentPersonalData.getFirstName());
-    dataWidget->setFirstName(studentFirstName);
+    mStudentDataWidget->setFirstName(studentFirstName);
     QString studentLastName =
             QString::fromStdString(studentPersonalData.getLastName());
-    dataWidget->setLastName(studentLastName);
+    mStudentDataWidget->setLastName(studentLastName);
 
     Gender studentGenderEnum = studentPersonalData.getGender();
     QString studentGender;
@@ -61,7 +73,7 @@ void MainWindow::prepareStudentDataWidgetToDisplay(
     } else {
         studentGender = "Unknown";
     }
-    dataWidget->setGender(studentGender);
+    mStudentDataWidget->setGender(studentGender);
 
     const auto& studentGrades = student.getGrades();
     QString gradesString = "";
@@ -73,11 +85,11 @@ void MainWindow::prepareStudentDataWidgetToDisplay(
             gradesString += ", ";
         }
     }
-    dataWidget->setGrades(gradesString);
+    mStudentDataWidget->setGrades(gradesString);
 
     QString gradesAverage = QString::number(
             ClassStatistics::getStudentAverage(*mStudentClass, studentIndex),
             'f',
             1);
-    dataWidget->setGradesAverage(gradesAverage);
+    mStudentDataWidget->setGradesAverage(gradesAverage);
 }

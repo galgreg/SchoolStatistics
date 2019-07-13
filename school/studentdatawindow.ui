@@ -98,42 +98,42 @@
      </item>
      <item>
       <layout class="QVBoxLayout" name="verticalLayout">
-       <item alignment="Qt::AlignHCenter">
+       <item alignment="Qt::AlignLeft">
         <widget class="QLabel" name="studentIDValue">
          <property name="text">
           <string>None</string>
          </property>
         </widget>
        </item>
-       <item alignment="Qt::AlignHCenter">
+       <item alignment="Qt::AlignLeft">
         <widget class="QLabel" name="firstNameValue">
          <property name="text">
           <string>None</string>
          </property>
         </widget>
        </item>
-       <item alignment="Qt::AlignHCenter">
+       <item alignment="Qt::AlignLeft">
         <widget class="QLabel" name="lastNameValue">
          <property name="text">
           <string>None</string>
          </property>
         </widget>
        </item>
-       <item alignment="Qt::AlignHCenter">
+       <item alignment="Qt::AlignLeft">
         <widget class="QLabel" name="genderValue">
          <property name="text">
           <string>None</string>
          </property>
         </widget>
        </item>
-       <item alignment="Qt::AlignHCenter">
+       <item alignment="Qt::AlignLeft">
         <widget class="QLabel" name="gradesValue">
          <property name="text">
           <string>None</string>
          </property>
         </widget>
        </item>
-       <item alignment="Qt::AlignHCenter">
+       <item alignment="Qt::AlignLeft">
         <widget class="QLabel" name="gradesAverageValue">
          <property name="text">
           <string>None</string>
@@ -196,15 +196,15 @@
    <sender>okButton</sender>
    <signal>clicked()</signal>
    <receiver>StudentDataWindow</receiver>
-   <slot>close()</slot>
+   <slot>hide()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>371</x>
      <y>252</y>
     </hint>
     <hint type="destinationlabel">
-     <x>441</x>
-     <y>211</y>
+     <x>414</x>
+     <y>207</y>
     </hint>
    </hints>
   </connection>
