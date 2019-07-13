@@ -2,6 +2,7 @@
 #define STUDENTDATAFORM_H
 
 #include <QWidget>
+#include <memory>
 
 namespace Ui {
     class StudentDataForm;
@@ -16,7 +17,7 @@ public:
     ~StudentDataForm();
 
 private:
-    Ui::StudentDataForm *ui;
+    std::unique_ptr<Ui::StudentDataForm> ui;
 };
 
 #endif // STUDENTDATAFORM_H
