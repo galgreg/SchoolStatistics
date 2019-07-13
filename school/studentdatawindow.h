@@ -5,6 +5,8 @@
 #include "istudentdatawidget.h"
 #include <memory>
 
+class TestStudentDataWindow;
+
 namespace Ui {
 class StudentDataWindow;
 }
@@ -14,6 +16,8 @@ class StudentDataWindow : public QWidget, public IStudentDataWidget
     Q_OBJECT
 
 public:
+    friend TestStudentDataWindow;
+
     explicit StudentDataWindow(QWidget *parent = nullptr);
     ~StudentDataWindow() override;
     void showWidget() override;

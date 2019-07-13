@@ -8,6 +8,7 @@
 #include "teststudentfactory.h"
 #include "testmainwindow.h"
 #include "testconfirmdialog.h"
+#include "teststudentdatawindow.h"
 
 int main(int argc, char** argv) {
     QApplication app(argc, argv);
@@ -33,6 +34,9 @@ int main(int argc, char** argv) {
     result |= QTest::qExec(&testMainWindow, argc, argv);
     TestConfirmDialog testConfirmDialog(passedCounter, failedCounter);
     result |= QTest::qExec(&testConfirmDialog, argc, argv);
+    TestStudentDataWindow testStudentDataWindow(passedCounter, failedCounter);
+    result |= QTest::qExec(&testStudentDataWindow, argc, argv);
+
     qDebug() << QString("Totals: %1 passed, %2 failed.")
                 .arg(passedCounter)
                 .arg(failedCounter);
