@@ -16,6 +16,7 @@ private slots:
     void cleanup();
     void testReadDataFromRepository();
     void testPrepareStudentDataWidgetToDisplay();
+    void testDeleteStudent();
 private:
     std::unique_ptr<MainWindow> mMainWindow;
     std::unique_ptr<IStudentClass> mStudentClassData;

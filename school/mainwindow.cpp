@@ -93,3 +93,9 @@ void MainWindow::prepareStudentDataWidgetToDisplay(size_t studentIndex) {
             1);
     mStudentDataWidget->setGradesAverage(gradesAverage);
 }
+
+void MainWindow::deleteStudent(size_t studentIndex) {
+    mStudentClass->removeStudent(studentIndex);
+    mDataRepository->write(*mStudentClass);
+    readDataFromRepository();
+}

@@ -75,7 +75,7 @@ void TestMainWindow::testReadDataFromRepository() {
 }
 
 void TestMainWindow::testPrepareStudentDataWidgetToDisplay() {
-    unsigned studentIndex = 1;
+    size_t studentIndex = 1;
     mMainWindow->prepareStudentDataWidgetToDisplay(studentIndex);
     QString expectedStudentID = "2";
     QString actualStudentID = mMainWindow->mStudentDataWidget->getID();
@@ -101,4 +101,18 @@ void TestMainWindow::testPrepareStudentDataWidgetToDisplay() {
     QString actualGradesAverage =
             mMainWindow->mStudentDataWidget->getGradesAverage();
     QCOMPARE(actualGradesAverage, expectedGradesAverage);
+}
+
+void TestMainWindow::testDeleteStudent() {
+    size_t studentIndex = 1;
+    const auto& expectedStudentClassBeforeDelete = *mStudentClassData;
+    const auto& actualStudentClassBeforeDelete = *mMainWindow->mStudentClass;
+    QCOMPARE(actualStudentClassBeforeDelete, expectedStudentClassBeforeDelete);
+
+    mStudentClassData->removeStudent(studentIndex);
+    mMainWindow->deleteStudent(studentIndex);
+
+    const auto& expectedStudentClassAfterDelete = *mStudentClassData;
+    const auto& actualStudentClassAfterDelete = *mMainWindow->mStudentClass;
+    QCOMPARE(actualStudentClassAfterDelete, expectedStudentClassAfterDelete);
 }

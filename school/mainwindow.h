@@ -32,6 +32,7 @@ private slots:
 private:
     void readDataFromRepository();
     void prepareStudentDataWidgetToDisplay(size_t studentIndex);
+    void deleteStudent(size_t studentIndex);
 
     std::unique_ptr<Ui::MainWindow> ui;
     std::unique_ptr<IDataRepository> mDataRepository;
