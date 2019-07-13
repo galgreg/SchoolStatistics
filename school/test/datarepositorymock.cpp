@@ -25,6 +25,7 @@ IStudentClass *DataRepositoryMock::read(
 }
 
 void DataRepositoryMock::write(const IStudentClass &studentClass) {
+    mStudentClass.removeAll();
     for (size_t i = 0; i < studentClass.count(); ++i) {
         const IStudent& tempStudent = studentClass.getStudent(i);
         std::unique_ptr<IStudent> studentCopy(
