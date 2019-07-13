@@ -141,10 +141,12 @@ void TestMainWindow::testPrepareConfirmDialogToDisplay() {
     mMainWindow->prepareConfirmDialogToDisplay(actionToConfirm, studentName);
 
     QFETCH(QString, expectedActionString);
-    QString actualActionString = mMainWindow->mConfirmDialog->getAction();
+    QString actualActionString =
+            mMainWindow->mConfirmDialog->getCurrentActionString();
     QCOMPARE(actualActionString, expectedActionString);
 
     QString expectedStudentName = studentName;
-    QString actualStudentName = mMainWindow->mConfirmDialog->getStudentName();
+    QString actualStudentName =
+            mMainWindow->mConfirmDialog->getCurrentStudentName();
     QCOMPARE(actualStudentName, expectedStudentName);
 }

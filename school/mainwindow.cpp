@@ -114,7 +114,6 @@ void MainWindow::prepareConfirmDialogToDisplay(
     } else if (actionToConfirm == DELETE_STUDENT) {
         actionString = "delete";
     }
-    mConfirmDialog->setAction(actionString);
-    mConfirmDialog->setStudentName(studentName);
+    mConfirmDialog->customizeDialogMessage(actionString, studentName);
 }
 
