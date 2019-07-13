@@ -1,3 +1,4 @@
+#include "confirmdialog.h"
 #include "mainwindow.h"
 #include "studentclass.h"
 #include "studentdatawindow.h"
@@ -13,7 +14,8 @@ int main(int argc, char *argv[])
     const QString PATH_TO_STORAGE = fileStorageDirLocation + "students.txt";
     MainWindow w(
             new TextFileStorage(PATH_TO_STORAGE.toStdString()),
-            new StudentDataWindow);
+            new StudentDataWindow,
+            new ConfirmDialog);
     w.show();
     return a.exec();
 }

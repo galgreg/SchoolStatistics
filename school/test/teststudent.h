@@ -13,11 +13,13 @@ class TestStudent : public QObject, public TestExecutionCounter
 
 public:
     TestStudent(unsigned &passed, unsigned &failed);
+
 private slots:
     void cleanup();
     void testState_DefaultInitialized();
     void testState_DataInitialized();
     void testChangeStateBySetters();
+
 private:
     void checkObjectState(
         const Student &actualStudent,
