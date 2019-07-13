@@ -14,14 +14,15 @@ public:
     void showDialog() override;
     void hideDialog() override;
 
-    void setAction(const QString &newAction) override;
-    void setStudentName(const QString &newStudentName) override;
+    void customizeDialogMessage(
+            const QString &actionString,
+            const QString &studentName) override;
 
-    QString getAction() override;
-    QString getStudentName() override;
+    QString getCurrentActionString() override;
+    QString getCurrentStudentName() override;
 
 private:
-    QString mAction;
+    QString mActionString;
     QString mStudentName;
 };
 

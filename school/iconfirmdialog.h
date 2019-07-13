@@ -9,11 +9,12 @@ public:
     virtual void showDialog() = 0;
     virtual void hideDialog() = 0;
 
-    virtual void setAction(const QString &) = 0;
-    virtual void setStudentName(const QString &) = 0;
+    virtual void customizeDialogMessage(
+            const QString &actionString,
+            const QString &studentName) = 0;
 
-    virtual QString getAction() = 0;
-    virtual QString getStudentName() = 0;
+    virtual QString getCurrentActionString() = 0;
+    virtual QString getCurrentStudentName() = 0;
 };
 
 #endif // ICONFIRMDIALOG_H

@@ -3,7 +3,7 @@
 ConfirmDialogMock::ConfirmDialogMock(
         const QString &defaultAction,
         const QString &defaultStudentName) :
-            mAction(defaultAction),
+            mActionString(defaultAction),
             mStudentName(defaultStudentName) {
 
 }
@@ -16,18 +16,17 @@ void ConfirmDialogMock::hideDialog() {
 
 }
 
-void ConfirmDialogMock::setAction(const QString &newAction) {
-    mAction = newAction;
+void ConfirmDialogMock::customizeDialogMessage(
+        const QString &actionString,
+        const QString &studentName) {
+    mActionString = actionString;
+    mStudentName = studentName;
 }
 
-void ConfirmDialogMock::setStudentName(const QString &newStudentName) {
-    mStudentName = newStudentName;
+QString ConfirmDialogMock::getCurrentActionString() {
+    return mActionString;
 }
 
-QString ConfirmDialogMock::getAction() {
-    return mAction;
-}
-
-QString ConfirmDialogMock::getStudentName() {
+QString ConfirmDialogMock::getCurrentStudentName() {
     return mStudentName;
 }
