@@ -3,12 +3,12 @@
 
 #include "istudentclass.h"
 #include "studentmock.h"
-#include <memory>
+#include <vector>
 
 class StudentClassMock : public IStudentClass
 {
 public:
-    StudentClassMock();
+    StudentClassMock(const std::initializer_list<double> &studentGrades = {});
     size_t maxAllowedCount() const override;
     size_t count() const override;
     void addStudent(IStudent *newStudent) override;
@@ -17,7 +17,7 @@ public:
     void editStudent(size_t whichStudent, IStudent *newValue) override;
     void removeAll() override;
 private:
-    std::unique_ptr<StudentMock> mStudent;
+    std::vector<StudentMock> mStudents;
 };
 
 #endif // STUDENTCLASSMOCK_H

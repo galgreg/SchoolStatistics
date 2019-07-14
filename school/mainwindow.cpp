@@ -43,9 +43,12 @@ void MainWindow::showStudentDataWidget() {
 
 void MainWindow::beginDeleteTransaction() {
     DialogAction actionToConfirm = DELETE_STUDENT;
-    QString studentName = ui->studentList->currentItem()->text();
-    prepareConfirmDialogToDisplay(actionToConfirm, studentName);
-    mConfirmDialog->showDialog();
+
+    if (ui->studentList->currentRow() > -1) {
+        QString studentName = ui->studentList->currentItem()->text();
+        prepareConfirmDialogToDisplay(actionToConfirm, studentName);
+        mConfirmDialog->showDialog();
+    }
 }
 
 void MainWindow::doAction(DialogAction actionToDo) {

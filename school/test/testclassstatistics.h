@@ -13,7 +13,9 @@ public:
 private slots:
     void cleanup();
     void testGetStudentAverage();
+    void testGetStudentAverage_NoGrades();
     void testGetClassAverage();
+    void testGetClassAverage_EmptyClass();
 };
 
 #endif // TESTCLASSSTATISTICS_H
