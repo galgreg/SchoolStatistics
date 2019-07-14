@@ -19,6 +19,8 @@ MainWindow::MainWindow(
 
     connect(ui->showStudentButton, &QPushButton::clicked,
             this, &MainWindow::showStudentDataWidget);
+    connect(ui->deleteStudentButton, &QPushButton::clicked,
+            this, &MainWindow::beginDeleteTransaction);
     readDataFromRepository();
 }
 
@@ -32,6 +34,13 @@ void MainWindow::showStudentDataWidget() {
         prepareStudentDataWidgetToDisplay(static_cast<size_t>(studentIndex));
         mStudentDataWidget->showWidget();
     }
+}
+
+void MainWindow::beginDeleteTransaction() {
+    DialogAction actionToConfirm = DELETE_STUDENT;
+    QString studentName = ui->studentList->currentItem()->text();
+    prepareConfirmDialogToDisplay(actionToConfirm, studentName);
+    mConfirmDialog->showDialog();
 }
 
 void MainWindow::readDataFromRepository() {
@@ -117,7 +126,7 @@ void MainWindow::prepareStudentDataWidgetToDisplay(size_t studentIndex) {
 }
 
 void MainWindow::prepareConfirmDialogToDisplay(
-        ConfirmAction actionToConfirm,
+        DialogAction actionToConfirm,
         QString studentName) {
     QString actionString;
 

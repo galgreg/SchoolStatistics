@@ -123,7 +123,7 @@ void TestMainWindow::testPrepareStudentDataWidgetToDisplay() {
 }
 
 void TestMainWindow::testPrepareConfirmDialogToDisplay_data() {
-    QTest::addColumn<ConfirmAction>("actionToConfirm");
+    QTest::addColumn<DialogAction>("actionToConfirm");
     QTest::addColumn<QString>("studentName");
     QTest::addColumn<QString>("expectedActionString");
 
@@ -136,7 +136,7 @@ void TestMainWindow::testPrepareConfirmDialogToDisplay_data() {
 }
 
 void TestMainWindow::testPrepareConfirmDialogToDisplay() {
-    QFETCH(ConfirmAction, actionToConfirm);
+    QFETCH(DialogAction, actionToConfirm);
     QFETCH(QString, studentName);
     mMainWindow->prepareConfirmDialogToDisplay(actionToConfirm, studentName);
 
