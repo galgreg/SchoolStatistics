@@ -1,10 +1,12 @@
 #include "confirmdialog.h"
 #include "ui_confirmdialog.h"
 
-ConfirmDialog::ConfirmDialog(QWidget *parent) :
+ConfirmDialog::ConfirmDialog(
+        std::shared_ptr<SignalTransmitter> signalTransmitter,
+        QWidget *parent) :
             QWidget(parent),
             ui(new Ui::ConfirmDialog),
-            mSignalTransmitter(new SignalTransmitter),
+            mSignalTransmitter(signalTransmitter),
             mCurrentActionString(""),
             mCurrentStudentName("") {
     ui->setupUi(this);

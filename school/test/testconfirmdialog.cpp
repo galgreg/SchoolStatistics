@@ -9,7 +9,8 @@ TestConfirmDialog::TestConfirmDialog(unsigned &passed, unsigned &failed) :
 }
 
 void TestConfirmDialog::init() {
-    mConfirmDialog.reset(new ConfirmDialog);
+    mConfirmDialog.reset(
+            new ConfirmDialog(std::make_shared<SignalTransmitter>()));
 }
 
 void TestConfirmDialog::cleanup() {

@@ -27,6 +27,7 @@ public:
         IDataRepository *dataRepository,
         IStudentDataWidget *studentDataWidget,
         IConfirmDialog *confirmDialog,
+        std::shared_ptr<SignalTransmitter> signalTransmitter,
         QWidget *parent = nullptr);
     ~MainWindow();
 
@@ -49,7 +50,7 @@ private:
     std::unique_ptr<IStudentClass> mStudentClass;
     std::unique_ptr<IStudentDataWidget> mStudentDataWidget;
     std::unique_ptr<IConfirmDialog> mConfirmDialog;
-    std::unique_ptr<SignalTransmitter> mSignalTransmitter;
+    std::shared_ptr<SignalTransmitter> mSignalTransmitter;
 };
 
 #endif // MAINWINDOW_H

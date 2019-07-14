@@ -12,10 +12,12 @@ int main(int argc, char *argv[])
     QDir tempDir;
     QString fileStorageDirLocation = tempDir.absolutePath() + "/../school/";
     const QString PATH_TO_STORAGE = fileStorageDirLocation + "students.txt";
+    auto signalTransmitter = std::make_shared<SignalTransmitter>();
     MainWindow w(
             new TextFileStorage(PATH_TO_STORAGE.toStdString()),
             new StudentDataWindow,
-            new ConfirmDialog);
+            new ConfirmDialog(signalTransmitter),
+            signalTransmitter);
     w.show();
     return a.exec();
 }

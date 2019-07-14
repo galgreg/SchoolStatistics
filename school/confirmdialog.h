@@ -19,7 +19,9 @@ class ConfirmDialog : public QWidget, public IConfirmDialog
 public:
     friend TestConfirmDialog;
 
-    explicit ConfirmDialog(QWidget *parent = nullptr);
+    explicit ConfirmDialog(
+        std::shared_ptr<SignalTransmitter> signalTransmitter,
+        QWidget *parent = nullptr);
     ~ConfirmDialog() override;
     void showDialog() override;
     void hideDialog() override;
@@ -40,7 +42,7 @@ private slots:
 
 private:
     std::unique_ptr<Ui::ConfirmDialog> ui;
-    std::unique_ptr<SignalTransmitter> mSignalTransmitter;
+    std::shared_ptr<SignalTransmitter> mSignalTransmitter;
     DialogAction mActionToDo;
     QString mCurrentActionString;
     QString mCurrentStudentName;

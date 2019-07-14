@@ -8,6 +8,7 @@ MainWindow::MainWindow(
         IDataRepository *dataRepository,
         IStudentDataWidget *studentDataWidget,
         IConfirmDialog *confirmDialog,
+        std::shared_ptr<SignalTransmitter> signalTransmitter,
         QWidget *parent) :
             QWidget(parent),
             ui(new Ui::MainWindow),
@@ -15,7 +16,7 @@ MainWindow::MainWindow(
             mStudentClass(nullptr),
             mStudentDataWidget(studentDataWidget),
             mConfirmDialog(confirmDialog),
-            mSignalTransmitter(new SignalTransmitter) {
+            mSignalTransmitter(signalTransmitter) {
     ui->setupUi(this);
 
     connect(ui->showStudentButton, &QPushButton::clicked,

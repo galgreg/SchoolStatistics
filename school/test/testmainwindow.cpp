@@ -38,7 +38,8 @@ void TestMainWindow::init() {
             new MainWindow(
                     dataRepository,
                     new StudentDataWidgetMock,
-                    new ConfirmDialogMock));
+                    new ConfirmDialogMock,
+                    std::make_shared<SignalTransmitter>()));
 }
 
 void TestMainWindow::cleanup() {
