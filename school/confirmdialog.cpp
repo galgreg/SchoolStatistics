@@ -4,9 +4,15 @@
 ConfirmDialog::ConfirmDialog(QWidget *parent) :
             QWidget(parent),
             ui(new Ui::ConfirmDialog),
+            mSignalTransmitter(new SignalTransmitter),
             mCurrentActionString(""),
             mCurrentStudentName("") {
     ui->setupUi(this);
+
+    connect(ui->confirmButton, &QPushButton::clicked,
+            this, &ConfirmDialog::confirmButtonClicked);
+    connect(this, &ConfirmDialog::commit,
+            mSignalTransmitter.get(), &SignalTransmitter::transmitSignal);
 }
 
 ConfirmDialog::~ConfirmDialog() {
@@ -22,8 +28,10 @@ void ConfirmDialog::hideDialog() {
 }
 
 void ConfirmDialog::customizeDialogMessage(
+         DialogAction actionToDo,
         const QString &actionString,
         const QString &studentName) {
+    mActionToDo = actionToDo;
     mCurrentActionString = actionString;
     mCurrentStudentName = studentName;
     QString dialogMessage = QString(
@@ -40,6 +48,11 @@ QString ConfirmDialog::getCurrentActionString() {
 
 QString ConfirmDialog::getCurrentStudentName() {
     return mCurrentStudentName;
+}
+
+void ConfirmDialog::confirmButtonClicked() {
+    emit commit(mActionToDo);
+    this->hide();
 }
 
 

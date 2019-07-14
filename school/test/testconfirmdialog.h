@@ -19,6 +19,8 @@ private slots:
     void testCustomizeDialogMessage();
     void testShowDialog();
     void testHideDialog();
+    void testConfirmButtonClicked_data();
+    void testConfirmButtonClicked();
 
 private:
     std::unique_ptr<ConfirmDialog> mConfirmDialog;

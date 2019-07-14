@@ -1,5 +1,6 @@
 #include "testconfirmdialog.h"
 #include "ui_confirmdialog.h"
+#include <QSignalSpy>
 
 TestConfirmDialog::TestConfirmDialog(unsigned &passed, unsigned &failed) :
         TestExecutionCounter(passed, failed),
@@ -30,9 +31,10 @@ void TestConfirmDialog::testInitialState() {
 }
 
 void TestConfirmDialog::testCustomizeDialogMessage() {
+    DialogAction actionToDo = ADD_STUDENT;
     QString actionString = "add";
     QString studentName = "Jan Kowalski";
-    mConfirmDialog->customizeDialogMessage(actionString, studentName);
+    mConfirmDialog->customizeDialogMessage(actionToDo,actionString, studentName);
 
     QString expectedActionString = actionString;
     QString actualActionString = mConfirmDialog->getCurrentActionString();
@@ -59,6 +61,33 @@ void TestConfirmDialog::testShowDialog() {
 
 void TestConfirmDialog::testHideDialog() {
     mConfirmDialog->hideDialog();
+    bool isDialogVisible = mConfirmDialog->isVisible();
+    QVERIFY(isDialogVisible == false);
+}
+
+void TestConfirmDialog::testConfirmButtonClicked_data() {
+    QTest::addColumn<DialogAction>("actionToCommit");
+
+    QTest::newRow("commit_add_student") << ADD_STUDENT;
+    QTest::newRow("commit_edit_student") << EDIT_STUDENT;
+    QTest::newRow("commit_delete_student") << DELETE_STUDENT;
+}
+
+void TestConfirmDialog::testConfirmButtonClicked() {
+    QFETCH(DialogAction, actionToCommit);
+    QSignalSpy signalSpy(mConfirmDialog.get(), &ConfirmDialog::commit);
+
+    mConfirmDialog->mActionToDo = actionToCommit;
+    mConfirmDialog->confirmButtonClicked();
+
+    QCOMPARE(signalSpy.count(), 1);
+
+    auto signalArguments = signalSpy.takeFirst();
+    DialogAction expectedActionToCommit = actionToCommit;
+    DialogAction actualActionToCommit =
+            signalArguments.at(0).value<DialogAction>();
+    QCOMPARE(actualActionToCommit, expectedActionToCommit);
+
     bool isDialogVisible = mConfirmDialog->isVisible();
     QVERIFY(isDialogVisible == false);
 }

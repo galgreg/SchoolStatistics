@@ -17,6 +17,7 @@ void ConfirmDialogMock::hideDialog() {
 }
 
 void ConfirmDialogMock::customizeDialogMessage(
+        DialogAction /* actionToDo */,
         const QString &actionString,
         const QString &studentName) {
     mActionString = actionString;

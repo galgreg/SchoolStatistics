@@ -15,6 +15,7 @@ public:
     void hideDialog() override;
 
     void customizeDialogMessage(
+            DialogAction actionToDo,
             const QString &actionString,
             const QString &studentName) override;
 
