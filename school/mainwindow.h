@@ -7,6 +7,7 @@
 #include "idatarepository.h"
 #include "istudentclass.h"
 #include "istudentdatawidget.h"
+#include "signaltransmitter.h"
 #include <memory>
 
 class TestMainWindow;
@@ -32,6 +33,7 @@ public:
 private slots:
     void showStudentDataWidget();
     void beginDeleteTransaction();
+    void doAction(DialogAction actionToDo);
 
 private:
     void readDataFromRepository();
@@ -47,6 +49,7 @@ private:
     std::unique_ptr<IStudentClass> mStudentClass;
     std::unique_ptr<IStudentDataWidget> mStudentDataWidget;
     std::unique_ptr<IConfirmDialog> mConfirmDialog;
+    std::unique_ptr<SignalTransmitter> mSignalTransmitter;
 };
 
 #endif // MAINWINDOW_H

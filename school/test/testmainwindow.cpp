@@ -150,3 +150,19 @@ void TestMainWindow::testPrepareConfirmDialogToDisplay() {
             mMainWindow->mConfirmDialog->getCurrentStudentName();
     QCOMPARE(actualStudentName, expectedStudentName);
 }
+
+void TestMainWindow::testDoAction_DeleteStudent() {
+    size_t studentIndex = 1;
+    mMainWindow->ui->studentList->setCurrentRow(static_cast<int>(studentIndex));
+
+    const auto& expectedStudentClassBeforeDelete = *mStudentClassData;
+    const auto& actualStudentClassBeforeDelete = *mMainWindow->mStudentClass;
+    QCOMPARE(actualStudentClassBeforeDelete, expectedStudentClassBeforeDelete);
+
+    mStudentClassData->removeStudent(studentIndex);
+    mMainWindow->doAction(DELETE_STUDENT);
+
+    const auto& expectedStudentClassAfterDelete = *mStudentClassData;
+    const auto& actualStudentClassAfterDelete = *mMainWindow->mStudentClass;
+    QCOMPARE(actualStudentClassAfterDelete, expectedStudentClassAfterDelete);
+}

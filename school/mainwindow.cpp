@@ -14,13 +14,17 @@ MainWindow::MainWindow(
             mDataRepository(dataRepository),
             mStudentClass(nullptr),
             mStudentDataWidget(studentDataWidget),
-            mConfirmDialog(confirmDialog) {
+            mConfirmDialog(confirmDialog),
+            mSignalTransmitter(new SignalTransmitter) {
     ui->setupUi(this);
 
     connect(ui->showStudentButton, &QPushButton::clicked,
             this, &MainWindow::showStudentDataWidget);
     connect(ui->deleteStudentButton, &QPushButton::clicked,
             this, &MainWindow::beginDeleteTransaction);
+    connect(mSignalTransmitter.get(), &SignalTransmitter::transactionCommitted,
+            this, &MainWindow::doAction);
+
     readDataFromRepository();
 }
 
@@ -41,6 +45,15 @@ void MainWindow::beginDeleteTransaction() {
     QString studentName = ui->studentList->currentItem()->text();
     prepareConfirmDialogToDisplay(actionToConfirm, studentName);
     mConfirmDialog->showDialog();
+}
+
+void MainWindow::doAction(DialogAction actionToDo) {
+    if (actionToDo == DELETE_STUDENT) {
+        int indexOfStudentToDelete = ui->studentList->currentRow();
+        if (indexOfStudentToDelete > -1) {
+            deleteStudent(static_cast<size_t>(indexOfStudentToDelete));
+        }
+    }
 }
 
 void MainWindow::readDataFromRepository() {
@@ -137,6 +150,9 @@ void MainWindow::prepareConfirmDialogToDisplay(
     } else if (actionToConfirm == DELETE_STUDENT) {
         actionString = "delete";
     }
-    mConfirmDialog->customizeDialogMessage(actionString, studentName);
+    mConfirmDialog->customizeDialogMessage(
+            actionToConfirm,
+            actionString,
+            studentName);
 }
 
