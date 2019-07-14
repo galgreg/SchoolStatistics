@@ -39,7 +39,8 @@ SOURCES += main.cpp \
     istudentclass.cpp \
     istudent.cpp \
     test/datarepositorymock.cpp \
-    studentdataform.cpp
+    studentdataform.cpp \
+    signaltransmitter.cpp
 
 HEADERS += mainwindow.h \
     studentdatawindow.h \
@@ -60,8 +61,9 @@ HEADERS += mainwindow.h \
     test/datarepositorymock.h \
     istudentdatawidget.h \
     studentdataform.h \
-    confirmaction.h \
-    iconfirmdialog.h
+    iconfirmdialog.h \
+    signaltransmitter.h \
+    dialogaction.h
 
 FORMS += mainwindow.ui \
     studentdatawindow.ui \

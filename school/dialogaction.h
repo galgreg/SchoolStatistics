@@ -3,11 +3,11 @@
 
 #include <QMetaType>
 
-enum ConfirmAction {
+enum DialogAction {
     ADD_STUDENT,
     EDIT_STUDENT,
     DELETE_STUDENT
 };
-Q_DECLARE_METATYPE(ConfirmAction)
+Q_DECLARE_METATYPE(DialogAction)
 
 #endif // CONFIRMACTION_H
