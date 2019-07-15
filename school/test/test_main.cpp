@@ -10,6 +10,7 @@
 #include "testconfirmdialog.h"
 #include "teststudentdatawindow.h"
 #include "testsignaltransmitter.h"
+#include "teststudentdataform.h"
 
 int main(int argc, char** argv) {
     QApplication app(argc, argv);
@@ -39,6 +40,8 @@ int main(int argc, char** argv) {
     result |= QTest::qExec(&testStudentDataWindow, argc, argv);
     TestSignalTransmitter testSignalTransmitter(passedCounter, failedCounter);
     result |= QTest::qExec(&testSignalTransmitter, argc, argv);
+    TestStudentDataForm testStudentDataForm(passedCounter, failedCounter);
+    result |= QTest::qExec(&testStudentDataForm, argc, argv);
 
     qDebug() << QString("Totals: %1 passed, %2 failed.")
                 .arg(passedCounter)

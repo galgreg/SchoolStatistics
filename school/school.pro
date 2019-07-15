@@ -96,7 +96,8 @@ test {
     test/testconfirmdialog.h \
     test/teststudentdatawindow.h \
     test/testsignaltransmitter.h \
-    test/studentdataformmock.h
+    test/studentdataformmock.h \
+    test/teststudentdataform.h
 
 
     SOURCES += test/test_main.cpp \
@@ -118,7 +119,8 @@ test {
     test/testconfirmdialog.cpp \
     test/teststudentdatawindow.cpp \
     test/testsignaltransmitter.cpp \
-    test/studentdataformmock.cpp
+    test/studentdataformmock.cpp \
+    test/teststudentdataform.cpp
 
 } else {
     message(Normal build)

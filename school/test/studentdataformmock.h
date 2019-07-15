@@ -22,7 +22,7 @@ public:
     QString getFirstName() override;
     QString getLastName() override;
     Gender getGender() override;
-    QList<double> getGrades() = 0;
+    QList<double> getGrades() override;
 
 private:
     QString mHeader, mFirstName, mLastName;

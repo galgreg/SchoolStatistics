@@ -5,8 +5,7 @@
 #include "confirmdialog.h"
 #include <QtTest>
 
-class TestConfirmDialog : public QObject, public TestExecutionCounter
-{
+class TestConfirmDialog : public QObject, public TestExecutionCounter {
     Q_OBJECT
 
 public:
