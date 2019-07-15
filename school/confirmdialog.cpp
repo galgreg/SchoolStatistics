@@ -30,7 +30,7 @@ void ConfirmDialog::hideDialog() {
 }
 
 void ConfirmDialog::customizeDialogMessage(
-         DialogAction actionToDo,
+         StudentDataAction actionToDo,
         const QString &actionString,
         const QString &studentName) {
     mActionToDo = actionToDo;

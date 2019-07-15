@@ -79,7 +79,8 @@ QList<double> StudentDataForm::getGrades() {
     const auto& gradesList = *(ui->gradesList);
 
     for (int i = 0; i < gradesList.count(); ++i) {
-        double newGrade = gradesList.item(i)->text().toDouble();
+        QString gradeString = gradesList.item(i)->text();
+        double newGrade = gradeString.toDouble();
         gradesFromUiList.append(newGrade);
     }
     return gradesFromUiList;

@@ -3,11 +3,11 @@
 
 #include <QMetaType>
 
-enum DialogAction {
+enum StudentDataAction {
     ADD_STUDENT,
     EDIT_STUDENT,
     DELETE_STUDENT
 };
-Q_DECLARE_METATYPE(DialogAction)
+Q_DECLARE_METATYPE(StudentDataAction)
 
 #endif // CONFIRMACTION_H

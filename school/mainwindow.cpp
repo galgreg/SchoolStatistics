@@ -42,7 +42,7 @@ void MainWindow::showStudentDataWidget() {
 }
 
 void MainWindow::beginDeleteTransaction() {
-    DialogAction actionToConfirm = DELETE_STUDENT;
+    StudentDataAction actionToConfirm = DELETE_STUDENT;
 
     if (ui->studentList->currentRow() > -1) {
         QString studentName = ui->studentList->currentItem()->text();
@@ -51,7 +51,7 @@ void MainWindow::beginDeleteTransaction() {
     }
 }
 
-void MainWindow::doAction(DialogAction actionToDo) {
+void MainWindow::doAction(StudentDataAction actionToDo) {
     if (actionToDo == DELETE_STUDENT) {
         int indexOfStudentToDelete = ui->studentList->currentRow();
         if (indexOfStudentToDelete > -1) {
@@ -143,7 +143,7 @@ void MainWindow::prepareStudentDataWidgetToDisplay(size_t studentIndex) {
 }
 
 void MainWindow::prepareConfirmDialogToDisplay(
-        DialogAction actionToConfirm,
+        StudentDataAction actionToConfirm,
         QString studentName) {
     QString actionString;
 

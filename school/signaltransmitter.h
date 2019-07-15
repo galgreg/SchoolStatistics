@@ -1,7 +1,7 @@
 #ifndef SIGNALTRANSMITTER_H
 #define SIGNALTRANSMITTER_H
 
-#include "dialogaction.h"
+#include "studentdataaction.h"
 #include <QObject>
 
 class SignalTransmitter : public QObject
@@ -11,10 +11,10 @@ public:
     explicit SignalTransmitter(QObject *parent = nullptr);
 
 signals:
-    void transactionCommitted(DialogAction);
+    void transactionCommitted(StudentDataAction);
 
 public slots:
-    void transmitSignal(DialogAction action);
+    void transmitSignal(StudentDataAction action);
 };
 
 #endif // SIGNALTRANSMITTER_H

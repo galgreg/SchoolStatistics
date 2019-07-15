@@ -2,7 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QWidget>
-#include "dialogaction.h"
+#include "studentdataaction.h"
 #include "iconfirmdialog.h"
 #include "idatarepository.h"
 #include "istudentclass.h"
@@ -34,7 +34,7 @@ public:
 private slots:
     void showStudentDataWidget();
     void beginDeleteTransaction();
-    void doAction(DialogAction actionToDo);
+    void doAction(StudentDataAction actionToDo);
 
 private:
     void readDataFromRepository();
@@ -42,7 +42,7 @@ private:
 
     void prepareStudentDataWidgetToDisplay(size_t studentIndex);
     void prepareConfirmDialogToDisplay(
-            DialogAction actionToConfirm,
+            StudentDataAction actionToConfirm,
             QString studentName);
 
     std::unique_ptr<Ui::MainWindow> ui;

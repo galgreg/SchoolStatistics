@@ -38,7 +38,6 @@ SOURCES += main.cpp \
     studentfactory.cpp \
     istudentclass.cpp \
     istudent.cpp \
-    test/datarepositorymock.cpp \
     studentdataform.cpp \
     signaltransmitter.cpp
 
@@ -58,13 +57,12 @@ HEADERS += mainwindow.h \
     idatarepository.h \
     textfilestorage.h \
     studentfactory.h \
-    test/datarepositorymock.h \
     istudentdatawidget.h \
     studentdataform.h \
     iconfirmdialog.h \
     signaltransmitter.h \
-    dialogaction.h \
-    istudentdataform.h
+    istudentdataform.h \
+    studentdataaction.h
 
 FORMS += mainwindow.ui \
     studentdatawindow.ui \
@@ -97,7 +95,8 @@ test {
     test/teststudentdatawindow.h \
     test/testsignaltransmitter.h \
     test/studentdataformmock.h \
-    test/teststudentdataform.h
+    test/teststudentdataform.h \
+    test/datarepositorymock.h
 
 
     SOURCES += test/test_main.cpp \
@@ -120,7 +119,8 @@ test {
     test/teststudentdatawindow.cpp \
     test/testsignaltransmitter.cpp \
     test/studentdataformmock.cpp \
-    test/teststudentdataform.cpp
+    test/teststudentdataform.cpp \
+    test/datarepositorymock.cpp
 
 } else {
     message(Normal build)

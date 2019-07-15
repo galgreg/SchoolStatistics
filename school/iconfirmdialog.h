@@ -1,7 +1,7 @@
 #ifndef ICONFIRMDIALOG_H
 #define ICONFIRMDIALOG_H
 
-#include "dialogaction.h"
+#include "studentdataaction.h"
 class QString;
 
 class IConfirmDialog {
@@ -11,7 +11,7 @@ public:
     virtual void hideDialog() = 0;
 
     virtual void customizeDialogMessage(
-            DialogAction actionToDo,
+            StudentDataAction actionToDo,
             const QString &actionString,
             const QString &studentName) = 0;
 

@@ -32,7 +32,7 @@ void TestConfirmDialog::testInitialState() {
 }
 
 void TestConfirmDialog::testCustomizeDialogMessage() {
-    DialogAction actionToDo = ADD_STUDENT;
+    StudentDataAction actionToDo = ADD_STUDENT;
     QString actionString = "add";
     QString studentName = "Jan Kowalski";
     mConfirmDialog->customizeDialogMessage(actionToDo,actionString, studentName);
@@ -67,7 +67,7 @@ void TestConfirmDialog::testHideDialog() {
 }
 
 void TestConfirmDialog::testConfirmButtonClicked_data() {
-    QTest::addColumn<DialogAction>("actionToCommit");
+    QTest::addColumn<StudentDataAction>("actionToCommit");
 
     QTest::newRow("commit_add_student") << ADD_STUDENT;
     QTest::newRow("commit_edit_student") << EDIT_STUDENT;
@@ -75,7 +75,7 @@ void TestConfirmDialog::testConfirmButtonClicked_data() {
 }
 
 void TestConfirmDialog::testConfirmButtonClicked() {
-    QFETCH(DialogAction, actionToCommit);
+    QFETCH(StudentDataAction, actionToCommit);
     QSignalSpy signalSpy(mConfirmDialog.get(), &ConfirmDialog::commit);
 
     mConfirmDialog->mActionToDo = actionToCommit;
@@ -84,9 +84,9 @@ void TestConfirmDialog::testConfirmButtonClicked() {
     QCOMPARE(signalSpy.count(), 1);
 
     auto signalArguments = signalSpy.takeFirst();
-    DialogAction expectedActionToCommit = actionToCommit;
-    DialogAction actualActionToCommit =
-            signalArguments.at(0).value<DialogAction>();
+    StudentDataAction expectedActionToCommit = actionToCommit;
+    StudentDataAction actualActionToCommit =
+            signalArguments.at(0).value<StudentDataAction>();
     QCOMPARE(actualActionToCommit, expectedActionToCommit);
 
     bool isDialogVisible = mConfirmDialog->isVisible();

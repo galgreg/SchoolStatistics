@@ -19,7 +19,7 @@ void TestSignalTransmitter::cleanup() {
 }
 
 void TestSignalTransmitter::testTransmitSignal_data() {
-    QTest::addColumn<DialogAction>("actionToTransmit");
+    QTest::addColumn<StudentDataAction>("actionToTransmit");
 
     QTest::newRow("transmit_add_student") << ADD_STUDENT;
     QTest::newRow("transmit_edit_student") << EDIT_STUDENT;
@@ -27,7 +27,7 @@ void TestSignalTransmitter::testTransmitSignal_data() {
 }
 
 void TestSignalTransmitter::testTransmitSignal() {
-    QFETCH(DialogAction, actionToTransmit);
+    QFETCH(StudentDataAction, actionToTransmit);
     QSignalSpy signalSpy(
             mSignalTransmitter.get(),
             &SignalTransmitter::transactionCommitted);
@@ -35,8 +35,8 @@ void TestSignalTransmitter::testTransmitSignal() {
     QCOMPARE(signalSpy.count(), 1);
 
     auto signalArguments = signalSpy.takeFirst();
-    DialogAction expectedTransmittedAction = actionToTransmit;
-    DialogAction actualTransmittedAction =
-            signalArguments.at(0).value<DialogAction>();
+    StudentDataAction expectedTransmittedAction = actionToTransmit;
+    StudentDataAction actualTransmittedAction =
+            signalArguments.at(0).value<StudentDataAction>();
     QCOMPARE(actualTransmittedAction, expectedTransmittedAction);
 }

@@ -27,7 +27,7 @@ public:
     void hideDialog() override;
 
     void customizeDialogMessage(
-            DialogAction actionToDo,
+            StudentDataAction actionToDo,
             const QString &actionString,
             const QString &studentName) override;
 
@@ -35,7 +35,7 @@ public:
     QString getCurrentStudentName() override;
 
 signals:
-    void commit(DialogAction);
+    void commit(StudentDataAction);
 
 private slots:
     void confirmButtonClicked();
@@ -43,7 +43,7 @@ private slots:
 private:
     std::unique_ptr<Ui::ConfirmDialog> ui;
     std::shared_ptr<SignalTransmitter> mSignalTransmitter;
-    DialogAction mActionToDo;
+    StudentDataAction mActionToDo;
     QString mCurrentActionString;
     QString mCurrentStudentName;
 };

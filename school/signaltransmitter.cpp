@@ -4,6 +4,6 @@ SignalTransmitter::SignalTransmitter(QObject *parent) : QObject(parent) {
 
 }
 
-void SignalTransmitter::transmitSignal(DialogAction action) {
+void SignalTransmitter::transmitSignal(StudentDataAction action) {
     emit transactionCommitted(action);
 }
