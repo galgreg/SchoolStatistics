@@ -36,6 +36,7 @@ public:
 private slots:
     void showStudentDataWidget();
     void beginDeleteTransaction();
+    void showAddNewStudentForm();
     void doAction(StudentDataAction actionToDo);
 
 private:

@@ -36,7 +36,7 @@ void TestStudentDataForm::testSetHeader() {
     QString actualHeader_1 = mStudentDataForm->getHeader();
     QCOMPARE(actualHeader_1, expectedHeader);
 
-    QString actualHeader_2 = mStudentDataForm->ui->headerLabel->text();
+    QString actualHeader_2 = mStudentDataForm->mHeader;
     QCOMPARE(actualHeader_2, expectedHeader);
 }
 

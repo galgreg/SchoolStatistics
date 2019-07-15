@@ -21,7 +21,13 @@ void StudentDataForm::hideForm() {
 }
 
 void StudentDataForm::setHeader(const QString &newHeader) {
-    ui->headerLabel->setText(newHeader);
+    mHeader = newHeader;
+    QString formattedNewHeader = QString(
+                "<html><head/><body><p align=\"center\">"
+                "<span style=\" font-size:16pt; font-weight:600; "
+                    "color:#ef2929;\"> %1 </span>"
+                "</p></body></html>").arg(newHeader);
+    ui->headerLabel->setText(formattedNewHeader);
 }
 
 void StudentDataForm::setFirstName(const QString &newFirstName) {
@@ -63,7 +69,7 @@ void StudentDataForm::deleteAllGrades() {
 }
 
 QString StudentDataForm::getHeader() {
-    return ui->headerLabel->text();
+    return mHeader;
 }
 
 QString StudentDataForm::getFirstName() {

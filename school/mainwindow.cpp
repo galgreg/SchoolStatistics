@@ -23,11 +23,12 @@ MainWindow::MainWindow(
 
     connect(ui->showStudentButton, &QPushButton::clicked,
             this, &MainWindow::showStudentDataWidget);
+    connect(ui->addStudentButton, &QPushButton::clicked,
+            this, &MainWindow::showAddNewStudentForm);
     connect(ui->deleteStudentButton, &QPushButton::clicked,
             this, &MainWindow::beginDeleteTransaction);
     connect(mSignalTransmitter.get(), &SignalTransmitter::transactionCommitted,
             this, &MainWindow::doAction);
-
     readDataFromRepository();
 }
 
@@ -51,6 +52,11 @@ void MainWindow::beginDeleteTransaction() {
         prepareConfirmDialogToDisplay(actionToConfirm, studentName);
         mConfirmDialog->showDialog();
     }
+}
+
+void MainWindow::showAddNewStudentForm() {
+    prepareStudentDataFormToDisplay(ADD_STUDENT);
+    mStudentDataForm->showForm();
 }
 
 void MainWindow::doAction(StudentDataAction actionToDo) {

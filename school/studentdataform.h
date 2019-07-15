@@ -42,6 +42,7 @@ public:
 
 private:
     std::unique_ptr<Ui::StudentDataForm> ui;
+    QString mHeader;
     Gender mGender;
 };
 
