@@ -14,6 +14,9 @@ StudentDataForm::StudentDataForm(QWidget *parent) :
 
     ui->firstNameLineEdit->setValidator(mStudentNameValidator.get());
     ui->lastNameLineEdit->setValidator(mStudentNameValidator.get());
+
+    connect(ui->addGradeButton, &QPushButton::clicked,
+            this, &StudentDataForm::addGradeToList);
 }
 
 StudentDataForm::~StudentDataForm() {
@@ -102,4 +105,9 @@ QList<double> StudentDataForm::getGrades() {
         gradesFromUiList.append(newGrade);
     }
     return gradesFromUiList;
+}
+
+void StudentDataForm::addGradeToList() {
+    double newGrade = ui->gradesSlider->value() / 2.0;
+    addGrade(newGrade);
 }

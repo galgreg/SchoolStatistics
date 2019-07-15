@@ -41,6 +41,9 @@ public:
     Gender getGender() override;
     QList<double> getGrades() override;
 
+private slots:
+    void addGradeToList();
+
 private:
     std::unique_ptr<Ui::StudentDataForm> ui;
     std::unique_ptr<QRegExpValidator> mStudentNameValidator;

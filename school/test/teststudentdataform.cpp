@@ -227,6 +227,28 @@ void TestStudentDataForm::testStudentNameValidation() {
     QCOMPARE(actualValidationResult, expectedValidationResult);
 }
 
+void TestStudentDataForm::testAddGradeToList_data() {
+    QTest::addColumn<int>("gradesSliderValue");
+    QTest::addColumn<double>("expectedGrade");
+
+    QTest::newRow("add 2.0") << 4 << 2.0;
+    QTest::newRow("add 3.5") << 7 << 3.5;
+    QTest::newRow("add 5.0") << 10 << 5.0;
+}
+
+void TestStudentDataForm::testAddGradeToList() {
+    QFETCH(int, gradesSliderValue);
+    mStudentDataForm->ui->gradesSlider->setValue(gradesSliderValue);
+    mStudentDataForm->addGradeToList();
+
+    const auto *gradesList = mStudentDataForm->ui->gradesList;
+    QString gradeString = gradesList->item(0)->text();
+
+    double actualGrade = gradeString.toDouble();
+    QFETCH(double, expectedGrade);
+    QCOMPARE(actualGrade, expectedGrade);
+}
+
 QList<double> TestStudentDataForm::getGradesFromUiGradesList() {
     QList<double> gradesFromUiList;
     const auto& gradesList = *(mStudentDataForm->ui->gradesList);

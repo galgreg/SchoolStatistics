@@ -27,6 +27,8 @@ private slots:
 
     void testStudentNameValidation_data();
     void testStudentNameValidation();
+    void testAddGradeToList_data();
+    void testAddGradeToList();
 private:
     QList<double> getGradesFromUiGradesList();
 
