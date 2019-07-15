@@ -58,6 +58,10 @@ void StudentDataForm::deleteGrade(size_t whichGrade) {
     ui->gradesList->takeItem(static_cast<int>(whichGrade));
 }
 
+void StudentDataForm::deleteAllGrades() {
+    ui->gradesList->clear();
+}
+
 QString StudentDataForm::getHeader() {
     return ui->headerLabel->text();
 }

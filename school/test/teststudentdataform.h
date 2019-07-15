@@ -23,6 +23,7 @@ private slots:
     void testAddGrade();
     void testEditGrade();
     void testDeleteGrade();
+    void testDeleteAllGrades();
 private:
     QList<double> getGradesFromUiGradesList();
 

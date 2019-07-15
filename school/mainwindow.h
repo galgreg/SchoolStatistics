@@ -6,6 +6,7 @@
 #include "iconfirmdialog.h"
 #include "idatarepository.h"
 #include "istudentclass.h"
+#include "istudentdataform.h"
 #include "istudentdatawidget.h"
 #include "signaltransmitter.h"
 #include <memory>
@@ -27,6 +28,7 @@ public:
         IDataRepository *dataRepository,
         IStudentDataWidget *studentDataWidget,
         IConfirmDialog *confirmDialog,
+        IStudentDataForm *studentDataForm,
         std::shared_ptr<SignalTransmitter> signalTransmitter,
         QWidget *parent = nullptr);
     ~MainWindow();
@@ -44,12 +46,14 @@ private:
     void prepareConfirmDialogToDisplay(
             StudentDataAction actionToConfirm,
             QString studentName);
+    void prepareStudentDataFormToDisplay(StudentDataAction actionToPerform);
 
     std::unique_ptr<Ui::MainWindow> ui;
     std::unique_ptr<IDataRepository> mDataRepository;
     std::unique_ptr<IStudentClass> mStudentClass;
     std::unique_ptr<IStudentDataWidget> mStudentDataWidget;
     std::unique_ptr<IConfirmDialog> mConfirmDialog;
+    std::unique_ptr<IStudentDataForm> mStudentDataForm;
     std::shared_ptr<SignalTransmitter> mSignalTransmitter;
 };
 

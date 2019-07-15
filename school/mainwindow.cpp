@@ -8,6 +8,7 @@ MainWindow::MainWindow(
         IDataRepository *dataRepository,
         IStudentDataWidget *studentDataWidget,
         IConfirmDialog *confirmDialog,
+        IStudentDataForm *studentDataForm,
         std::shared_ptr<SignalTransmitter> signalTransmitter,
         QWidget *parent) :
             QWidget(parent),
@@ -16,6 +17,7 @@ MainWindow::MainWindow(
             mStudentClass(nullptr),
             mStudentDataWidget(studentDataWidget),
             mConfirmDialog(confirmDialog),
+            mStudentDataForm(studentDataForm),
             mSignalTransmitter(signalTransmitter) {
     ui->setupUi(this);
 
@@ -157,6 +159,17 @@ void MainWindow::prepareConfirmDialogToDisplay(
     mConfirmDialog->customizeDialogMessage(
             actionToConfirm,
             actionString,
-            studentName);
+                studentName);
+}
+
+void MainWindow::prepareStudentDataFormToDisplay(
+        StudentDataAction actionToPerform) {
+    if (actionToPerform == ADD_STUDENT) {
+        mStudentDataForm->setHeader("Add Student");
+        mStudentDataForm->setFirstName("");
+        mStudentDataForm->setLastName("");
+        mStudentDataForm->setGender(UNKNOWN);
+        mStudentDataForm->deleteAllGrades();
+    }
 }
 

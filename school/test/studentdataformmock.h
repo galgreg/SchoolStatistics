@@ -17,6 +17,7 @@ public:
     void addGrade(double newGrade) override;
     void editGrade(size_t whichGrade, double newGrade) override;
     void deleteGrade(size_t whichGrade) override;
+    void deleteAllGrades() override;
 
     QString getHeader() override;
     QString getFirstName() override;

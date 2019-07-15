@@ -41,6 +41,10 @@ void StudentDataFormMock::deleteGrade(size_t whichGrade) {
     mGrades.removeAt(static_cast<int>(whichGrade));
 }
 
+void StudentDataFormMock::deleteAllGrades() {
+    mGrades.clear();
+}
+
 QString StudentDataFormMock::getHeader() {
     return mHeader;
 }

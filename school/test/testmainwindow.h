@@ -20,6 +20,8 @@ private slots:
     void testPrepareConfirmDialogToDisplay_data();
     void testPrepareConfirmDialogToDisplay();
     void testDoAction_DeleteStudent();
+
+    void testPrepareStudentDataFormToDisplay_AddStudent();
 private:
     std::unique_ptr<MainWindow> mMainWindow;
     std::unique_ptr<IStudentClass> mStudentClassData;

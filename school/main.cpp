@@ -1,6 +1,7 @@
 #include "confirmdialog.h"
 #include "mainwindow.h"
 #include "studentclass.h"
+#include "studentdataform.h"
 #include "studentdatawindow.h"
 #include "textfilestorage.h"
 #include <QApplication>
@@ -17,6 +18,7 @@ int main(int argc, char *argv[])
             new TextFileStorage(PATH_TO_STORAGE.toStdString()),
             new StudentDataWindow,
             new ConfirmDialog(signalTransmitter),
+            new StudentDataForm,
             signalTransmitter);
     w.show();
     return a.exec();

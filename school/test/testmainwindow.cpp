@@ -2,6 +2,7 @@
 #include "confirmdialogmock.h"
 #include "datarepositorymock.h"
 #include "studentclass.h"
+#include "studentdataformmock.h"
 #include "studentdatawidgetmock.h"
 #include "studentfactory.h"
 #include "ui_mainwindow.h"
@@ -39,6 +40,7 @@ void TestMainWindow::init() {
                     dataRepository,
                     new StudentDataWidgetMock,
                     new ConfirmDialogMock,
+                    new StudentDataFormMock,
                     std::make_shared<SignalTransmitter>()));
 }
 
@@ -166,4 +168,29 @@ void TestMainWindow::testDoAction_DeleteStudent() {
     const auto& expectedStudentClassAfterDelete = *mStudentClassData;
     const auto& actualStudentClassAfterDelete = *mMainWindow->mStudentClass;
     QCOMPARE(actualStudentClassAfterDelete, expectedStudentClassAfterDelete);
+}
+
+void TestMainWindow::testPrepareStudentDataFormToDisplay_AddStudent() {
+    StudentDataAction actionToPerform = ADD_STUDENT;
+    mMainWindow->prepareStudentDataFormToDisplay(actionToPerform);
+
+    QString expectedHeader = "Add Student";
+    QString actualHeader = mMainWindow->mStudentDataForm->getHeader();
+    QCOMPARE(actualHeader, expectedHeader);
+
+    QString expectedFirstName = "";
+    QString actualFirstName = mMainWindow->mStudentDataForm->getFirstName();
+    QCOMPARE(actualFirstName, expectedFirstName);
+
+    QString expectedLastName = "";
+    QString actualLastName = mMainWindow->mStudentDataForm->getLastName();
+    QCOMPARE(actualLastName, expectedLastName);
+
+    Gender expectedGender = UNKNOWN;
+    Gender actualGender = mMainWindow->mStudentDataForm->getGender();
+    QCOMPARE(actualGender, expectedGender);
+
+    QList<double> expectedGrades = {};
+    QList<double> actualGrades = mMainWindow->mStudentDataForm->getGrades();
+    QCOMPARE(actualGrades, expectedGrades);
 }

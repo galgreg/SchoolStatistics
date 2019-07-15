@@ -19,6 +19,7 @@ public:
     virtual void addGrade(double newGrade) = 0;
     virtual void editGrade(size_t whichGrade, double newGrade) = 0;
     virtual void deleteGrade(size_t whichGrade) = 0;
+    virtual void deleteAllGrades() = 0;
 
     virtual QString getHeader() = 0;
     virtual QString getFirstName() = 0;
