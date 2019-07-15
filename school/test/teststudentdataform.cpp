@@ -94,3 +94,86 @@ void TestStudentDataForm::testSetGender() {
             mStudentDataForm->ui->unknownGenderButton->isChecked();
     QCOMPARE(actualUnknownGenderButtonValue, expectedUnknownGenderButtonValue);
 }
+
+void TestStudentDataForm::testAddGrade() {
+    QList<double> gradesToAdd = {3.5, 4.5, 5.0};
+
+    for(int i = 0; i < gradesToAdd.size(); ++i) {
+        mStudentDataForm->addGrade(gradesToAdd.at(i));
+    }
+
+    auto expectedGrades = gradesToAdd;
+    auto actualGrades_1 = mStudentDataForm->getGrades();
+    QCOMPARE(actualGrades_1, expectedGrades);
+
+    auto actualGrades_2 = getGradesFromUiGradesList();
+    QCOMPARE(actualGrades_2, expectedGrades);
+}
+
+void TestStudentDataForm::testEditGrade() {
+    QList<double> gradesToAdd = {3.5, 4.5, 5.0};
+
+    for(int i = 0; i < gradesToAdd.size(); ++i) {
+        QString gradeString = QString::number(gradesToAdd.at(i), 'f', 1);
+        mStudentDataForm->ui->gradesList->addItem(gradeString);
+    }
+
+    auto expectedGrades_BeforeEdit = gradesToAdd;
+    auto actualGrades_BeforeEdit_1 = mStudentDataForm->getGrades();
+    QCOMPARE(actualGrades_BeforeEdit_1, expectedGrades_BeforeEdit);
+
+    auto actualGrades_BeforeEdit_2 = getGradesFromUiGradesList();
+    QCOMPARE(actualGrades_BeforeEdit_2, expectedGrades_BeforeEdit);
+
+    size_t indexOfEditedGrade = 1;
+    double newGrade = 2.0;
+
+    mStudentDataForm->editGrade(indexOfEditedGrade, newGrade);
+    gradesToAdd[static_cast<int>(indexOfEditedGrade)] = newGrade;
+
+    auto expectedGrades_AfterEdit = gradesToAdd;
+    auto actualGrades_AfterEdit_1 = mStudentDataForm->getGrades();
+    QCOMPARE(actualGrades_AfterEdit_1, expectedGrades_AfterEdit);
+
+    auto actualGrades_AfterEdit_2 = getGradesFromUiGradesList();
+    QCOMPARE(actualGrades_AfterEdit_2, expectedGrades_AfterEdit);
+}
+
+void TestStudentDataForm::testDeleteGrade() {
+    QList<double> gradesList = {3.5, 4.5, 5.0};
+
+    for(int i = 0; i < gradesList.size(); ++i) {
+        QString gradeString = QString::number(gradesList.at(i), 'f', 1);
+        mStudentDataForm->ui->gradesList->addItem(gradeString);
+    }
+
+    auto expectedGrades_BeforeDelete = gradesList;
+    auto actualGrades_BeforeDelete_1 = mStudentDataForm->getGrades();
+    QCOMPARE(actualGrades_BeforeDelete_1, expectedGrades_BeforeDelete);
+
+    auto actualGrades_BeforeDelete_2 = getGradesFromUiGradesList();
+    QCOMPARE(actualGrades_BeforeDelete_2, expectedGrades_BeforeDelete);
+
+    size_t indexOfDeletedGrade = 1;
+
+    mStudentDataForm->deleteGrade(indexOfDeletedGrade);
+    gradesList.removeAt(static_cast<int>(indexOfDeletedGrade));
+
+    auto expectedGrades_AfterDelete = gradesList;
+    auto actualGrades_AfterDelete_1 = mStudentDataForm->getGrades();
+    QCOMPARE(actualGrades_AfterDelete_1, expectedGrades_AfterDelete);
+
+    auto actualGrades_AfterDelete_2 = getGradesFromUiGradesList();
+    QCOMPARE(actualGrades_AfterDelete_2, expectedGrades_AfterDelete);
+}
+
+QList<double> TestStudentDataForm::getGradesFromUiGradesList() {
+    QList<double> gradesFromUiList;
+    const auto& gradesList = *(mStudentDataForm->ui->gradesList);
+
+    for (int i = 0; i < gradesList.count(); ++i) {
+        double newGrade = gradesList.item(i)->text().toDouble();
+        gradesFromUiList.append(newGrade);
+    }
+    return gradesFromUiList;
+}

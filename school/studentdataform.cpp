@@ -45,15 +45,17 @@ void StudentDataForm::setGender(Gender newGender) {
 }
 
 void StudentDataForm::addGrade(double newGrade) {
-    // TODO
+    QString gradeString = QString::number(newGrade, 'f', 1);
+    ui->gradesList->addItem(gradeString);
 }
 
 void StudentDataForm::editGrade(size_t whichGrade, double newGrade) {
-    // TODO
+    QString gradeString = QString::number(newGrade, 'f', 1);
+    ui->gradesList->item(static_cast<int>(whichGrade))->setText(gradeString);
 }
 
 void StudentDataForm::deleteGrade(size_t whichGrade) {
-    // TODO
+    ui->gradesList->takeItem(static_cast<int>(whichGrade));
 }
 
 QString StudentDataForm::getHeader() {
@@ -73,6 +75,12 @@ Gender StudentDataForm::getGender() {
 }
 
 QList<double> StudentDataForm::getGrades() {
-    // TODO
-    return {};
+    QList<double> gradesFromUiList;
+    const auto& gradesList = *(ui->gradesList);
+
+    for (int i = 0; i < gradesList.count(); ++i) {
+        double newGrade = gradesList.item(i)->text().toDouble();
+        gradesFromUiList.append(newGrade);
+    }
+    return gradesFromUiList;
 }

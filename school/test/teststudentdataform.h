@@ -20,7 +20,12 @@ private slots:
     void testSetLastName();
     void testSetGender_data();
     void testSetGender();
+    void testAddGrade();
+    void testEditGrade();
+    void testDeleteGrade();
 private:
+    QList<double> getGradesFromUiGradesList();
+
     std::unique_ptr<StudentDataForm> mStudentDataForm;
 };
 
