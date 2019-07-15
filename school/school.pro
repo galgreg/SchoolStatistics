@@ -63,7 +63,8 @@ HEADERS += mainwindow.h \
     studentdataform.h \
     iconfirmdialog.h \
     signaltransmitter.h \
-    dialogaction.h
+    dialogaction.h \
+    istudentdataform.h
 
 FORMS += mainwindow.ui \
     studentdatawindow.ui \
@@ -94,7 +95,8 @@ test {
     test/confirmdialogmock.h \
     test/testconfirmdialog.h \
     test/teststudentdatawindow.h \
-    test/testsignaltransmitter.h
+    test/testsignaltransmitter.h \
+    test/studentdataformmock.h
 
 
     SOURCES += test/test_main.cpp \
@@ -115,7 +117,8 @@ test {
     test/confirmdialogmock.cpp \
     test/testconfirmdialog.cpp \
     test/teststudentdatawindow.cpp \
-    test/testsignaltransmitter.cpp
+    test/testsignaltransmitter.cpp \
+    test/studentdataformmock.cpp
 
 } else {
     message(Normal build)

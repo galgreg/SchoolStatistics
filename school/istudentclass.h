@@ -4,8 +4,7 @@
 #include "istudent.h"
 #include <cstddef>
 
-class IStudentClass
-{
+class IStudentClass {
 public:
     virtual ~IStudentClass() = default;
     bool operator==(const IStudentClass &classToCompare) const;
