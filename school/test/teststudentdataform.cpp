@@ -192,6 +192,41 @@ void TestStudentDataForm::testDeleteAllGrades() {
     QCOMPARE(actualGrades_AfterDelete_2, expectedGrades_AfterDelete);
 }
 
+void TestStudentDataForm::testStudentNameValidation_data() {
+    QTest::addColumn<QString>("inputString");
+    QTest::addColumn<bool>("expectedValidationResult");
+
+    QTest::newRow("input_numbers") << "0123456789" << false;
+    QTest::newRow("input_lower_case") << "jan" << false;
+    QTest::newRow("input_upper_case") << "JAN" << false;
+    QTest::newRow("input_too_short") << "Ja" << false;
+    QTest::newRow("input_with_special_chars") << "J@n" << false;
+    QTest::newRow("input_inverted_case") << "jAN" << false;
+    QTest::newRow("input_valid_string") << "Jan" << true;
+}
+
+void TestStudentDataForm::testStudentNameValidation() {
+    const QValidator *expectedValidator =
+            mStudentDataForm->mStudentNameValidator.get();
+
+    const QValidator* actualValidator_FirstName =
+            mStudentDataForm->ui->firstNameLineEdit->validator();
+    QCOMPARE(actualValidator_FirstName, expectedValidator);
+
+    const QValidator* actualValidator_LastName =
+            mStudentDataForm->ui->lastNameLineEdit->validator();
+    QCOMPARE(actualValidator_LastName, expectedValidator);
+
+    QFETCH(QString, inputString);
+    QFETCH(bool, expectedValidationResult);
+
+    const auto& validatorRegex =
+            mStudentDataForm->mStudentNameValidator->regExp();
+
+    bool actualValidationResult = validatorRegex.exactMatch(inputString);
+    QCOMPARE(actualValidationResult, expectedValidationResult);
+}
+
 QList<double> TestStudentDataForm::getGradesFromUiGradesList() {
     QList<double> gradesFromUiList;
     const auto& gradesList = *(mStudentDataForm->ui->gradesList);

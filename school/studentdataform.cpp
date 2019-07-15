@@ -1,11 +1,19 @@
 #include "studentdataform.h"
 #include "ui_studentdataform.h"
+#include <QRegExp>
+#include <QRegExpValidator>
 
 StudentDataForm::StudentDataForm(QWidget *parent) :
         QWidget(parent),
         ui(new Ui::StudentDataForm),
+        mStudentNameValidator(nullptr),
         mGender(UNKNOWN) {
     ui->setupUi(this);
+    QRegExp studentNameRegex("^[A-Z][a-z]{2,}$");
+    mStudentNameValidator.reset(new QRegExpValidator(studentNameRegex, nullptr));
+
+    ui->firstNameLineEdit->setValidator(mStudentNameValidator.get());
+    ui->lastNameLineEdit->setValidator(mStudentNameValidator.get());
 }
 
 StudentDataForm::~StudentDataForm() {

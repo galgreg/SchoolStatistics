@@ -5,6 +5,7 @@
 #include <QWidget>
 #include <memory>
 
+class QRegExpValidator;
 class TestStudentDataForm;
 
 namespace Ui {
@@ -42,6 +43,7 @@ public:
 
 private:
     std::unique_ptr<Ui::StudentDataForm> ui;
+    std::unique_ptr<QRegExpValidator> mStudentNameValidator;
     QString mHeader;
     Gender mGender;
 };
