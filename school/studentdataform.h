@@ -43,6 +43,8 @@ public:
 
 private slots:
     void addGradeToList();
+    void editGradeOnGradesList();
+    void deleteGradeFromGradesList();
 
 private:
     std::unique_ptr<Ui::StudentDataForm> ui;

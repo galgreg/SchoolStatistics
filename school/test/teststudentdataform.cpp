@@ -249,6 +249,63 @@ void TestStudentDataForm::testAddGradeToList() {
     QCOMPARE(actualGrade, expectedGrade);
 }
 
+void TestStudentDataForm::testEditGradeOnGradesList_data() {
+    QTest::addColumn<QList<double>>("expectedGradesListBeforeEdit");
+    QTest::addColumn<int>("indexOfSelectedGrade");
+    QTest::addColumn<int>("gradesSliderValue");
+    QTest::addColumn<QList<double>>("expectedGradesListAfterEdit");
+
+    QTest::newRow("Empty gradelist") << QList<double>({}) << -1 << 7
+                            << QList<double>({});
+    QTest::newRow("case 2") << QList<double>({2.5, 3.5, 4.5}) << 0 << 10
+                            << QList<double>({5.0, 3.5, 4.5});
+    QTest::newRow("case 3") << QList<double>({5.0, 3.5, 2.0}) << 2 << 5
+                            << QList<double>({5.0, 3.5, 2.5});
+}
+
+void TestStudentDataForm::testEditGradeOnGradesList() {
+    QFETCH(QList<double>, expectedGradesListBeforeEdit);
+
+    for (int i = 0; i < expectedGradesListBeforeEdit.size(); ++i) {
+        double gradeValue = expectedGradesListBeforeEdit.at(i);
+        QString gradeString = QString::number(gradeValue, 'f', 1);
+        mStudentDataForm->ui->gradesList->addItem(gradeString);
+    }
+    QList<double> actualGradesListBeforeEdit = getGradesFromUiGradesList();
+    QCOMPARE(actualGradesListBeforeEdit, expectedGradesListBeforeEdit);
+
+    QFETCH(int, indexOfSelectedGrade);
+    mStudentDataForm->ui->gradesList->setCurrentRow(indexOfSelectedGrade);
+    QFETCH(int, gradesSliderValue);
+    mStudentDataForm->ui->gradesSlider->setValue(gradesSliderValue);
+
+    mStudentDataForm->editGradeOnGradesList();
+
+    QFETCH(QList<double>, expectedGradesListAfterEdit);
+    QList<double> actualGradesListAfterEdit = getGradesFromUiGradesList();
+    QCOMPARE(actualGradesListAfterEdit, expectedGradesListAfterEdit);
+}
+
+void TestStudentDataForm::testDeleteGradeFromGradesList() {
+    QList<double> expectedGradesListBeforeDelete = {5.0, 4.0, 3.5};
+
+    for (int i = 0; i < expectedGradesListBeforeDelete.size(); ++i) {
+        double gradeValue = expectedGradesListBeforeDelete.at(i);
+        QString gradeString = QString::number(gradeValue, 'f', 1);
+        mStudentDataForm->ui->gradesList->addItem(gradeString);
+    }
+    QList<double> actualGradesListBeforeDelete = getGradesFromUiGradesList();
+    QCOMPARE(actualGradesListBeforeDelete, expectedGradesListBeforeDelete);
+
+    int indexOfSelectedGrade = 2;
+    mStudentDataForm->ui->gradesList->setCurrentRow(indexOfSelectedGrade);
+    mStudentDataForm->deleteGradeFromGradesList();
+
+    QList<double> expectedGradesListAfterDelete = {5.0, 4.0};
+    QList<double> actualGradesListAfterDelete = getGradesFromUiGradesList();
+    QCOMPARE(actualGradesListAfterDelete, expectedGradesListAfterDelete);
+}
+
 QList<double> TestStudentDataForm::getGradesFromUiGradesList() {
     QList<double> gradesFromUiList;
     const auto& gradesList = *(mStudentDataForm->ui->gradesList);

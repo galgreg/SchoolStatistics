@@ -29,6 +29,9 @@ private slots:
     void testStudentNameValidation();
     void testAddGradeToList_data();
     void testAddGradeToList();
+    void testEditGradeOnGradesList_data();
+    void testEditGradeOnGradesList();
+    void testDeleteGradeFromGradesList();
 private:
     QList<double> getGradesFromUiGradesList();
 

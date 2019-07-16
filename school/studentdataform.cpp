@@ -17,6 +17,10 @@ StudentDataForm::StudentDataForm(QWidget *parent) :
 
     connect(ui->addGradeButton, &QPushButton::clicked,
             this, &StudentDataForm::addGradeToList);
+    connect(ui->editGradeButton, &QPushButton::clicked,
+            this, &StudentDataForm::editGradeOnGradesList);
+    connect(ui->deleteGradeButton, &QPushButton::clicked,
+            this, &StudentDataForm::deleteGradeFromGradesList);
 }
 
 StudentDataForm::~StudentDataForm() {
@@ -110,4 +114,19 @@ QList<double> StudentDataForm::getGrades() {
 void StudentDataForm::addGradeToList() {
     double newGrade = ui->gradesSlider->value() / 2.0;
     addGrade(newGrade);
+}
+
+void StudentDataForm::editGradeOnGradesList() {
+    int indexOfSelectedGrade = ui->gradesList->currentRow();
+    if (indexOfSelectedGrade > -1) {
+        double newGrade = ui->gradesSlider->value() / 2.0;
+        editGrade(static_cast<size_t>(indexOfSelectedGrade), newGrade);
+    }
+}
+
+void StudentDataForm::deleteGradeFromGradesList() {
+    int indexOfSelectedGrade = ui->gradesList->currentRow();
+    if (indexOfSelectedGrade > -1) {
+        deleteGrade(static_cast<size_t>(indexOfSelectedGrade));
+    }
 }
