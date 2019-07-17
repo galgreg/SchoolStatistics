@@ -25,12 +25,11 @@ public:
     friend TestMainWindow;
 
     MainWindow(
-        IDataRepository *dataRepository,
-        IStudentDataWidget *studentDataWidget,
-        IConfirmDialog *confirmDialog,
-        IStudentDataForm *studentDataForm,
-        std::shared_ptr<SignalTransmitter> signalTransmitter,
-        QWidget *parent = nullptr);
+        std::unique_ptr<IDataRepository> dataRepository,
+        std::unique_ptr<IStudentDataWidget> studentDataWidget,
+        std::unique_ptr<IConfirmDialog> confirmDialog,
+        std::unique_ptr<IStudentDataForm> studentDataForm,
+        std::shared_ptr<SignalTransmitter> signalTransmitter);
     ~MainWindow();
 
 private slots:

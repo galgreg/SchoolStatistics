@@ -18,7 +18,7 @@ class StudentDataWindow : public QWidget, public IStudentDataWidget
 public:
     friend TestStudentDataWindow;
 
-    explicit StudentDataWindow(QWidget *parent = nullptr);
+    StudentDataWindow();
     ~StudentDataWindow() override;
     void showWidget() override;
     void hideWidget() override;

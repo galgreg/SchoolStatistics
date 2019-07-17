@@ -23,7 +23,7 @@ const IStudent& StudentClassMock::getStudent(size_t) const {
     return mStudents.at(0);
 }
 
-void StudentClassMock::editStudent(size_t, IStudent *) {
+void StudentClassMock::editStudent(size_t, std::unique_ptr<IStudent>) {
 }
 
 void StudentClassMock::removeAll() {

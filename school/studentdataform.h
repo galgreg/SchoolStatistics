@@ -19,7 +19,7 @@ class StudentDataForm : public QWidget, public IStudentDataForm
 public:
     friend TestStudentDataForm;
 
-    explicit StudentDataForm(QWidget *parent = nullptr);
+    StudentDataForm();
     ~StudentDataForm() override;
 
     void showForm() override;

@@ -15,10 +15,10 @@ int main(int argc, char *argv[])
     const QString PATH_TO_STORAGE = fileStorageDirLocation + "students.txt";
     auto signalTransmitter = std::make_shared<SignalTransmitter>();
     MainWindow w(
-            new TextFileStorage(PATH_TO_STORAGE.toStdString()),
-            new StudentDataWindow,
-            new ConfirmDialog(signalTransmitter),
-            new StudentDataForm,
+            std::make_unique<TextFileStorage>(PATH_TO_STORAGE.toStdString()),
+            std::make_unique<StudentDataWindow>(),
+            std::make_unique<ConfirmDialog>(signalTransmitter),
+            std::make_unique<StudentDataForm>(),
             signalTransmitter);
     w.show();
     return a.exec();

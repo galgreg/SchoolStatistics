@@ -5,19 +5,18 @@
 #include "textfilestorage.h"
 
 MainWindow::MainWindow(
-        IDataRepository *dataRepository,
-        IStudentDataWidget *studentDataWidget,
-        IConfirmDialog *confirmDialog,
-        IStudentDataForm *studentDataForm,
-        std::shared_ptr<SignalTransmitter> signalTransmitter,
-        QWidget *parent) :
-            QWidget(parent),
+        std::unique_ptr<IDataRepository> dataRepository,
+        std::unique_ptr<IStudentDataWidget> studentDataWidget,
+        std::unique_ptr<IConfirmDialog> confirmDialog,
+        std::unique_ptr<IStudentDataForm> studentDataForm,
+        std::shared_ptr<SignalTransmitter> signalTransmitter) :
+            QWidget(nullptr),
             ui(new Ui::MainWindow),
-            mDataRepository(dataRepository),
+            mDataRepository(std::move(dataRepository)),
             mStudentClass(nullptr),
-            mStudentDataWidget(studentDataWidget),
-            mConfirmDialog(confirmDialog),
-            mStudentDataForm(studentDataForm),
+            mStudentDataWidget(std::move(studentDataWidget)),
+            mConfirmDialog(std::move(confirmDialog)),
+            mStudentDataForm(std::move(studentDataForm)),
             mSignalTransmitter(signalTransmitter) {
     ui->setupUi(this);
 

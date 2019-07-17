@@ -8,7 +8,7 @@ class SignalTransmitter : public QObject
 {
     Q_OBJECT
 public:
-    explicit SignalTransmitter(QObject *parent = nullptr);
+    SignalTransmitter();
 
 signals:
     void transactionCommitted(StudentDataAction);

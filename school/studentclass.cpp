@@ -38,11 +38,13 @@ const IStudent& StudentClass::getStudent(size_t whichStudent) const {
     return *mStudents.at(whichStudent);
 }
 
-void StudentClass::editStudent(size_t whichStudent, IStudent *newValue) {
+void StudentClass::editStudent(
+        size_t whichStudent,
+        std::unique_ptr<IStudent> newValue) {
     if (newValue == nullptr) {
         throw std::bad_alloc();
     }
-    mStudents.at(whichStudent).reset(newValue);
+    mStudents.at(whichStudent).swap(newValue);
 }
 
 void StudentClass::removeAll() {

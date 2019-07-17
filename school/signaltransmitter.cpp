@@ -1,6 +1,6 @@
 #include "signaltransmitter.h"
 
-SignalTransmitter::SignalTransmitter(QObject *parent) : QObject(parent) {
+SignalTransmitter::SignalTransmitter() : QObject(nullptr) {
 
 }
 

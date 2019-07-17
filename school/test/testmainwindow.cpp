@@ -32,15 +32,15 @@ void TestMainWindow::init() {
     mStudentClassData->addStudent(StudentFactory::create(
             3, "Gal", "Anonim", UNKNOWN, {2.0, 2.0, 2.0}));
 
-    IDataRepository *dataRepository = new DataRepositoryMock;
+    std::unique_ptr<IDataRepository> dataRepository(new DataRepositoryMock);
     dataRepository->write(*mStudentClassData);
 
     mMainWindow.reset(
             new MainWindow(
-                    dataRepository,
-                    new StudentDataWidgetMock,
-                    new ConfirmDialogMock,
-                    new StudentDataFormMock,
+                    std::move(dataRepository),
+                    std::make_unique<StudentDataWidgetMock>(),
+                    std::make_unique<ConfirmDialogMock>(),
+                    std::make_unique<StudentDataFormMock>(),
                     std::make_shared<SignalTransmitter>()));
 }
 
@@ -73,7 +73,6 @@ void TestMainWindow::testReadDataFromRepository() {
             {"Jan Kowalski", "Maria Nowak", "Gal Anonim"};
     QList<QString> actualStudentListContent;
     const auto& studentList = *(mMainWindow->ui->studentList);
-
 
     for (int i = 0; i < studentList.count(); ++i) {
         const auto& item = studentList.item(i);

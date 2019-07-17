@@ -1,8 +1,8 @@
 #include "studentdatawindow.h"
 #include "ui_studentdatawindow.h"
 
-StudentDataWindow::StudentDataWindow(QWidget *parent) :
-    QWidget(parent),
+StudentDataWindow::StudentDataWindow() :
+    QWidget(nullptr),
     ui(nullptr)
 {
     ui.reset(new Ui::StudentDataWindow);

@@ -77,7 +77,7 @@ void TestStudentClass::testRemoveStudent_Error_NoSuchElement() {
     QVERIFY(actualClass.count() < whichStudentToRemove);
     QVERIFY_EXCEPTION_THROWN(
             actualClass.removeStudent(whichStudentToRemove),
-                std::out_of_range);
+            std::out_of_range);
 }
 
 void TestStudentClass::testGetStudent_OK() {
@@ -126,7 +126,7 @@ void TestStudentClass::testEditStudent_OK() {
                 new StudentMock(*tempStudent));
     QVERIFY(*expectedStudent_BeforeEdit != *expectedStudent_AfterEdit);
 
-    studentClass.editStudent(whichStudent, new StudentMock(*tempStudent));
+    studentClass.editStudent(whichStudent, std::move(tempStudent));
     const IStudent& actualStudent_AfterEdit = studentClass.getStudent(whichStudent);
     QCOMPARE(actualStudent_AfterEdit, *expectedStudent_AfterEdit);
 }
@@ -141,9 +141,10 @@ void TestStudentClass::testEditStudent_Error_NoSuchElement() {
     const size_t whichStudent = 10;
     QVERIFY(whichStudent > actualCount);
 
-    IStudent *newStudent = new StudentMock;
     QVERIFY_EXCEPTION_THROWN(
-            studentClass.editStudent(whichStudent, newStudent),
+            studentClass.editStudent(
+                    whichStudent,
+                    std::make_unique<StudentMock>()),
                 std::out_of_range);
 }
 

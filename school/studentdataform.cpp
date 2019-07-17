@@ -3,8 +3,8 @@
 #include <QRegExp>
 #include <QRegExpValidator>
 
-StudentDataForm::StudentDataForm(QWidget *parent) :
-        QWidget(parent),
+StudentDataForm::StudentDataForm() :
+        QWidget(nullptr),
         ui(new Ui::StudentDataForm),
         mStudentNameValidator(nullptr),
         mGender(UNKNOWN) {
