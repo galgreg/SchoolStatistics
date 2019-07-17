@@ -13,7 +13,7 @@ size_t StudentClassMock::count() const {
     return mStudents.size();
 }
 
-void StudentClassMock::addStudent(IStudent *) {
+void StudentClassMock::addStudent(std::unique_ptr<IStudent>) {
 }
 
 void StudentClassMock::removeStudent(size_t) {

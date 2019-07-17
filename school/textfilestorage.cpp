@@ -11,7 +11,7 @@ TextFileStorage::TextFileStorage(
 
 }
 
-IStudentClass *TextFileStorage::read(
+std::unique_ptr<IStudentClass> TextFileStorage::read(
         size_t maxStudentCount,
         size_t maxGradesCount) {
     if (!exist()) {
@@ -21,7 +21,8 @@ IStudentClass *TextFileStorage::read(
     }
     QFile textFile(QString::fromStdString(getPath()));
     if (textFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
-        IStudentClass *studentClass = new StudentClass(maxStudentCount);
+        std::unique_ptr<IStudentClass> studentClass(
+                    new StudentClass(maxStudentCount));
         QTextStream textStream(&textFile);
         QString line;
         while (textStream.readLineInto(&line)) {
@@ -51,13 +52,13 @@ IStudentClass *TextFileStorage::read(
                 grades.push_back(newGrade);
                 --maxGradesPerStudent;
             }
-            IStudent *newStudent = StudentFactory::create(
+            std::unique_ptr<IStudent> newStudent(StudentFactory::create(
                     studentID,
                     firstName.toStdString(),
                     lastName.toStdString(),
                     gender,
-                    grades);
-            studentClass->addStudent(newStudent);
+                    grades));
+            studentClass->addStudent(std::move(newStudent));
             ++studentID;
         }
         return studentClass;

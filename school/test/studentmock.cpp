@@ -6,6 +6,12 @@ StudentMock::StudentMock(const std::initializer_list<double>& grades) :
         mGrades(new GradesMock(grades)) {
 }
 
+StudentMock::StudentMock(const IStudent &originalStudentObject) :
+    mPersonalData(new PersonalDataMock(originalStudentObject.getPersonalData())),
+    mGrades(new GradesMock(originalStudentObject.getGrades())) {
+
+}
+
 unsigned StudentMock::getID() const {
     return 0;
 }

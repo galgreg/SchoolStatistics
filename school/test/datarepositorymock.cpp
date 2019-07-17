@@ -6,7 +6,7 @@ DataRepositoryMock::DataRepositoryMock(const std::string &repositoryPath) :
 
 }
 
-IStudentClass *DataRepositoryMock::read(
+std::unique_ptr<IStudentClass> DataRepositoryMock::read(
         size_t maxStudentCount,
         size_t maxGradesCount) {
     std::unique_ptr<IStudentClass> classFromFile(
@@ -19,9 +19,9 @@ IStudentClass *DataRepositoryMock::read(
             studentGrades->add(studentCopy->getGrades().getGrade(k));
         }
         studentCopy->setGrades(*studentGrades);
-        classFromFile->addStudent(studentCopy.release());
+        classFromFile->addStudent(std::move(studentCopy));
     }
-    return classFromFile.release();
+    return classFromFile;
 }
 
 void DataRepositoryMock::write(const IStudentClass &studentClass) {
@@ -30,7 +30,7 @@ void DataRepositoryMock::write(const IStudentClass &studentClass) {
         const IStudent& tempStudent = studentClass.getStudent(i);
         std::unique_ptr<IStudent> studentCopy(
                 StudentFactory::copy(tempStudent));
-        mStudentClass.addStudent(studentCopy.release());
+        mStudentClass.addStudent(std::move(studentCopy));
     }
 }
 

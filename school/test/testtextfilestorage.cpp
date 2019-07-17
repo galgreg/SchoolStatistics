@@ -54,23 +54,26 @@ void TestTextFileStorage::testRead_Error_NoSuchFile() {
 }
 
 void TestTextFileStorage::testRead_OK() {
-    IStudent *expectedStudent_1 = StudentFactory::create(
-            1, "Jan", "Kowalski", MALE, {5.0, 4.5, 4.0});
+    std::unique_ptr<IStudent> expectedStudent_1(
+            StudentFactory::create(
+                1, "Jan", "Kowalski", MALE, {5.0, 4.5, 4.0}));
 
-    IStudent *expectedStudent_2 = StudentFactory::create(
-            2, "Maria", "Nowak", FEMALE, {4.0, 3.5, 3.0});
+    std::unique_ptr<IStudent> expectedStudent_2(
+            StudentFactory::create(
+                2, "Maria", "Nowak", FEMALE, {4.0, 3.5, 3.0}));
 
-    IStudent *expectedStudent_3 = StudentFactory::create(
-            3, "Gal", "Anonim", UNKNOWN, {2.0, 2.0, 2.0});
+    std::unique_ptr<IStudent> expectedStudent_3(
+            StudentFactory::create(
+                3, "Gal", "Anonim", UNKNOWN, {2.0, 2.0, 2.0}));
 
     const size_t maximumStudentsCount = 3;
     const size_t maximumGradesCount = 3;
     std::unique_ptr<IStudentClass> expectedStudentClass(
             new StudentClass(maximumStudentsCount));
 
-    expectedStudentClass->addStudent(expectedStudent_1);
-    expectedStudentClass->addStudent(expectedStudent_2);
-    expectedStudentClass->addStudent(expectedStudent_3);
+    expectedStudentClass->addStudent(std::move(expectedStudent_1));
+    expectedStudentClass->addStudent(std::move(expectedStudent_2));
+    expectedStudentClass->addStudent(std::move(expectedStudent_3));
 
     TextFileStorage fileStorage(testFilePath);
     std::unique_ptr<IStudentClass> actualStudentClass(

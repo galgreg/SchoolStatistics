@@ -27,7 +27,7 @@ void TestStudentClass::testAddStudent_OK() {
     const size_t expectedMaxCount = 20;
     const size_t expectedCount = 1;
     StudentClass actualClass(expectedMaxCount);
-    actualClass.addStudent(new StudentMock);
+    actualClass.addStudent(std::make_unique<StudentMock>());
     QCOMPARE(actualClass.count(), expectedCount);
 }
 
@@ -36,12 +36,12 @@ void TestStudentClass::testAddStudent_Error_ClassOverflow() {
     StudentClass actualClass(expectedCountBeforeOverflow);
 
     for(size_t i = 0; i != expectedCountBeforeOverflow; ++i) {
-        actualClass.addStudent(new StudentMock);
+        actualClass.addStudent(std::make_unique<StudentMock>());
     }
     QCOMPARE(actualClass.count(), expectedCountBeforeOverflow);
     QVERIFY_EXCEPTION_THROWN(
-            actualClass.addStudent(new StudentMock),
-                std::out_of_range);
+            actualClass.addStudent(std::make_unique<StudentMock>()),
+            std::out_of_range);
 }
 
 void TestStudentClass::testAddStudent_Error_NullPtrStudent() {
@@ -55,7 +55,7 @@ void TestStudentClass::testRemoveStudent_OK() {
     const size_t maxAllowedCount = 20;
     const size_t expectedCountBeforeRemove = 1;
     StudentClass actualClass(maxAllowedCount);
-    actualClass.addStudent(new StudentMock);
+    actualClass.addStudent(std::make_unique<StudentMock>());
     QCOMPARE(actualClass.count(), expectedCountBeforeRemove);
 
     const size_t whichStudent = 0;
@@ -70,7 +70,7 @@ void TestStudentClass::testRemoveStudent_Error_NoSuchElement() {
     StudentClass actualClass(maxAllowedCount);
 
     for (size_t i = 0; i != expectedCount; ++i) {
-        actualClass.addStudent(new StudentMock);
+        actualClass.addStudent(std::make_unique<StudentMock>());
     }
 
     const size_t whichStudentToRemove = 10;
@@ -83,8 +83,8 @@ void TestStudentClass::testRemoveStudent_Error_NoSuchElement() {
 void TestStudentClass::testGetStudent_OK() {
     const size_t maxAllowedCount = 20;
     StudentClass studentClass(maxAllowedCount);
-    IStudent *expectedStudent = new StudentMock;
-    studentClass.addStudent(expectedStudent);
+    std::unique_ptr<IStudent> expectedStudent(new StudentMock);
+    studentClass.addStudent(std::make_unique<StudentMock>());
 
     const size_t whichStudent = 0;
     const IStudent& actualStudent = studentClass.getStudent(whichStudent);
@@ -103,24 +103,30 @@ void TestStudentClass::testGetStudent_Error_NoSuchElement() {
     QVERIFY(actualCount < whichStudent);
     QVERIFY_EXCEPTION_THROWN(
             studentClass.getStudent(whichStudent),
-                std::out_of_range);
+            std::out_of_range);
 }
 
 void TestStudentClass::testEditStudent_OK() {
     const size_t maxAllowedCount = 20;
     StudentClass studentClass(maxAllowedCount);
 
-    IStudent *expectedStudent_BeforeEdit = new StudentMock({3.0, 3.0, 3.0});
-    studentClass.addStudent(expectedStudent_BeforeEdit);
+    std::unique_ptr<IStudent> tempStudent(new StudentMock({3.0, 3.0, 3.0}));
+    std::unique_ptr<IStudent> expectedStudent_BeforeEdit(
+                new StudentMock(*tempStudent));
+
+    studentClass.addStudent(std::move(tempStudent));
 
     const size_t whichStudent = 0;
-    const IStudent& actualStudent_BeforeEdit = studentClass.getStudent(whichStudent);
+    const IStudent& actualStudent_BeforeEdit =
+            studentClass.getStudent(whichStudent);
     QCOMPARE(actualStudent_BeforeEdit, *expectedStudent_BeforeEdit);
 
-    IStudent *expectedStudent_AfterEdit = new StudentMock({5.0, 5.0, 5.0});
+    tempStudent.reset(new StudentMock({5.0, 5.0, 5.0}));
+    std::unique_ptr<IStudent> expectedStudent_AfterEdit(
+                new StudentMock(*tempStudent));
     QVERIFY(*expectedStudent_BeforeEdit != *expectedStudent_AfterEdit);
 
-    studentClass.editStudent(whichStudent, expectedStudent_AfterEdit);
+    studentClass.editStudent(whichStudent, new StudentMock(*tempStudent));
     const IStudent& actualStudent_AfterEdit = studentClass.getStudent(whichStudent);
     QCOMPARE(actualStudent_AfterEdit, *expectedStudent_AfterEdit);
 }
@@ -144,7 +150,7 @@ void TestStudentClass::testEditStudent_Error_NoSuchElement() {
 void TestStudentClass::testEditStudent_Error_NullPtrStudent() {
     const size_t maxAllowedCount = 20;
     StudentClass studentClass(maxAllowedCount);
-    studentClass.addStudent(new StudentMock);
+    studentClass.addStudent(std::make_unique<StudentMock>());
 
     const size_t whichStudent = 0;
     QVERIFY_EXCEPTION_THROWN(
@@ -158,7 +164,7 @@ void TestStudentClass::testRemoveAll() {
     StudentClass studentClass(maxAllowedCount);
 
     for (size_t i = 0; i !=  expectedCount_BeforeRemoveAll; ++i) {
-        studentClass.addStudent(new StudentMock);
+        studentClass.addStudent(std::make_unique<StudentMock>());
     }
     const size_t actualCount_BeforeRemoveAll = studentClass.count();
     QCOMPARE(actualCount_BeforeRemoveAll, expectedCount_BeforeRemoveAll);

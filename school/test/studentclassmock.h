@@ -11,7 +11,7 @@ public:
     StudentClassMock(const std::initializer_list<double> &studentGrades = {});
     size_t maxAllowedCount() const override;
     size_t count() const override;
-    void addStudent(IStudent *newStudent) override;
+    void addStudent(std::unique_ptr<IStudent> newStudent) override;
     void removeStudent(size_t whichStudent) override;
     const IStudent& getStudent(size_t whichStudent) const override;
     void editStudent(size_t whichStudent, IStudent *newValue) override;

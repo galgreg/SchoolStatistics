@@ -13,7 +13,7 @@ public:
     explicit StudentClass(size_t maximumCount = 20);
     size_t maxAllowedCount() const override;
     size_t count() const override;
-    void addStudent(IStudent *newStudent) override;
+    void addStudent(std::unique_ptr<IStudent> newStudent) override;
     void removeStudent(size_t whichStudent) override;
     const IStudent& getStudent(size_t whichStudent) const override;
     void editStudent(size_t whichStudent, IStudent *newValue) override;

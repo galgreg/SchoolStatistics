@@ -6,6 +6,12 @@ GradesMock::GradesMock(const std::initializer_list<double> &grades) :
 
 }
 
+GradesMock::GradesMock(const IGrades &originalGrades) {
+    for (unsigned i = 0; i < originalGrades.count(); ++i) {
+        mGrades.push_back(originalGrades.getGrade(i));
+    }
+}
+
 void GradesMock::add(double) {
 }
 

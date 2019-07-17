@@ -2,9 +2,8 @@
 #include "ui_confirmdialog.h"
 
 ConfirmDialog::ConfirmDialog(
-        std::shared_ptr<SignalTransmitter> signalTransmitter,
-        QWidget *parent) :
-            QWidget(parent),
+        std::shared_ptr<SignalTransmitter> signalTransmitter) :
+            QWidget(nullptr),
             ui(new Ui::ConfirmDialog),
             mSignalTransmitter(signalTransmitter),
             mCurrentActionString(""),

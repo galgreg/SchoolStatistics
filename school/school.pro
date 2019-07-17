@@ -39,7 +39,9 @@ SOURCES += main.cpp \
     istudentclass.cpp \
     istudent.cpp \
     studentdataform.cpp \
-    signaltransmitter.cpp
+    signaltransmitter.cpp \
+    igrades.cpp \
+    ipersonaldata.cpp
 
 HEADERS += mainwindow.h \
     studentdatawindow.h \

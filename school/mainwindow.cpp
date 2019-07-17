@@ -70,7 +70,7 @@ void MainWindow::doAction(StudentDataAction actionToDo) {
 
 void MainWindow::readDataFromRepository() {
     try {
-        mStudentClass.reset(mDataRepository->read(20, 3));
+        mStudentClass = mDataRepository->read(20, 3);
         ui->errorLabel->setText("");
     } catch (...) {
         mStudentClass.reset(new StudentClass(20));

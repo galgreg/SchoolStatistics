@@ -3,13 +3,13 @@
 #include "personaldata.h"
 #include "grades.h"
 
-Student* StudentFactory::create(
+std::unique_ptr<Student> StudentFactory::create(
         unsigned ID,
         const std::string &firstName,
         const std::string &lastName,
         Gender gender,
         const std::vector<double> &grades) {
-    Student *student = new Student(ID);
+    std::unique_ptr<Student> student(new Student(ID));
 
     std::unique_ptr<IGrades> studentGrades(new Grades(grades.size()));
     for(auto grade : grades) {
@@ -21,7 +21,7 @@ Student* StudentFactory::create(
     return student;
 }
 
-Student *StudentFactory::copy(const IStudent &studentToCopy) {
+std::unique_ptr<Student> StudentFactory::copy(const IStudent &studentToCopy) {
     unsigned studentID = studentToCopy.getID();
     std::string studentFirstName = studentToCopy.getPersonalData().getFirstName();
     std::string studentLastName = studentToCopy.getPersonalData().getLastName();

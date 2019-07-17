@@ -7,11 +7,7 @@
 class IPersonalData {
 public:
     virtual ~IPersonalData() = default;
-    bool operator==(const IPersonalData &dataToCompare) const {
-        return this->getFirstName() == dataToCompare.getFirstName() &&
-        this->getLastName() == dataToCompare.getLastName() &&
-        this->getGender() == dataToCompare.getGender();
-    }
+    bool operator==(const IPersonalData &dataToCompare) const;
 
     virtual std::string getFirstName() const = 0;
     virtual std::string getLastName() const = 0;

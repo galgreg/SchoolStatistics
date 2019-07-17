@@ -1,5 +1,9 @@
 #include "personaldatamock.h"
 
+PersonalDataMock::PersonalDataMock(const IPersonalData &) {
+
+}
+
 std::string PersonalDataMock::getFirstName() const {
     return "";
 }

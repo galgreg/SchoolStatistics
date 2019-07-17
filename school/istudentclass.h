@@ -3,6 +3,7 @@
 
 #include "istudent.h"
 #include <cstddef>
+#include <memory>
 
 class IStudentClass {
 public:
@@ -10,7 +11,7 @@ public:
     bool operator==(const IStudentClass &classToCompare) const;
     virtual size_t maxAllowedCount() const = 0;
     virtual size_t count() const = 0;
-    virtual void addStudent(IStudent *newStudent) = 0;
+    virtual void addStudent(std::unique_ptr<IStudent> newStudent) = 0;
     virtual void removeStudent(size_t whichStudent) = 0;
     virtual const IStudent& getStudent(size_t whichStudent) const = 0;
     virtual void editStudent(size_t whichStudent, IStudent *newValue) = 0;

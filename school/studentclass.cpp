@@ -12,19 +12,17 @@ size_t StudentClass::count() const {
     return mStudents.size();
 }
 
-void StudentClass::addStudent(IStudent *newStudent) {
+void StudentClass::addStudent(std::unique_ptr<IStudent> newStudent) {
     if (newStudent == nullptr) {
         throw std::bad_alloc();
     }
-
-    std::unique_ptr<IStudent> tempPtr(newStudent);
 
     if(count() >= maxAllowedCount()) {
         throw std::out_of_range(
                 "StudentClass::addStudent() : StudentClass overflow");
     }
 
-    mStudents.push_back(std::move(tempPtr));
+    mStudents.push_back(std::move(newStudent));
 }
 
 void StudentClass::removeStudent(size_t whichStudent) {

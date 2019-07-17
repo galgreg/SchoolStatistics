@@ -20,16 +20,15 @@ public:
     friend TestConfirmDialog;
 
     explicit ConfirmDialog(
-        std::shared_ptr<SignalTransmitter> signalTransmitter,
-        QWidget *parent = nullptr);
+        std::shared_ptr<SignalTransmitter> signalTransmitter);
     ~ConfirmDialog() override;
     void showDialog() override;
     void hideDialog() override;
 
     void customizeDialogMessage(
-            StudentDataAction actionToDo,
-            const QString &actionString,
-            const QString &studentName) override;
+        StudentDataAction actionToDo,
+        const QString &actionString,
+        const QString &studentName) override;
 
     QString getCurrentActionString() override;
     QString getCurrentStudentName() override;

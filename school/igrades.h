@@ -6,24 +6,7 @@
 class IGrades {
 public:
     virtual ~IGrades() = default;
-    bool operator==(const IGrades &gradesToCompare) const {
-        bool comparisonResult = true;
-        bool maxAllowedCountIsTheSame =
-                this->maxAllowedCount() == gradesToCompare.maxAllowedCount();
-        comparisonResult = (comparisonResult && maxAllowedCountIsTheSame);
-        bool gradesCountIsTheSame =
-                this->count() == gradesToCompare.count();
-        comparisonResult = (comparisonResult && gradesCountIsTheSame);
-
-        if(comparisonResult) {
-            for (unsigned i = 0; i < this->count(); ++i) {
-                bool gradeIsTheSame =
-                        this->getGrade(i) == gradesToCompare.getGrade(i);
-                comparisonResult = (comparisonResult && gradeIsTheSame);
-            }
-        }
-        return comparisonResult;
-    }
+    bool operator==(const IGrades &gradesToCompare) const;
 
     virtual void add(double grade) = 0;
     virtual void remove(size_t whichGrade) = 0;
