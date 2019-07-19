@@ -16,6 +16,8 @@ public:
     virtual void setLastName(const QString &newLastName) = 0;
     virtual void setGender(Gender newGender) = 0;
 
+    virtual void setMaxGradesCount(size_t newMaxGradesCount) = 0;
+    virtual size_t getMaxGradesCount() = 0;
     virtual void addGrade(double newGrade) = 0;
     virtual void editGrade(size_t whichGrade, double newGrade) = 0;
     virtual void deleteGrade(size_t whichGrade) = 0;

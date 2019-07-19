@@ -14,6 +14,8 @@ public:
 private slots:
     void init();
     void cleanup();
+    void testMaxCounts_Default();
+    void testMaxCounts_SetValues();
     void testReadDataFromRepository();
     void testDeleteStudent();
     void testPrepareStudentDataWidgetToDisplay();

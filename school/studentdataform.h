@@ -30,6 +30,8 @@ public:
     void setLastName(const QString &newLastName) override;
     void setGender(Gender newGender) override;
 
+    void setMaxGradesCount(size_t newMaxGradesCount) override;
+    size_t getMaxGradesCount() override;
     void addGrade(double newGrade) override;
     void editGrade(size_t whichGrade, double newGrade) override;
     void deleteGrade(size_t whichGrade) override;
@@ -51,6 +53,7 @@ private:
     std::unique_ptr<QRegExpValidator> mStudentNameValidator;
     QString mHeader;
     Gender mGender;
+    size_t mMaxGradesCount = 0;
 };
 
 #endif // STUDENTDATAFORM_H

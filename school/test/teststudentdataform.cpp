@@ -10,6 +10,7 @@ TestStudentDataForm::TestStudentDataForm(
 
 void TestStudentDataForm::init() {
     mStudentDataForm.reset(new StudentDataForm);
+    mStudentDataForm->setMaxGradesCount(3);
 }
 
 void TestStudentDataForm::cleanup() {
@@ -95,6 +96,28 @@ void TestStudentDataForm::testSetGender() {
     QCOMPARE(actualUnknownGenderButtonValue, expectedUnknownGenderButtonValue);
 }
 
+void TestStudentDataForm::testSetMaxGradesCount() {
+    std::unique_ptr<StudentDataForm> studentDataForm(new StudentDataForm);
+    const size_t expectedMaxCountBeforeSet = 0;
+    const size_t actualMaxCountBeforeSet_1 =
+            studentDataForm->getMaxGradesCount();
+    const size_t actualMaxCountBeforeSet_2 =
+            studentDataForm->mMaxGradesCount;
+    QCOMPARE(actualMaxCountBeforeSet_1, expectedMaxCountBeforeSet);
+    QCOMPARE(actualMaxCountBeforeSet_2, expectedMaxCountBeforeSet);
+
+    const size_t newMaxGradesCount = 20;
+    studentDataForm->setMaxGradesCount(newMaxGradesCount);
+
+    const size_t expectedMaxCountAfterSet = newMaxGradesCount;
+    const size_t actualMaxCountAfterSet_1 =
+            studentDataForm->getMaxGradesCount();
+    const size_t actualMaxCountAfterSet_2 =
+            studentDataForm->mMaxGradesCount;
+    QCOMPARE(actualMaxCountAfterSet_1, expectedMaxCountAfterSet);
+    QCOMPARE(actualMaxCountAfterSet_2, expectedMaxCountAfterSet);
+}
+
 void TestStudentDataForm::testAddGrade() {
     QList<double> gradesToAdd = {3.5, 4.5, 5.0};
 
@@ -108,6 +131,32 @@ void TestStudentDataForm::testAddGrade() {
 
     auto actualGrades_2 = getGradesFromUiGradesList();
     QCOMPARE(actualGrades_2, expectedGrades);
+}
+
+void TestStudentDataForm::testAddGrade_CannotAddBecauseListIsFull() {
+    mStudentDataForm->setMaxGradesCount(4);
+
+    const QList<double> gradesToAdd = {3.5, 4.5, 5.0, 2.0};
+    for(int i = 0; i < gradesToAdd.size(); ++i) {
+        mStudentDataForm->addGrade(gradesToAdd.at(i));
+    }
+
+    auto expectedGradesBeforeAdd = gradesToAdd;
+    auto actualGradesBeforeAdd_1 = mStudentDataForm->getGrades();
+    QCOMPARE(actualGradesBeforeAdd_1, expectedGradesBeforeAdd);
+
+    auto actualGradesBeforeAdd_2 = getGradesFromUiGradesList();
+    QCOMPARE(actualGradesBeforeAdd_2, expectedGradesBeforeAdd);
+
+    double redundantGrade = 4.0;
+    mStudentDataForm->addGrade(redundantGrade);
+
+    auto expectedGradesAfterAdd = gradesToAdd;
+    auto actualGradesAfterAdd_1 = mStudentDataForm->getGrades();
+    QCOMPARE(actualGradesAfterAdd_1, expectedGradesAfterAdd);
+
+    auto actualGradesAfterAdd_2 = getGradesFromUiGradesList();
+    QCOMPARE(actualGradesAfterAdd_2, expectedGradesAfterAdd);
 }
 
 void TestStudentDataForm::testEditGrade() {

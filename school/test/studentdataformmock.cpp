@@ -29,6 +29,14 @@ void StudentDataFormMock::setGender(Gender newGender) {
     mGender = newGender;
 }
 
+void StudentDataFormMock::setMaxGradesCount(size_t newMaxGradesCount) {
+    mMaxGradesCount = newMaxGradesCount;
+}
+
+size_t StudentDataFormMock::getMaxGradesCount() {
+    return mMaxGradesCount;
+}
+
 void StudentDataFormMock::addGrade(double newGrade) {
     mGrades.append(newGrade);
 }

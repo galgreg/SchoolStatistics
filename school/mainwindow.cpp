@@ -9,7 +9,9 @@ MainWindow::MainWindow(
         std::unique_ptr<IStudentDataWidget> studentDataWidget,
         std::unique_ptr<IConfirmDialog> confirmDialog,
         std::unique_ptr<IStudentDataForm> studentDataForm,
-        std::shared_ptr<SignalTransmitter> signalTransmitter) :
+        std::shared_ptr<SignalTransmitter> signalTransmitter,
+        size_t maxStudentCount,
+        size_t maxGradesCount) :
             QWidget(nullptr),
             ui(new Ui::MainWindow),
             mDataRepository(std::move(dataRepository)),
@@ -17,7 +19,9 @@ MainWindow::MainWindow(
             mStudentDataWidget(std::move(studentDataWidget)),
             mConfirmDialog(std::move(confirmDialog)),
             mStudentDataForm(std::move(studentDataForm)),
-            mSignalTransmitter(signalTransmitter) {
+            mSignalTransmitter(signalTransmitter),
+            mMaxStudentCount(maxStudentCount),
+            mMaxGradesCount(maxGradesCount) {
     ui->setupUi(this);
 
     connect(ui->showStudentButton, &QPushButton::clicked,
@@ -28,6 +32,7 @@ MainWindow::MainWindow(
             this, &MainWindow::beginDeleteTransaction);
     connect(mSignalTransmitter.get(), &SignalTransmitter::transactionCommitted,
             this, &MainWindow::doAction);
+    mStudentDataForm->setMaxGradesCount(mMaxGradesCount);
     readDataFromRepository();
 }
 
@@ -69,10 +74,10 @@ void MainWindow::doAction(StudentDataAction actionToDo) {
 
 void MainWindow::readDataFromRepository() {
     try {
-        mStudentClass = mDataRepository->read(20, 3);
+        mStudentClass = mDataRepository->read(mMaxStudentCount, mMaxGradesCount);
         ui->errorLabel->setText("");
     } catch (...) {
-        mStudentClass.reset(new StudentClass(20));
+        mStudentClass.reset(new StudentClass(mMaxStudentCount));
         ui->studentsNumberValue->setText("0");
         ui->classAverageValue->setText("0.0");
         ui->studentList->clear();

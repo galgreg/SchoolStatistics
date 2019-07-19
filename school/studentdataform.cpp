@@ -65,9 +65,20 @@ void StudentDataForm::setGender(Gender newGender) {
     }
 }
 
+void StudentDataForm::setMaxGradesCount(size_t newMaxGradesCount) {
+    mMaxGradesCount = newMaxGradesCount;
+}
+
+size_t StudentDataForm::getMaxGradesCount() {
+    return mMaxGradesCount;
+}
+
 void StudentDataForm::addGrade(double newGrade) {
-    QString gradeString = QString::number(newGrade, 'f', 1);
-    ui->gradesList->addItem(gradeString);
+    size_t gradesListCount = static_cast<size_t>(ui->gradesList->count());
+    if (gradesListCount < mMaxGradesCount) {
+        QString gradeString = QString::number(newGrade, 'f', 1);
+        ui->gradesList->addItem(gradeString);
+    }
 }
 
 void StudentDataForm::editGrade(size_t whichGrade, double newGrade) {

@@ -59,7 +59,6 @@ std::unique_ptr<IStudentClass> TextFileStorage::read(
                     gender,
                     grades));
             studentClass->addStudent(std::move(newStudent));
-            ++studentID;
         }
         return studentClass;
     } else {

@@ -52,6 +52,55 @@ void TestMainWindow::cleanup() {
     }
 }
 
+void TestMainWindow::testMaxCounts_Default() {
+    std::unique_ptr<MainWindow> tempWindow(
+            new MainWindow(
+                std::make_unique<DataRepositoryMock>(),
+                std::make_unique<StudentDataWidgetMock>(),
+                std::make_unique<ConfirmDialogMock>(),
+                std::make_unique<StudentDataFormMock>(),
+                std::make_shared<SignalTransmitter>()));
+
+    size_t expectedStudentMaxCount = 20;
+    size_t actualStudentMaxCount = tempWindow->mMaxStudentCount;
+    QCOMPARE(actualStudentMaxCount, expectedStudentMaxCount);
+
+    size_t expectedGradesMaxCount = 3;
+    size_t actualGradesMaxCount_1 = tempWindow->mMaxGradesCount;
+    QCOMPARE(actualGradesMaxCount_1, expectedGradesMaxCount);
+
+    size_t actualGradesMaxCount_2 =
+            tempWindow->mStudentDataForm->getMaxGradesCount();
+    QCOMPARE(actualGradesMaxCount_2, expectedGradesMaxCount);
+}
+
+void TestMainWindow::testMaxCounts_SetValues() {
+    size_t windowStudentMaxCount = 13;
+    size_t windowGradesMaxCount = 5;
+
+    std::unique_ptr<MainWindow> tempWindow(
+            new MainWindow(
+                std::make_unique<DataRepositoryMock>(),
+                std::make_unique<StudentDataWidgetMock>(),
+                std::make_unique<ConfirmDialogMock>(),
+                std::make_unique<StudentDataFormMock>(),
+                std::make_shared<SignalTransmitter>(),
+                windowStudentMaxCount,
+                windowGradesMaxCount));
+
+    size_t expectedStudentMaxCount = windowStudentMaxCount;
+    size_t actualStudentMaxCount = tempWindow->mMaxStudentCount;
+    QCOMPARE(actualStudentMaxCount, expectedStudentMaxCount);
+
+    size_t expectedGradesMaxCount = windowGradesMaxCount;
+    size_t actualGradesMaxCount_1 = tempWindow->mMaxGradesCount;
+    QCOMPARE(actualGradesMaxCount_1, expectedGradesMaxCount);
+
+    size_t actualGradesMaxCount_2 =
+            tempWindow->mStudentDataForm->getMaxGradesCount();
+    QCOMPARE(actualGradesMaxCount_2, expectedGradesMaxCount);
+}
+
 void TestMainWindow::testReadDataFromRepository() {
     mMainWindow->readDataFromRepository();
     const IStudentClass& expectedStudentClass = *mStudentClassData;

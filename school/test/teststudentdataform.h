@@ -20,13 +20,16 @@ private slots:
     void testSetLastName();
     void testSetGender_data();
     void testSetGender();
+    void testSetMaxGradesCount();
     void testAddGrade();
+    void testAddGrade_CannotAddBecauseListIsFull();
     void testEditGrade();
     void testDeleteGrade();
     void testDeleteAllGrades();
 
     void testStudentNameValidation_data();
     void testStudentNameValidation();
+
     void testAddGradeToList_data();
     void testAddGradeToList();
     void testEditGradeOnGradesList_data();

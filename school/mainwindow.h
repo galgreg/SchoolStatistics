@@ -29,7 +29,9 @@ public:
         std::unique_ptr<IStudentDataWidget> studentDataWidget,
         std::unique_ptr<IConfirmDialog> confirmDialog,
         std::unique_ptr<IStudentDataForm> studentDataForm,
-        std::shared_ptr<SignalTransmitter> signalTransmitter);
+        std::shared_ptr<SignalTransmitter> signalTransmitter,
+        size_t maxStudentCount = 20,
+        size_t maxGradesCount = 3);
     ~MainWindow();
 
 private slots:
@@ -55,6 +57,7 @@ private:
     std::unique_ptr<IConfirmDialog> mConfirmDialog;
     std::unique_ptr<IStudentDataForm> mStudentDataForm;
     std::shared_ptr<SignalTransmitter> mSignalTransmitter;
+    size_t mMaxStudentCount, mMaxGradesCount;
 };
 
 #endif // MAINWINDOW_H
