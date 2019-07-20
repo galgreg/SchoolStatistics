@@ -349,9 +349,9 @@
       </spacer>
      </item>
      <item>
-      <widget class="QPushButton" name="okButton">
+      <widget class="QPushButton" name="submitButton">
        <property name="text">
-        <string>OK</string>
+        <string>Submit</string>
        </property>
       </widget>
      </item>

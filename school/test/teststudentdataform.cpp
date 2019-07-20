@@ -1,5 +1,6 @@
 #include "teststudentdataform.h"
 #include "ui_studentdataform.h"
+#include "notificationpopupmock.h"
 
 TestStudentDataForm::TestStudentDataForm(
         unsigned &passed,
@@ -9,7 +10,8 @@ TestStudentDataForm::TestStudentDataForm(
 }
 
 void TestStudentDataForm::init() {
-    mStudentDataForm.reset(new StudentDataForm);
+    mStudentDataForm.reset(
+            new StudentDataForm(std::make_unique<NotificationPopupMock>()));
     mStudentDataForm->setMaxGradesCount(3);
 }
 
@@ -97,7 +99,8 @@ void TestStudentDataForm::testSetGender() {
 }
 
 void TestStudentDataForm::testSetMaxGradesCount() {
-    std::unique_ptr<StudentDataForm> studentDataForm(new StudentDataForm);
+    std::unique_ptr<StudentDataForm> studentDataForm(
+            new StudentDataForm(std::make_unique<NotificationPopupMock>()));
     const size_t expectedMaxCountBeforeSet = 0;
     const size_t actualMaxCountBeforeSet_1 =
             studentDataForm->getMaxGradesCount();
@@ -353,6 +356,59 @@ void TestStudentDataForm::testDeleteGradeFromGradesList() {
     QList<double> expectedGradesListAfterDelete = {5.0, 4.0};
     QList<double> actualGradesListAfterDelete = getGradesFromUiGradesList();
     QCOMPARE(actualGradesListAfterDelete, expectedGradesListAfterDelete);
+}
+
+void TestStudentDataForm::testTrySubmitForm_InvalidInputs_data() {
+    QTest::addColumn<QString>("firstNameString");
+    QTest::addColumn<QString>("lastNameString");
+    QTest::addColumn<QPoint>("globalAnchorPosition");
+    QTest::addColumn<int>("anchorWidth");
+    QTest::addColumn<int>("anchorHeight");
+
+    QTest::newRow("Invalid first name input")
+            << "" << "Kowalski"
+            << mStudentDataForm->ui->firstNameLineEdit->mapFromGlobal(QPoint(0, 0))
+            << mStudentDataForm->ui->firstNameLineEdit->width()
+            << mStudentDataForm->ui->firstNameLineEdit->height();
+    QTest::newRow("Invalid last name input")
+            << "Jan" << ""
+            << mStudentDataForm->ui->lastNameLineEdit->mapFromGlobal(QPoint(0, 0))
+            << mStudentDataForm->ui->lastNameLineEdit->width()
+            << mStudentDataForm->ui->lastNameLineEdit->height();
+    QTest::newRow("Both invalid inputs")
+            << "" << ""
+            << mStudentDataForm->ui->firstNameLineEdit->mapFromGlobal(QPoint(0, 0))
+            << mStudentDataForm->ui->firstNameLineEdit->width()
+            << mStudentDataForm->ui->firstNameLineEdit->height();
+}
+
+void TestStudentDataForm::testTrySubmitForm_InvalidInputs() {
+    QFETCH(QString, firstNameString);
+    mStudentDataForm->ui->firstNameLineEdit->setText(firstNameString);
+    QFETCH(QString, lastNameString);
+    mStudentDataForm->ui->lastNameLineEdit->setText(lastNameString);
+
+    mStudentDataForm->trySubmitForm();
+
+    QString expectedPopupContent =
+            "Invalid input, it must begin from upper case "
+            "and have minimum 3 chars!";
+    QString actualPopupContent =
+            mStudentDataForm->mNotificationPopup->getContent();
+    QCOMPARE(actualPopupContent, expectedPopupContent);
+
+    QFETCH(QPoint, globalAnchorPosition);
+    QFETCH(int, anchorWidth);
+    QFETCH(int, anchorHeight);
+
+    const QPoint expectedPopupPosition =
+            QPoint(
+                globalAnchorPosition.x() - (anchorWidth / 2),
+                globalAnchorPosition.y() + anchorHeight);
+
+    const QPoint actualPopupPosition =
+            mStudentDataForm->mNotificationPopup->getPopupPosition();
+    QCOMPARE(actualPopupPosition, expectedPopupPosition);
 }
 
 QList<double> TestStudentDataForm::getGradesFromUiGradesList() {
