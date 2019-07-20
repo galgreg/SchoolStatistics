@@ -41,7 +41,8 @@ SOURCES += main.cpp \
     studentdataform.cpp \
     signaltransmitter.cpp \
     igrades.cpp \
-    ipersonaldata.cpp
+    ipersonaldata.cpp \
+    notificationpopup.cpp
 
 HEADERS += mainwindow.h \
     studentdatawindow.h \
@@ -65,7 +66,8 @@ HEADERS += mainwindow.h \
     signaltransmitter.h \
     istudentdataform.h \
     studentdataaction.h \
-    inotificationpopup.h
+    inotificationpopup.h \
+    notificationpopup.h
 
 FORMS += mainwindow.ui \
     studentdatawindow.ui \
@@ -100,7 +102,8 @@ test {
     test/studentdataformmock.h \
     test/teststudentdataform.h \
     test/datarepositorymock.h \
-    test/notificationpopupmock.h
+    test/notificationpopupmock.h \
+    test/testnotificationpopup.h
 
 
     SOURCES += test/test_main.cpp \
@@ -125,7 +128,8 @@ test {
     test/studentdataformmock.cpp \
     test/teststudentdataform.cpp \
     test/datarepositorymock.cpp \
-    test/notificationpopupmock.cpp
+    test/notificationpopupmock.cpp \
+    test/testnotificationpopup.cpp
 
 } else {
     message(Normal build)
