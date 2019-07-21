@@ -11,7 +11,6 @@
 #include "teststudentdatawindow.h"
 #include "testsignaltransmitter.h"
 #include "teststudentdataform.h"
-#include "testnotificationpopup.h"
 
 int main(int argc, char** argv) {
     QApplication app(argc, argv);
@@ -43,8 +42,6 @@ int main(int argc, char** argv) {
     result |= QTest::qExec(&testSignalTransmitter, argc, argv);
     TestStudentDataForm testStudentDataForm(passedCounter, failedCounter);
     result |= QTest::qExec(&testStudentDataForm, argc, argv);
-    TestNotificationPopup testNotificationPopup(passedCounter, failedCounter);
-    result |= QTest::qExec(&testNotificationPopup, argc, argv);
 
     qDebug() << QString("Totals: %1 passed, %2 failed.")
                 .arg(passedCounter)

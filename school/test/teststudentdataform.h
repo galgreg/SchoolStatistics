@@ -36,8 +36,6 @@ private slots:
     void testEditGradeOnGradesList();
     void testDeleteGradeFromGradesList();
 
-    void testTrySubmitForm_InvalidInputs_data();
-    void testTrySubmitForm_InvalidInputs();
 private:
     QList<double> getGradesFromUiGradesList();
 

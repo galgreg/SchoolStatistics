@@ -3,11 +3,10 @@
 #include <QRegExp>
 #include <QRegExpValidator>
 
-StudentDataForm::StudentDataForm(std::unique_ptr<INotificationPopup> popup) :
+StudentDataForm::StudentDataForm() :
         QWidget(nullptr),
         ui(new Ui::StudentDataForm),
         mStudentNameValidator(nullptr),
-        mNotificationPopup(std::move(popup)),
         mGender(UNKNOWN) {
     ui->setupUi(this);
     QRegExp studentNameRegex("^[A-Z][a-z]{2,}$");
@@ -22,8 +21,6 @@ StudentDataForm::StudentDataForm(std::unique_ptr<INotificationPopup> popup) :
             this, &StudentDataForm::editGradeOnGradesList);
     connect(ui->deleteGradeButton, &QPushButton::clicked,
             this, &StudentDataForm::deleteGradeFromGradesList);
-    connect(ui->submitButton, &QPushButton::clicked,
-            this, &StudentDataForm::trySubmitForm);
 }
 
 StudentDataForm::~StudentDataForm() {
@@ -143,34 +140,4 @@ void StudentDataForm::deleteGradeFromGradesList() {
     if (indexOfSelectedGrade > -1) {
         deleteGrade(static_cast<size_t>(indexOfSelectedGrade));
     }
-}
-
-void StudentDataForm::trySubmitForm() {
-    QString popupContent = "Invalid input, it must begin from upper case "
-                            "and have minimum 3 chars!";
-
-    if (ui->firstNameLineEdit->hasAcceptableInput() == false) {
-        mNotificationPopup->setContent(popupContent);
-        const QPoint newPopupPosition =
-                computePopupPosition(*(ui->firstNameLineEdit));
-        mNotificationPopup->setPopupPosition(newPopupPosition);
-        mNotificationPopup->showPopup();
-    } else if (ui->lastNameLineEdit->hasAcceptableInput() == false) {
-        mNotificationPopup->setContent(popupContent);
-        const QPoint newPopupPosition =
-                computePopupPosition(*(ui->lastNameLineEdit));
-        mNotificationPopup->setPopupPosition(newPopupPosition);
-        mNotificationPopup->showPopup();
-    }
-}
-
-QPoint StudentDataForm::computePopupPosition(const QLineEdit &popupAnchor) {
-    const QPoint anchorGlobalPosition = popupAnchor.mapFromGlobal(QPoint(0, 0));
-    const int anchorWidth = popupAnchor.width();
-    const int anchorHeight = popupAnchor.height();
-    const QPoint newPopupPosition =
-            QPoint(
-                anchorGlobalPosition.x() - (anchorWidth / 2),
-                anchorGlobalPosition.y() + anchorHeight);
-    return newPopupPosition;
 }

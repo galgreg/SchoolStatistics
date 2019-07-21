@@ -2,7 +2,6 @@
 #define STUDENTDATAFORM_H
 
 #include "istudentdataform.h"
-#include "inotificationpopup.h"
 #include <QWidget>
 #include <memory>
 
@@ -21,7 +20,7 @@ class StudentDataForm : public QWidget, public IStudentDataForm
 public:
     friend TestStudentDataForm;
 
-    explicit StudentDataForm(std::unique_ptr<INotificationPopup> popup);
+    StudentDataForm();
     ~StudentDataForm() override;
 
     void showForm() override;
@@ -50,14 +49,9 @@ private slots:
     void editGradeOnGradesList();
     void deleteGradeFromGradesList();
 
-    void trySubmitForm();
-
 private:
-    QPoint computePopupPosition(const QLineEdit &popupAnchor);
-
     std::unique_ptr<Ui::StudentDataForm> ui;
     std::unique_ptr<QRegExpValidator> mStudentNameValidator;
-    std::unique_ptr<INotificationPopup> mNotificationPopup;
     QString mHeader;
     Gender mGender;
     size_t mMaxGradesCount = 0;
