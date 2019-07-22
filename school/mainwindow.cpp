@@ -2,6 +2,7 @@
 #include "classstatistics.h"
 #include "ui_mainwindow.h"
 #include "studentclass.h"
+#include "studentfactory.h"
 #include "textfilestorage.h"
 
 MainWindow::MainWindow(
@@ -22,7 +23,7 @@ MainWindow::MainWindow(
             mSignalTransmitter(signalTransmitter),
             mMaxStudentCount(maxStudentCount),
             mMaxGradesCount(maxGradesCount),
-            mNextStudentID(0) {
+            mNextStudentID(1) {
     ui->setupUi(this);
 
     connect(ui->showStudentButton, &QPushButton::clicked,
@@ -33,6 +34,8 @@ MainWindow::MainWindow(
             this, &MainWindow::beginDeleteTransaction);
     connect(mSignalTransmitter.get(), &SignalTransmitter::transactionCommitted,
             this, &MainWindow::doAction);
+    connect(mSignalTransmitter.get(), &SignalTransmitter::informAboutAddStudentRequest,
+            this, &MainWindow::beginAddTransaction);
     mStudentDataForm->setMaxGradesCount(mMaxGradesCount);
     readDataFromRepository();
 }
@@ -66,11 +69,55 @@ void MainWindow::showAddNewStudentForm() {
 
 void MainWindow::doAction(StudentDataAction actionToDo) {
     if (actionToDo == DELETE_STUDENT) {
-        int indexOfStudentToDelete = ui->studentList->currentRow();
-        if (indexOfStudentToDelete > -1) {
-            deleteStudent(static_cast<size_t>(indexOfStudentToDelete));
-        }
+        doDeleteAction();
+    } else if (actionToDo == ADD_STUDENT) {
+        doAddAction();
     }
+}
+
+void MainWindow::beginAddTransaction() {
+    StudentDataAction actionToConfirm = ADD_STUDENT;
+
+    QString studentName =
+            QString("%1 %2")
+            .arg(mStudentDataForm->getFirstName())
+            .arg(mStudentDataForm->getLastName());
+    prepareConfirmDialogToDisplay(actionToConfirm, studentName);
+    mConfirmDialog->showDialog();
+}
+
+void MainWindow::doDeleteAction() {
+    int indexOfStudentToDelete = ui->studentList->currentRow();
+    if (indexOfStudentToDelete > -1) {
+        deleteStudent(static_cast<size_t>(indexOfStudentToDelete));
+    }
+}
+
+void MainWindow::doAddAction() {
+    unsigned studentID = mNextStudentID++;
+    std::string studentFirstName =
+            mStudentDataForm->getFirstName().toStdString();
+    std::string studentLastName =
+            mStudentDataForm->getLastName().toStdString();
+    Gender studentGender = mStudentDataForm->getGender();
+
+    auto tempGrades = mStudentDataForm->getGrades();
+    std::vector<double> studentGrades;
+    for(int i = 0; i < tempGrades.size(); ++i) {
+        studentGrades.push_back(tempGrades.at(i));
+    }
+    std::unique_ptr<IStudent> newStudent(
+            StudentFactory::create(
+                    studentID,
+                    studentFirstName,
+                    studentLastName,
+                    studentGender,
+                    studentGrades));
+
+    mStudentClass->addStudent(std::move(newStudent));
+    mDataRepository->write(*mStudentClass);
+    readDataFromRepository();
+    mStudentDataForm->hideForm();
 }
 
 void MainWindow::readDataFromRepository() {
@@ -104,7 +151,7 @@ void MainWindow::readDataFromRepository() {
                 personalData.getFirstName() + " " + personalData.getLastName();
         studentList->addItem(QString::fromStdString(studentFullName));
 
-        if (mNextStudentID < student.getID()) {
+        if (mNextStudentID <= student.getID()) {
            mNextStudentID = student.getID() + 1;
         }
     }

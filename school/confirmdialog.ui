@@ -80,7 +80,7 @@
      <item>
       <widget class="QPushButton" name="abortButton">
        <property name="text">
-        <string>Abort</string>
+        <string>Cancel</string>
        </property>
       </widget>
      </item>

@@ -9,7 +9,8 @@ TestStudentDataForm::TestStudentDataForm(
 }
 
 void TestStudentDataForm::init() {
-    mStudentDataForm.reset(new StudentDataForm);
+    mStudentDataForm.reset(
+            new StudentDataForm(std::make_shared<SignalTransmitter>()));
     mStudentDataForm->setMaxGradesCount(3);
 }
 
@@ -97,7 +98,8 @@ void TestStudentDataForm::testSetGender() {
 }
 
 void TestStudentDataForm::testSetMaxGradesCount() {
-    std::unique_ptr<StudentDataForm> studentDataForm(new StudentDataForm);
+    std::unique_ptr<StudentDataForm> studentDataForm(
+                new StudentDataForm(std::make_shared<SignalTransmitter>()));
     const size_t expectedMaxCountBeforeSet = 0;
     const size_t actualMaxCountBeforeSet_1 =
             studentDataForm->getMaxGradesCount();
@@ -382,6 +384,17 @@ void TestStudentDataForm::testTryToSubmitForm_InvalidInput() {
     QString actualNotificationString =
             mStudentDataForm->ui->notificationLabel->text();
     QCOMPARE(actualNotificationString, expectedNotificationString);
+}
+
+void TestStudentDataForm::testTryToSubmitForm_ValidInput() {
+    mStudentDataForm->ui->firstNameLineEdit->setText("Jan");
+    mStudentDataForm->ui->lastNameLineEdit->setText("Kowalski");
+
+    QSignalSpy signalSpy(
+            mStudentDataForm.get(),
+            &StudentDataForm::requestAddStudent);
+    mStudentDataForm->tryToSubmitForm();
+    QCOMPARE(signalSpy.count(), 1);
 }
 
 void TestStudentDataForm::testClearNotificationLabel() {

@@ -18,7 +18,7 @@ int main(int argc, char *argv[])
             std::make_unique<TextFileStorage>(PATH_TO_STORAGE.toStdString()),
             std::make_unique<StudentDataWindow>(),
             std::make_unique<ConfirmDialog>(signalTransmitter),
-            std::make_unique<StudentDataForm>(),
+            std::make_unique<StudentDataForm>(signalTransmitter),
             signalTransmitter);
     w.show();
     return a.exec();

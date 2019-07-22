@@ -52,6 +52,20 @@ void TestMainWindow::cleanup() {
     }
 }
 
+void TestMainWindow::testInitialState_WhenRepositoryIsEmpty() {
+    std::unique_ptr<MainWindow> tempWindow(
+            new MainWindow(
+                std::make_unique<DataRepositoryMock>(),
+                std::make_unique<StudentDataWidgetMock>(),
+                std::make_unique<ConfirmDialogMock>(),
+                std::make_unique<StudentDataFormMock>(),
+                std::make_shared<SignalTransmitter>()));
+
+    unsigned expectedInitialNextStudentID = 1;
+    unsigned actualInitialNextStudentID = tempWindow->mNextStudentID;
+    QCOMPARE(actualInitialNextStudentID, expectedInitialNextStudentID);
+}
+
 void TestMainWindow::testMaxCounts_Default() {
     std::unique_ptr<MainWindow> tempWindow(
             new MainWindow(
@@ -221,6 +235,125 @@ void TestMainWindow::testDoAction_DeleteStudent() {
     const auto& expectedStudentClassAfterDelete = *mStudentClassData;
     const auto& actualStudentClassAfterDelete = *mMainWindow->mStudentClass;
     QCOMPARE(actualStudentClassAfterDelete, expectedStudentClassAfterDelete);
+}
+
+void TestMainWindow::testDoAction_AddStudent() {
+    unsigned expectedStudentIdBeforeAdd = 4;
+    QString firstName = "Jack";
+    mMainWindow->mStudentDataForm->setFirstName(firstName);
+    QString lastName = "Stone";
+    mMainWindow->mStudentDataForm->setLastName(lastName);
+    Gender studentGender = MALE;
+    mMainWindow->mStudentDataForm->setGender(studentGender);
+    std::vector<double> studentGrades = {4.0, 5.0, 3.0};
+    for (auto grade : studentGrades) {
+        mMainWindow->mStudentDataForm->addGrade(grade);
+    }
+
+    mMainWindow->doAction(ADD_STUDENT);
+
+    size_t expectedStudentClassCount = 4;
+    size_t actualStudentClassCount_1 = mMainWindow->mStudentClass->count();
+    QCOMPARE(expectedStudentClassCount, actualStudentClassCount_1);
+
+    size_t actualStudentClassCount_2 =
+            static_cast<size_t>(mMainWindow->ui->studentList->count());
+    QCOMPARE(expectedStudentClassCount, actualStudentClassCount_2);
+
+    size_t actualStudentClassCount_3 =
+            mMainWindow->ui->studentsNumberValue->text().toUInt();
+    QCOMPARE(expectedStudentClassCount, actualStudentClassCount_3);
+
+    std::unique_ptr<IStudent> expectedNewStudent(
+                StudentFactory::create(
+                        expectedStudentIdBeforeAdd,
+                        firstName.toStdString(),
+                        lastName.toStdString(),
+                        studentGender,
+                        studentGrades));
+    const IStudent& actualNewStudent = mMainWindow->mStudentClass->getStudent(3);
+    QCOMPARE(actualNewStudent, *expectedNewStudent);
+
+    unsigned expectedNextStudentIdAfterAdd = expectedStudentIdBeforeAdd + 1;
+    unsigned actualNextStudentIdAfterAdd = mMainWindow->mNextStudentID;
+    QCOMPARE(actualNextStudentIdAfterAdd, expectedNextStudentIdAfterAdd);
+}
+
+void TestMainWindow::testDoDeleteAction() {
+    size_t studentIndex = 1;
+    mMainWindow->ui->studentList->setCurrentRow(static_cast<int>(studentIndex));
+
+    const auto& expectedStudentClassBeforeDelete = *mStudentClassData;
+    const auto& actualStudentClassBeforeDelete = *mMainWindow->mStudentClass;
+    QCOMPARE(actualStudentClassBeforeDelete, expectedStudentClassBeforeDelete);
+
+    mStudentClassData->removeStudent(studentIndex);
+    mMainWindow->doDeleteAction();
+
+    const auto& expectedStudentClassAfterDelete = *mStudentClassData;
+    const auto& actualStudentClassAfterDelete = *mMainWindow->mStudentClass;
+    QCOMPARE(actualStudentClassAfterDelete, expectedStudentClassAfterDelete);
+}
+
+void TestMainWindow::testDoAddAction() {
+    unsigned expectedStudentIdBeforeAdd = 4;
+    QString firstName = "Jack";
+    mMainWindow->mStudentDataForm->setFirstName(firstName);
+    QString lastName = "Stone";
+    mMainWindow->mStudentDataForm->setLastName(lastName);
+    Gender studentGender = MALE;
+    mMainWindow->mStudentDataForm->setGender(studentGender);
+    std::vector<double> studentGrades = {4.0, 5.0, 3.0};
+    for (auto grade : studentGrades) {
+        mMainWindow->mStudentDataForm->addGrade(grade);
+    }
+
+    mMainWindow->doAddAction();
+
+    size_t expectedStudentClassCount = 4;
+    size_t actualStudentClassCount_1 = mMainWindow->mStudentClass->count();
+    QCOMPARE(expectedStudentClassCount, actualStudentClassCount_1);
+
+    size_t actualStudentClassCount_2 =
+            static_cast<size_t>(mMainWindow->ui->studentList->count());
+    QCOMPARE(expectedStudentClassCount, actualStudentClassCount_2);
+
+    size_t actualStudentClassCount_3 =
+            mMainWindow->ui->studentsNumberValue->text().toUInt();
+    QCOMPARE(expectedStudentClassCount, actualStudentClassCount_3);
+
+    std::unique_ptr<IStudent> expectedNewStudent(
+                StudentFactory::create(
+                        expectedStudentIdBeforeAdd,
+                        firstName.toStdString(),
+                        lastName.toStdString(),
+                        studentGender,
+                        studentGrades));
+    const IStudent& actualNewStudent = mMainWindow->mStudentClass->getStudent(3);
+    QCOMPARE(actualNewStudent, *expectedNewStudent);
+
+    unsigned expectedNextStudentIdAfterAdd = expectedStudentIdBeforeAdd + 1;
+    unsigned actualNextStudentIdAfterAdd = mMainWindow->mNextStudentID;
+    QCOMPARE(actualNextStudentIdAfterAdd, expectedNextStudentIdAfterAdd);
+}
+
+void TestMainWindow::testBeginAddTransaction() {
+    QString firstName = "Jan";
+    mMainWindow->mStudentDataForm->setFirstName(firstName);
+    QString lastName = "Kowalski";
+    mMainWindow->mStudentDataForm->setLastName(lastName);
+
+    mMainWindow->beginAddTransaction();
+
+    QString expectedActionString = "add";
+    QString actualActionString =
+            mMainWindow->mConfirmDialog->getCurrentActionString();
+    QCOMPARE(actualActionString, expectedActionString);
+
+    QString expectedStudentName = QString("%1 %2").arg(firstName).arg(lastName);
+    QString actualStudentName =
+            mMainWindow->mConfirmDialog->getCurrentStudentName();
+    QCOMPARE(actualStudentName, expectedStudentName);
 }
 
 void TestMainWindow::testPrepareStudentDataFormToDisplay_AddStudent() {

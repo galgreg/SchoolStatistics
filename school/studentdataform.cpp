@@ -3,11 +3,12 @@
 #include <QRegExp>
 #include <QRegExpValidator>
 
-StudentDataForm::StudentDataForm() :
-        QWidget(nullptr),
-        ui(new Ui::StudentDataForm),
-        mStudentNameValidator(nullptr),
-        mGender(UNKNOWN) {
+StudentDataForm::StudentDataForm(
+        std::shared_ptr<SignalTransmitter> signalTransmitter) :
+            QWidget(nullptr),
+            ui(new Ui::StudentDataForm),
+            mStudentNameValidator(nullptr),
+            mSignalTransmitter(signalTransmitter) {
     ui->setupUi(this);
     QRegExp studentNameRegex("^[A-Z][a-z]{2,}$");
     mStudentNameValidator.reset(new QRegExpValidator(studentNameRegex, nullptr));
@@ -27,6 +28,8 @@ StudentDataForm::StudentDataForm() :
             this, &StudentDataForm::clearNotificationLabel);
     connect(ui->lastNameLineEdit, &QLineEdit::textEdited,
             this, &StudentDataForm::clearNotificationLabel);
+    connect(this, &StudentDataForm::requestAddStudent,
+            mSignalTransmitter.get(), &SignalTransmitter::informAboutAddStudentRequest);
 }
 
 StudentDataForm::~StudentDataForm() {
@@ -60,8 +63,6 @@ void StudentDataForm::setLastName(const QString &newLastName) {
 }
 
 void StudentDataForm::setGender(Gender newGender) {
-    mGender = newGender;
-
     if (newGender == MALE) {
         ui->maleButton->setChecked(true);
     } else if (newGender == FEMALE) {
@@ -113,7 +114,13 @@ QString StudentDataForm::getLastName() {
 }
 
 Gender StudentDataForm::getGender() {
-    return mGender;
+    if (ui->maleButton->isChecked()) {
+        return MALE;
+    } else if (ui->femaleButton->isChecked()) {
+        return FEMALE;
+    } else {
+        return UNKNOWN;
+    }
 }
 
 QList<double> StudentDataForm::getGrades() {
@@ -164,6 +171,7 @@ void StudentDataForm::tryToSubmitForm() {
         ui->notificationLabel->setText(notificationString);
         return;
     }
+    emit requestAddStudent();
 }
 
 void StudentDataForm::clearNotificationLabel() {

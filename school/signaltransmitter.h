@@ -12,6 +12,7 @@ public:
 
 signals:
     void transactionCommitted(StudentDataAction);
+    void informAboutAddStudentRequest();
 
 public slots:
     void transmitSignal(StudentDataAction action);

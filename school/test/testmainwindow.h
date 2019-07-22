@@ -14,6 +14,7 @@ public:
 private slots:
     void init();
     void cleanup();
+    void testInitialState_WhenRepositoryIsEmpty();
     void testMaxCounts_Default();
     void testMaxCounts_SetValues();
     void testReadDataFromRepository();
@@ -22,6 +23,11 @@ private slots:
     void testPrepareConfirmDialogToDisplay_data();
     void testPrepareConfirmDialogToDisplay();
     void testDoAction_DeleteStudent();
+    void testDoAction_AddStudent();
+    void testDoDeleteAction();
+    void testDoAddAction();
+
+    void testBeginAddTransaction();
 
     void testPrepareStudentDataFormToDisplay_AddStudent();
 private:

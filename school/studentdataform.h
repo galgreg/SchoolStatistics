@@ -2,6 +2,7 @@
 #define STUDENTDATAFORM_H
 
 #include "istudentdataform.h"
+#include "signaltransmitter.h"
 #include <QWidget>
 #include <memory>
 
@@ -20,7 +21,8 @@ class StudentDataForm : public QWidget, public IStudentDataForm
 public:
     friend TestStudentDataForm;
 
-    StudentDataForm();
+    explicit StudentDataForm(
+            std::shared_ptr<SignalTransmitter> signalTransmitter);
     ~StudentDataForm() override;
 
     void showForm() override;
@@ -44,6 +46,9 @@ public:
     Gender getGender() override;
     QList<double> getGrades() override;
 
+signals:
+    void requestAddStudent();
+
 private slots:
     void addGradeToList();
     void editGradeOnGradesList();
@@ -54,8 +59,8 @@ private slots:
 private:
     std::unique_ptr<Ui::StudentDataForm> ui;
     std::unique_ptr<QRegExpValidator> mStudentNameValidator;
+    std::shared_ptr<SignalTransmitter> mSignalTransmitter;
     QString mHeader;
-    Gender mGender;
     size_t mMaxGradesCount = 0;
 };
 
