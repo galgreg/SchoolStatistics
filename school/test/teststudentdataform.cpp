@@ -31,6 +31,25 @@ void TestStudentDataForm::testShowAndHideForm() {
     QVERIFY(isFormVisible == false);
 }
 
+void TestStudentDataForm::testSetFormAction_data() {
+    QTest::addColumn<StudentDataAction>("newFormAction");
+
+    QTest::newRow("Set ADD_STUDENT action") << ADD_STUDENT;
+    QTest::newRow("Set EDIT_STUDENT action") << EDIT_STUDENT;
+    QTest::newRow("Set DELETE_STUDENT action") << DELETE_STUDENT;
+}
+
+void TestStudentDataForm::testSetFormAction() {
+    QFETCH(StudentDataAction, newFormAction);
+    mStudentDataForm->setFormAction(newFormAction);
+    StudentDataAction expectedNewAction = newFormAction;
+    StudentDataAction actualNewAction_1 = mStudentDataForm->getFormAction();
+    QCOMPARE(actualNewAction_1, expectedNewAction);
+
+    StudentDataAction actualNewAction_2 = mStudentDataForm->mFormAction;
+    QCOMPARE(actualNewAction_2, expectedNewAction);
+}
+
 void TestStudentDataForm::testSetHeader() {
     QString expectedHeader = "Add Student";
     mStudentDataForm->setHeader(expectedHeader);
@@ -387,14 +406,22 @@ void TestStudentDataForm::testTryToSubmitForm_InvalidInput() {
 }
 
 void TestStudentDataForm::testTryToSubmitForm_ValidInput() {
+    StudentDataAction newFormAction = ADD_STUDENT;
+    mStudentDataForm->setFormAction(newFormAction);
     mStudentDataForm->ui->firstNameLineEdit->setText("Jan");
     mStudentDataForm->ui->lastNameLineEdit->setText("Kowalski");
 
     QSignalSpy signalSpy(
             mStudentDataForm.get(),
-            &StudentDataForm::requestAddStudent);
+            &StudentDataForm::requestAction);
     mStudentDataForm->tryToSubmitForm();
     QCOMPARE(signalSpy.count(), 1);
+
+    auto signalArguments = signalSpy.at(0);
+    StudentDataAction expectedFormAction = newFormAction;
+    StudentDataAction actualFormAction =
+            signalArguments.takeFirst().value<StudentDataAction>();
+    QCOMPARE(actualFormAction, expectedFormAction);
 }
 
 void TestStudentDataForm::testClearNotificationLabel() {

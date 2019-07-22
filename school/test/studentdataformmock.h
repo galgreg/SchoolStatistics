@@ -8,6 +8,8 @@ public:
     StudentDataFormMock();
     void showForm() override;
     void hideForm() override;
+    void setFormAction(StudentDataAction newFormAction) override;
+    StudentDataAction getFormAction() override;
 
     void setHeader(const QString &newHeader) override;
     void setFirstName(const QString &newFirstName) override;
@@ -32,6 +34,7 @@ private:
     Gender mGender;
     QList<double> mGrades;
     size_t mMaxGradesCount = 0;
+    StudentDataAction mFormAction;
 };
 
 #endif // STUDENTDATAFORMMOCK_H

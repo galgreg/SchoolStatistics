@@ -24,10 +24,12 @@ private slots:
     void testPrepareConfirmDialogToDisplay();
     void testDoAction_DeleteStudent();
     void testDoAction_AddStudent();
+    void testDoAction_EditStudent();
     void testDoDeleteAction();
     void testDoAddAction();
+    void testDoEditAction();
 
-    void testBeginAddTransaction();
+    void testBeginFormTransaction_AddStudent();
     void testPrepareStudentDataFormToDisplay_AddStudent();
     void testPrepareStudentDataFormToDisplay_EditStudent();
     void testShowEditStudentForm();

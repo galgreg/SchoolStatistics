@@ -27,6 +27,8 @@ public:
 
     void showForm() override;
     void hideForm() override;
+    void setFormAction(StudentDataAction newFormAction) override;
+    StudentDataAction getFormAction() override;
 
     void setHeader(const QString &newHeader) override;
     void setFirstName(const QString &newFirstName) override;
@@ -47,7 +49,7 @@ public:
     QList<double> getGrades() override;
 
 signals:
-    void requestAddStudent();
+    void requestAction(StudentDataAction);
 
 private slots:
     void addGradeToList();
@@ -61,6 +63,7 @@ private:
     std::unique_ptr<QRegExpValidator> mStudentNameValidator;
     std::shared_ptr<SignalTransmitter> mSignalTransmitter;
     QString mHeader;
+    StudentDataAction mFormAction;
     size_t mMaxGradesCount = 0;
 };
 

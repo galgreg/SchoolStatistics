@@ -12,7 +12,7 @@ public:
 
 signals:
     void transactionCommitted(StudentDataAction);
-    void informAboutAddStudentRequest();
+    void requestFormAction(StudentDataAction);
     void showEditForm();
 
 public slots:

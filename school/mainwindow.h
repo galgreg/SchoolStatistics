@@ -40,11 +40,12 @@ private slots:
     void showAddNewStudentForm();
     void showEditStudentForm();
     void doAction(StudentDataAction actionToDo);
-    void beginAddTransaction();
+    void beginFormTransaction(StudentDataAction formAction);
 
 private:
     void doDeleteAction();
     void doAddAction();
+    void doEditAction();
 
     void readDataFromRepository();
     void deleteStudent(size_t studentIndex);

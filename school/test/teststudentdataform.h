@@ -15,6 +15,8 @@ private slots:
     void init();
     void cleanup();
     void testShowAndHideForm();
+    void testSetFormAction_data();
+    void testSetFormAction();
     void testSetHeader();
     void testSetFirstName();
     void testSetLastName();

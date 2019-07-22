@@ -34,8 +34,8 @@ MainWindow::MainWindow(
             this, &MainWindow::beginDeleteTransaction);
     connect(mSignalTransmitter.get(), &SignalTransmitter::transactionCommitted,
             this, &MainWindow::doAction);
-    connect(mSignalTransmitter.get(), &SignalTransmitter::informAboutAddStudentRequest,
-            this, &MainWindow::beginAddTransaction);
+    connect(mSignalTransmitter.get(), &SignalTransmitter::requestFormAction,
+            this, &MainWindow::beginFormTransaction);
     connect(mSignalTransmitter.get(), &SignalTransmitter::showEditForm,
             this, &MainWindow::showEditStudentForm);
     mStudentDataForm->setMaxGradesCount(mMaxGradesCount);
@@ -79,18 +79,20 @@ void MainWindow::doAction(StudentDataAction actionToDo) {
         doDeleteAction();
     } else if (actionToDo == ADD_STUDENT) {
         doAddAction();
+    } else if (actionToDo == EDIT_STUDENT) {
+        doEditAction();
     }
 }
 
-void MainWindow::beginAddTransaction() {
-    StudentDataAction actionToConfirm = ADD_STUDENT;
-
-    QString studentName =
-            QString("%1 %2")
-            .arg(mStudentDataForm->getFirstName())
-            .arg(mStudentDataForm->getLastName());
-    prepareConfirmDialogToDisplay(actionToConfirm, studentName);
-    mConfirmDialog->showDialog();
+void MainWindow::beginFormTransaction(StudentDataAction formAction) {
+    if (formAction == ADD_STUDENT || formAction == EDIT_STUDENT) {
+        QString studentName =
+        QString("%1 %2")
+        .arg(mStudentDataForm->getFirstName())
+        .arg(mStudentDataForm->getLastName());
+        prepareConfirmDialogToDisplay(formAction, studentName);
+        mConfirmDialog->showDialog();
+    }
 }
 
 void MainWindow::doDeleteAction() {
@@ -125,6 +127,39 @@ void MainWindow::doAddAction() {
     mDataRepository->write(*mStudentClass);
     readDataFromRepository();
     mStudentDataForm->hideForm();
+}
+
+void MainWindow::doEditAction() {
+    int indexOfStudentToEdit = ui->studentList->currentRow();
+
+    if (indexOfStudentToEdit > -1) {
+        const auto& studentToEdit =
+                mStudentClass->getStudent(
+                    static_cast<size_t>(indexOfStudentToEdit));
+
+        unsigned studentID = studentToEdit.getID();
+        std::string studentFirstName =
+                mStudentDataForm->getFirstName().toStdString();
+        std::string studentLastName =
+                mStudentDataForm->getLastName().toStdString();
+        Gender studentGender = mStudentDataForm->getGender();
+        std::vector<double> studentGrades =
+                mStudentDataForm->getGrades().toVector().toStdVector();
+        std::unique_ptr<IStudent> newStudent(
+                StudentFactory::create(
+                        studentID,
+                        studentFirstName,
+                        studentLastName,
+                        studentGender,
+                        studentGrades));
+        mStudentClass->editStudent(
+                static_cast<size_t>(indexOfStudentToEdit),
+                std::move(newStudent));
+        mDataRepository->write(*mStudentClass);
+        readDataFromRepository();
+        mStudentDataForm->hideForm();
+        mStudentDataWidget->hideWidget();
+    }
 }
 
 void MainWindow::readDataFromRepository() {
@@ -233,6 +268,7 @@ void MainWindow::prepareConfirmDialogToDisplay(
 
 void MainWindow::prepareStudentDataFormToDisplay(
         StudentDataAction actionToPerform) {
+    mStudentDataForm->setFormAction(actionToPerform);
     if (actionToPerform == ADD_STUDENT) {
         mStudentDataForm->setHeader("Add Student");
         mStudentDataForm->setFirstName("");

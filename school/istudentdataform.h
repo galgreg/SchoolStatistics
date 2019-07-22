@@ -2,6 +2,7 @@
 #define ISTUDENTDATAFORM_H
 
 #include "gender.h"
+#include "studentdataaction.h"
 #include <QList>
 #include <QString>
 
@@ -10,6 +11,8 @@ public:
     virtual ~IStudentDataForm() = default;
     virtual void showForm() = 0;
     virtual void hideForm() = 0;
+    virtual void setFormAction(StudentDataAction newFormAction) = 0;
+    virtual StudentDataAction getFormAction() = 0;
 
     virtual void setHeader(const QString &newHeader) = 0;
     virtual void setFirstName(const QString &newFirstName) = 0;

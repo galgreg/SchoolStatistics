@@ -279,6 +279,52 @@ void TestMainWindow::testDoAction_AddStudent() {
     QCOMPARE(actualNextStudentIdAfterAdd, expectedNextStudentIdAfterAdd);
 }
 
+void TestMainWindow::testDoAction_EditStudent() {
+    size_t indexOfStudentToEdit = 1;
+
+    const auto& expectedStudentBeforeEdit =
+            mStudentClassData->getStudent(indexOfStudentToEdit);
+    const auto& actualStudentBeforeEdit =
+            mMainWindow->mStudentClass->getStudent(indexOfStudentToEdit);
+    QCOMPARE(actualStudentBeforeEdit, expectedStudentBeforeEdit);
+
+    mMainWindow->ui->studentList->setCurrentRow(
+            static_cast<int>(indexOfStudentToEdit));
+
+    const auto& studentToEdit =
+            mMainWindow->mStudentClass->getStudent(indexOfStudentToEdit);
+
+    QString newFirstName = "Konstancja";
+    mMainWindow->mStudentDataForm->setFirstName(newFirstName);
+    QString newLastName = "Nowakowska";
+    mMainWindow->mStudentDataForm->setLastName(newLastName);
+    Gender studentGender = studentToEdit.getPersonalData().getGender();
+    mMainWindow->mStudentDataForm->setGender(studentGender);
+
+    mMainWindow->mStudentDataForm->deleteAllGrades();
+    const auto& studentGrades = studentToEdit.getGrades();
+    for (unsigned i = 0; i < studentGrades.count(); ++i) {
+        mMainWindow->mStudentDataForm->addGrade(studentGrades.getGrade(i));
+    }
+
+    mMainWindow->doAction(EDIT_STUDENT);
+
+    std::unique_ptr<IStudent> expectedStudentAfterEdit(
+            StudentFactory::copy(
+                    mStudentClassData->getStudent(indexOfStudentToEdit)));
+
+    std::unique_ptr<IPersonalData> newPersonalData(
+            new PersonalData(
+                    newFirstName.toStdString(),
+                    newLastName.toStdString(),
+                    studentGender));
+    expectedStudentAfterEdit->setPersonalData(*newPersonalData);
+
+    const auto& actualStudentAfterEdit =
+            mMainWindow->mStudentClass->getStudent(indexOfStudentToEdit);
+    QCOMPARE(actualStudentAfterEdit, *expectedStudentAfterEdit);
+}
+
 void TestMainWindow::testDoDeleteAction() {
     size_t studentIndex = 1;
     mMainWindow->ui->studentList->setCurrentRow(static_cast<int>(studentIndex));
@@ -337,13 +383,59 @@ void TestMainWindow::testDoAddAction() {
     QCOMPARE(actualNextStudentIdAfterAdd, expectedNextStudentIdAfterAdd);
 }
 
-void TestMainWindow::testBeginAddTransaction() {
+void TestMainWindow::testDoEditAction() {
+    size_t indexOfStudentToEdit = 1;
+
+    const auto& expectedStudentBeforeEdit =
+            mStudentClassData->getStudent(indexOfStudentToEdit);
+    const auto& actualStudentBeforeEdit =
+            mMainWindow->mStudentClass->getStudent(indexOfStudentToEdit);
+    QCOMPARE(actualStudentBeforeEdit, expectedStudentBeforeEdit);
+
+    mMainWindow->ui->studentList->setCurrentRow(
+            static_cast<int>(indexOfStudentToEdit));
+
+    const auto& studentToEdit =
+            mMainWindow->mStudentClass->getStudent(indexOfStudentToEdit);
+
+    QString newFirstName = "Konstancja";
+    mMainWindow->mStudentDataForm->setFirstName(newFirstName);
+    QString newLastName = "Nowakowska";
+    mMainWindow->mStudentDataForm->setLastName(newLastName);
+    Gender studentGender = studentToEdit.getPersonalData().getGender();
+    mMainWindow->mStudentDataForm->setGender(studentGender);
+
+    mMainWindow->mStudentDataForm->deleteAllGrades();
+    const auto& studentGrades = studentToEdit.getGrades();
+    for (unsigned i = 0; i < studentGrades.count(); ++i) {
+        mMainWindow->mStudentDataForm->addGrade(studentGrades.getGrade(i));
+    }
+
+    mMainWindow->doEditAction();
+
+    std::unique_ptr<IStudent> expectedStudentAfterEdit(
+            StudentFactory::copy(
+                    mStudentClassData->getStudent(indexOfStudentToEdit)));
+
+    std::unique_ptr<IPersonalData> newPersonalData(
+            new PersonalData(
+                    newFirstName.toStdString(),
+                    newLastName.toStdString(),
+                    studentGender));
+    expectedStudentAfterEdit->setPersonalData(*newPersonalData);
+
+    const auto& actualStudentAfterEdit =
+            mMainWindow->mStudentClass->getStudent(indexOfStudentToEdit);
+    QCOMPARE(actualStudentAfterEdit, *expectedStudentAfterEdit);
+}
+
+void TestMainWindow::testBeginFormTransaction_AddStudent() {
     QString firstName = "Jan";
     mMainWindow->mStudentDataForm->setFirstName(firstName);
     QString lastName = "Kowalski";
     mMainWindow->mStudentDataForm->setLastName(lastName);
 
-    mMainWindow->beginAddTransaction();
+    mMainWindow->beginFormTransaction(ADD_STUDENT);
 
     QString expectedActionString = "add";
     QString actualActionString =
@@ -359,6 +451,11 @@ void TestMainWindow::testBeginAddTransaction() {
 void TestMainWindow::testPrepareStudentDataFormToDisplay_AddStudent() {
     StudentDataAction actionToPerform = ADD_STUDENT;
     mMainWindow->prepareStudentDataFormToDisplay(actionToPerform);
+
+    StudentDataAction expectedFormAction = actionToPerform;
+    StudentDataAction actualFormAction =
+            mMainWindow->mStudentDataForm->getFormAction();
+    QCOMPARE(actualFormAction, expectedFormAction);
 
     QString expectedHeader = "Add Student";
     QString actualHeader = mMainWindow->mStudentDataForm->getHeader();
@@ -383,7 +480,13 @@ void TestMainWindow::testPrepareStudentDataFormToDisplay_AddStudent() {
 
 void TestMainWindow::testPrepareStudentDataFormToDisplay_EditStudent() {
     mMainWindow->ui->studentList->setCurrentRow(1);
-    mMainWindow->showEditStudentForm();
+    StudentDataAction actionToPerform = EDIT_STUDENT;
+    mMainWindow->prepareStudentDataFormToDisplay(actionToPerform);
+
+    StudentDataAction expectedFormAction = actionToPerform;
+    StudentDataAction actualFormAction =
+            mMainWindow->mStudentDataForm->getFormAction();
+    QCOMPARE(actualFormAction, expectedFormAction);
 
     QString expectedFormHeader =
             "<html><head/><body><p align=\"center\">"

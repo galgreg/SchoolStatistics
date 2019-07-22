@@ -8,7 +8,8 @@ StudentDataForm::StudentDataForm(
             QWidget(nullptr),
             ui(new Ui::StudentDataForm),
             mStudentNameValidator(nullptr),
-            mSignalTransmitter(signalTransmitter) {
+            mSignalTransmitter(signalTransmitter),
+            mFormAction(ADD_STUDENT) {
     ui->setupUi(this);
     QRegExp studentNameRegex("^[A-Z][a-z]{2,}$");
     mStudentNameValidator.reset(new QRegExpValidator(studentNameRegex, nullptr));
@@ -28,8 +29,8 @@ StudentDataForm::StudentDataForm(
             this, &StudentDataForm::clearNotificationLabel);
     connect(ui->lastNameLineEdit, &QLineEdit::textEdited,
             this, &StudentDataForm::clearNotificationLabel);
-    connect(this, &StudentDataForm::requestAddStudent,
-            mSignalTransmitter.get(), &SignalTransmitter::informAboutAddStudentRequest);
+    connect(this, &StudentDataForm::requestAction,
+            mSignalTransmitter.get(), &SignalTransmitter::requestFormAction);
 }
 
 StudentDataForm::~StudentDataForm() {
@@ -42,6 +43,14 @@ void StudentDataForm::showForm() {
 
 void StudentDataForm::hideForm() {
     this->hide();
+}
+
+void StudentDataForm::setFormAction(StudentDataAction newFormAction) {
+    mFormAction = newFormAction;
+}
+
+StudentDataAction StudentDataForm::getFormAction() {
+    return mFormAction;
 }
 
 void StudentDataForm::setHeader(const QString &newHeader) {
@@ -171,7 +180,7 @@ void StudentDataForm::tryToSubmitForm() {
         ui->notificationLabel->setText(notificationString);
         return;
     }
-    emit requestAddStudent();
+    emit requestAction(mFormAction);
 }
 
 void StudentDataForm::clearNotificationLabel() {

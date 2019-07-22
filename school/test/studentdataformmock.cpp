@@ -13,6 +13,14 @@ void StudentDataFormMock::hideForm() {
 
 }
 
+void StudentDataFormMock::setFormAction(StudentDataAction newFormAction) {
+    mFormAction = newFormAction;
+}
+
+StudentDataAction StudentDataFormMock::getFormAction() {
+    return mFormAction;
+}
+
 void StudentDataFormMock::setHeader(const QString &newHeader) {
     mHeader = newHeader;
 }
