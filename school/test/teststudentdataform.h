@@ -38,6 +38,7 @@ private slots:
 
     void testTryToSubmitForm_InvalidInput_data();
     void testTryToSubmitForm_InvalidInput();
+    void testClearNotificationLabel();
 private:
     QList<double> getGradesFromUiGradesList();
 

@@ -50,6 +50,7 @@ private slots:
     void deleteGradeFromGradesList();
 
     void tryToSubmitForm();
+    void clearNotificationLabel();
 private:
     std::unique_ptr<Ui::StudentDataForm> ui;
     std::unique_ptr<QRegExpValidator> mStudentNameValidator;

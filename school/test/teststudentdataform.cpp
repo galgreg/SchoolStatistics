@@ -384,6 +384,27 @@ void TestStudentDataForm::testTryToSubmitForm_InvalidInput() {
     QCOMPARE(actualNotificationString, expectedNotificationString);
 }
 
+void TestStudentDataForm::testClearNotificationLabel() {
+    QString notificationString = "kanapka";
+    mStudentDataForm->ui->notificationLabel->setText(notificationString);
+
+    QString expectedNotificationStringBeforeClear = notificationString;
+    QString actualNotificationStringBeforeClear =
+            mStudentDataForm->ui->notificationLabel->text();
+    QCOMPARE(
+            actualNotificationStringBeforeClear,
+            expectedNotificationStringBeforeClear);
+
+    mStudentDataForm->clearNotificationLabel();
+
+    QString expectedNotificationStringAfterClear = "";
+    QString actualNotificationStringAfterClear =
+            mStudentDataForm->ui->notificationLabel->text();
+    QCOMPARE(
+            actualNotificationStringAfterClear,
+            expectedNotificationStringAfterClear);
+}
+
 QList<double> TestStudentDataForm::getGradesFromUiGradesList() {
     QList<double> gradesFromUiList;
     const auto& gradesList = *(mStudentDataForm->ui->gradesList);

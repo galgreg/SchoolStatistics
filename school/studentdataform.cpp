@@ -23,6 +23,10 @@ StudentDataForm::StudentDataForm() :
             this, &StudentDataForm::deleteGradeFromGradesList);
     connect(ui->submitButton, &QPushButton::clicked,
             this, &StudentDataForm::tryToSubmitForm);
+    connect(ui->firstNameLineEdit, &QLineEdit::textEdited,
+            this, &StudentDataForm::clearNotificationLabel);
+    connect(ui->lastNameLineEdit, &QLineEdit::textEdited,
+            this, &StudentDataForm::clearNotificationLabel);
 }
 
 StudentDataForm::~StudentDataForm() {
@@ -160,4 +164,8 @@ void StudentDataForm::tryToSubmitForm() {
         ui->notificationLabel->setText(notificationString);
         return;
     }
+}
+
+void StudentDataForm::clearNotificationLabel() {
+    ui->notificationLabel->clear();
 }
