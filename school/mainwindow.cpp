@@ -288,8 +288,6 @@ void MainWindow::prepareStudentDataFormToDisplay(
         mStudentDataForm->setLastName(
                 QString::fromStdString(studentPersonalData.getLastName()));
         mStudentDataForm->setGender(studentPersonalData.getGender());
-
-        mStudentDataForm->setMaxGradesCount(studentGrades.maxAllowedCount());
         mStudentDataForm->deleteAllGrades();
         for (unsigned i = 0; i < studentGrades.count(); ++i) {
             mStudentDataForm->addGrade(studentGrades.getGrade(i));
