@@ -49,6 +49,7 @@ private slots:
     void editGradeOnGradesList();
     void deleteGradeFromGradesList();
 
+    void tryToSubmitForm();
 private:
     std::unique_ptr<Ui::StudentDataForm> ui;
     std::unique_ptr<QRegExpValidator> mStudentNameValidator;

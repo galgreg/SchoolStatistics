@@ -355,6 +355,35 @@ void TestStudentDataForm::testDeleteGradeFromGradesList() {
     QCOMPARE(actualGradesListAfterDelete, expectedGradesListAfterDelete);
 }
 
+void TestStudentDataForm::testTryToSubmitForm_InvalidInput_data() {
+    QTest::addColumn<QString>("firstName");
+    QTest::addColumn<QString>("lastName");
+
+    QTest::newRow("Invalid first name") << "" << "Kowalski";
+    QTest::newRow("Invalid last name") << "Jan" << "123456";
+    QTest::newRow("Invalid both names") << "aA@1j" << "";
+}
+
+void TestStudentDataForm::testTryToSubmitForm_InvalidInput() {
+    QFETCH(QString, firstName);
+    mStudentDataForm->ui->firstNameLineEdit->setText(firstName);
+    QFETCH(QString, lastName);
+    mStudentDataForm->ui->lastNameLineEdit->setText(lastName);
+
+    mStudentDataForm->tryToSubmitForm();
+
+    QString expectedNotificationString =
+            "<html><head/><body>" "<p align=\"center\"><span style=\" "
+                    "font-size:16pt; font-weight:600; color:#ef2929;\">"
+                "Invalid input for student names!</span></p><p align=\"center\">"
+            "<span style=\" font-size:16pt; font-weight:600; color:#ef2929;\">"
+                "*It must begin from upper case and have minimum 3 letters*"
+            "</span></p></body></html>";
+    QString actualNotificationString =
+            mStudentDataForm->ui->notificationLabel->text();
+    QCOMPARE(actualNotificationString, expectedNotificationString);
+}
+
 QList<double> TestStudentDataForm::getGradesFromUiGradesList() {
     QList<double> gradesFromUiList;
     const auto& gradesList = *(mStudentDataForm->ui->gradesList);

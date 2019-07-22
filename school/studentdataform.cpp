@@ -21,6 +21,8 @@ StudentDataForm::StudentDataForm() :
             this, &StudentDataForm::editGradeOnGradesList);
     connect(ui->deleteGradeButton, &QPushButton::clicked,
             this, &StudentDataForm::deleteGradeFromGradesList);
+    connect(ui->submitButton, &QPushButton::clicked,
+            this, &StudentDataForm::tryToSubmitForm);
 }
 
 StudentDataForm::~StudentDataForm() {
@@ -139,5 +141,23 @@ void StudentDataForm::deleteGradeFromGradesList() {
     int indexOfSelectedGrade = ui->gradesList->currentRow();
     if (indexOfSelectedGrade > -1) {
         deleteGrade(static_cast<size_t>(indexOfSelectedGrade));
+    }
+}
+
+void StudentDataForm::tryToSubmitForm() {
+    bool isFirstNameValid = ui->firstNameLineEdit->hasAcceptableInput();
+    bool isLastNameValid = ui->lastNameLineEdit->hasAcceptableInput();
+    bool isInputValid = isFirstNameValid && isLastNameValid;
+
+    if (!isInputValid) {
+        QString notificationString =
+            "<html><head/><body>" "<p align=\"center\"><span style=\" "
+                    "font-size:16pt; font-weight:600; color:#ef2929;\">"
+                "Invalid input for student names!</span></p><p align=\"center\">"
+            "<span style=\" font-size:16pt; font-weight:600; color:#ef2929;\">"
+                "*It must begin from upper case and have minimum 3 letters*"
+            "</span></p></body></html>";
+        ui->notificationLabel->setText(notificationString);
+        return;
     }
 }
