@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include "istudentdatawidget.h"
+#include "signaltransmitter.h"
 #include <memory>
 
 class TestStudentDataWindow;
@@ -18,7 +19,7 @@ class StudentDataWindow : public QWidget, public IStudentDataWidget
 public:
     friend TestStudentDataWindow;
 
-    StudentDataWindow();
+    StudentDataWindow(std::shared_ptr<SignalTransmitter> signalTransmitter);
     ~StudentDataWindow() override;
     void showWidget() override;
     void hideWidget() override;
@@ -36,8 +37,10 @@ public:
     void setGender(const QString&) override;
     void setGrades(const QString&) override;
     void setGradesAverage(const QString&) override;
+
 private:
     std::unique_ptr<Ui::StudentDataWindow> ui;
+    std::shared_ptr<SignalTransmitter> mSignalTransmitter;
 };
 
 #endif // STUDENTDATAWINDOW_H

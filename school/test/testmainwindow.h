@@ -28,8 +28,9 @@ private slots:
     void testDoAddAction();
 
     void testBeginAddTransaction();
-
     void testPrepareStudentDataFormToDisplay_AddStudent();
+    void testPrepareStudentDataFormToDisplay_EditStudent();
+    void testShowEditStudentForm();
 private:
     std::unique_ptr<MainWindow> mMainWindow;
     std::unique_ptr<IStudentClass> mStudentClassData;

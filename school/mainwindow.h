@@ -38,6 +38,7 @@ private slots:
     void showStudentDataWidget();
     void beginDeleteTransaction();
     void showAddNewStudentForm();
+    void showEditStudentForm();
     void doAction(StudentDataAction actionToDo);
     void beginAddTransaction();
 

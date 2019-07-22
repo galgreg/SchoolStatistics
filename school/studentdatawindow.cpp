@@ -1,16 +1,17 @@
 #include "studentdatawindow.h"
 #include "ui_studentdatawindow.h"
 
-StudentDataWindow::StudentDataWindow() :
-    QWidget(nullptr),
-    ui(nullptr)
-{
-    ui.reset(new Ui::StudentDataWindow);
+StudentDataWindow::StudentDataWindow(
+        std::shared_ptr<SignalTransmitter> signalTransmitter) :
+            QWidget(nullptr),
+            ui(new Ui::StudentDataWindow),
+            mSignalTransmitter(signalTransmitter) {
     ui->setupUi(this);
+    connect(ui->editButton, &QPushButton::clicked,
+            mSignalTransmitter.get(), &SignalTransmitter::showEditForm);
 }
 
-StudentDataWindow::~StudentDataWindow()
-{
+StudentDataWindow::~StudentDataWindow() {
 
 }
 

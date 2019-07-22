@@ -10,7 +10,8 @@ TestStudentDataWindow::TestStudentDataWindow(
 }
 
 void TestStudentDataWindow::init() {
-    mStudentDataWindow.reset(new StudentDataWindow);
+    mStudentDataWindow.reset(
+            new StudentDataWindow(std::make_shared<SignalTransmitter>()));
 }
 
 void TestStudentDataWindow::cleanup() {

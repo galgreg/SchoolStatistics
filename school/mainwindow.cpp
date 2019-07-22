@@ -36,6 +36,8 @@ MainWindow::MainWindow(
             this, &MainWindow::doAction);
     connect(mSignalTransmitter.get(), &SignalTransmitter::informAboutAddStudentRequest,
             this, &MainWindow::beginAddTransaction);
+    connect(mSignalTransmitter.get(), &SignalTransmitter::showEditForm,
+            this, &MainWindow::showEditStudentForm);
     mStudentDataForm->setMaxGradesCount(mMaxGradesCount);
     readDataFromRepository();
 }
@@ -64,6 +66,11 @@ void MainWindow::beginDeleteTransaction() {
 
 void MainWindow::showAddNewStudentForm() {
     prepareStudentDataFormToDisplay(ADD_STUDENT);
+    mStudentDataForm->showForm();
+}
+
+void MainWindow::showEditStudentForm() {
+    prepareStudentDataFormToDisplay(EDIT_STUDENT);
     mStudentDataForm->showForm();
 }
 
@@ -232,6 +239,25 @@ void MainWindow::prepareStudentDataFormToDisplay(
         mStudentDataForm->setLastName("");
         mStudentDataForm->setGender(UNKNOWN);
         mStudentDataForm->deleteAllGrades();
+    } else if(actionToPerform == EDIT_STUDENT) {
+        size_t currentIndex =
+                static_cast<size_t>(ui->studentList->currentRow());
+        const auto& studentToEdit = mStudentClass->getStudent(currentIndex);
+        const auto& studentPersonalData = studentToEdit.getPersonalData();
+        const auto& studentGrades = studentToEdit.getGrades();
+
+        mStudentDataForm->setHeader("Edit Student");
+        mStudentDataForm->setFirstName(
+                QString::fromStdString(studentPersonalData.getFirstName()));
+        mStudentDataForm->setLastName(
+                QString::fromStdString(studentPersonalData.getLastName()));
+        mStudentDataForm->setGender(studentPersonalData.getGender());
+
+        mStudentDataForm->setMaxGradesCount(studentGrades.maxAllowedCount());
+        mStudentDataForm->deleteAllGrades();
+        for (unsigned i = 0; i < studentGrades.count(); ++i) {
+            mStudentDataForm->addGrade(studentGrades.getGrade(i));
+        }
     }
 }
 

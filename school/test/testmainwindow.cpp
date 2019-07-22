@@ -380,3 +380,78 @@ void TestMainWindow::testPrepareStudentDataFormToDisplay_AddStudent() {
     QList<double> actualGrades = mMainWindow->mStudentDataForm->getGrades();
     QCOMPARE(actualGrades, expectedGrades);
 }
+
+void TestMainWindow::testPrepareStudentDataFormToDisplay_EditStudent() {
+    mMainWindow->ui->studentList->setCurrentRow(1);
+    mMainWindow->showEditStudentForm();
+
+    QString expectedFormHeader =
+            "<html><head/><body><p align=\"center\">"
+            "<span style=\" font-size:16pt; font-weight:600; color:#ef2929;\">"
+            "Edit Student</span></p></body></html>";
+    QString actualFormHeader = mMainWindow->mStudentDataForm->getHeader();
+
+    const auto& studentToEdit = mStudentClassData->getStudent(1);
+
+    std::string expectedFirstName =
+            studentToEdit.getPersonalData().getFirstName();
+    std::string actualFirstName =
+            mMainWindow->mStudentDataForm->getFirstName().toStdString();
+    QCOMPARE(actualFirstName, expectedFirstName);
+
+    std::string expectedLastName =
+            studentToEdit.getPersonalData().getLastName();
+    std::string actualLastName =
+            mMainWindow->mStudentDataForm->getLastName().toStdString();
+    QCOMPARE(actualLastName, expectedLastName);
+
+    Gender expectedGender = studentToEdit.getPersonalData().getGender();
+    Gender actualGender = mMainWindow->mStudentDataForm->getGender();
+    QCOMPARE(actualGender, expectedGender);
+
+    QList<double> expectedGrades;
+    const auto& studentGrades = studentToEdit.getGrades();
+    for(unsigned i = 0; i < studentGrades.count(); ++i) {
+        expectedGrades.append(studentGrades.getGrade(i));
+    }
+    QList<double> actualGrades = mMainWindow->mStudentDataForm->getGrades();
+    QCOMPARE(actualGrades, expectedGrades);
+}
+
+void TestMainWindow::testShowEditStudentForm() {
+    mMainWindow->ui->studentList->setCurrentRow(1);
+    mMainWindow->showEditStudentForm();
+
+    QString expectedFormHeader =
+            "<html><head/><body><p align=\"center\">"
+            "<span style=\" font-size:16pt; font-weight:600; color:#ef2929;\">"
+            "Edit Student</span></p></body></html>";
+    QString actualFormHeader = mMainWindow->mStudentDataForm->getHeader();
+
+    const auto& studentToEdit = mStudentClassData->getStudent(1);
+
+    std::string expectedFirstName =
+            studentToEdit.getPersonalData().getFirstName();
+    std::string actualFirstName =
+            mMainWindow->mStudentDataForm->getFirstName().toStdString();
+    QCOMPARE(actualFirstName, expectedFirstName);
+
+    std::string expectedLastName =
+            studentToEdit.getPersonalData().getLastName();
+    std::string actualLastName =
+            mMainWindow->mStudentDataForm->getLastName().toStdString();
+    QCOMPARE(actualLastName, expectedLastName);
+
+    Gender expectedGender = studentToEdit.getPersonalData().getGender();
+    Gender actualGender = mMainWindow->mStudentDataForm->getGender();
+    QCOMPARE(actualGender, expectedGender);
+
+    QList<double> expectedGrades;
+    const auto& studentGrades = studentToEdit.getGrades();
+    for(unsigned i = 0; i < studentGrades.count(); ++i) {
+        expectedGrades.append(studentGrades.getGrade(i));
+    }
+
+    QList<double> actualGrades = mMainWindow->mStudentDataForm->getGrades();
+    QCOMPARE(actualGrades, expectedGrades);
+}

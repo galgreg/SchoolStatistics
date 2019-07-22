@@ -16,7 +16,7 @@ int main(int argc, char *argv[])
     auto signalTransmitter = std::make_shared<SignalTransmitter>();
     MainWindow w(
             std::make_unique<TextFileStorage>(PATH_TO_STORAGE.toStdString()),
-            std::make_unique<StudentDataWindow>(),
+            std::make_unique<StudentDataWindow>(signalTransmitter),
             std::make_unique<ConfirmDialog>(signalTransmitter),
             std::make_unique<StudentDataForm>(signalTransmitter),
             signalTransmitter);
