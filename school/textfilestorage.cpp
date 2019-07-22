@@ -48,9 +48,14 @@ std::unique_ptr<IStudentClass> TextFileStorage::read(
             std::vector<double> grades;
             while (!words.empty() && maxGradesPerStudent > 0) {
                 QString gradeString = words.takeFirst();
-                double newGrade = gradeString.toDouble();
-                grades.push_back(newGrade);
-                --maxGradesPerStudent;
+
+                bool conversionSucceed = false;
+                double newGrade = gradeString.toDouble(&conversionSucceed);
+
+                if (conversionSucceed) {
+                    grades.push_back(newGrade);
+                    --maxGradesPerStudent;
+                }
             }
             std::unique_ptr<IStudent> newStudent(StudentFactory::create(
                     studentID,
