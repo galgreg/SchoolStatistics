@@ -58,6 +58,7 @@ private:
     std::unique_ptr<IStudentDataForm> mStudentDataForm;
     std::shared_ptr<SignalTransmitter> mSignalTransmitter;
     size_t mMaxStudentCount, mMaxGradesCount;
+    unsigned mNextStudentID;
 };
 
 #endif // MAINWINDOW_H

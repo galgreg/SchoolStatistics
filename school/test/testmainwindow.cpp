@@ -128,6 +128,11 @@ void TestMainWindow::testReadDataFromRepository() {
         actualStudentListContent.append(item->text());
     }
     QCOMPARE(actualStudentListContent, expectedStudentListContent);
+
+    unsigned expectedNextStudentID =
+            mStudentClassData->getStudent(2).getID() + 1;
+    unsigned actualNextStudentID = mMainWindow->mNextStudentID;
+    QCOMPARE(actualNextStudentID, expectedNextStudentID);
 }
 
 void TestMainWindow::testDeleteStudent() {

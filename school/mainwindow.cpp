@@ -21,7 +21,8 @@ MainWindow::MainWindow(
             mStudentDataForm(std::move(studentDataForm)),
             mSignalTransmitter(signalTransmitter),
             mMaxStudentCount(maxStudentCount),
-            mMaxGradesCount(maxGradesCount) {
+            mMaxGradesCount(maxGradesCount),
+            mNextStudentID(0) {
     ui->setupUi(this);
 
     connect(ui->showStudentButton, &QPushButton::clicked,
@@ -102,6 +103,10 @@ void MainWindow::readDataFromRepository() {
         std::string studentFullName =
                 personalData.getFirstName() + " " + personalData.getLastName();
         studentList->addItem(QString::fromStdString(studentFullName));
+
+        if (mNextStudentID < student.getID()) {
+           mNextStudentID = student.getID() + 1;
+        }
     }
 }
 
