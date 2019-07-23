@@ -4,11 +4,11 @@ PersonalDataMock::PersonalDataMock(const IPersonalData &) {
 
 }
 
-std::string PersonalDataMock::getFirstName() const {
+QString PersonalDataMock::getFirstName() const {
     return "";
 }
 
-std::string PersonalDataMock::getLastName() const {
+QString PersonalDataMock::getLastName() const {
     return "";
 }
 
@@ -16,10 +16,10 @@ Gender PersonalDataMock::getGender() const {
     return UNKNOWN;
 }
 
-void PersonalDataMock::setFirstName(const std::string &) {
+void PersonalDataMock::setFirstName(const QString &) {
 }
 
-void PersonalDataMock::setLastName(const std::string &) {
+void PersonalDataMock::setLastName(const QString &) {
 }
 
 void PersonalDataMock::setGender(Gender) {

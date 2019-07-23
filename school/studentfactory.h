@@ -3,18 +3,19 @@
 #include "gender.h"
 #include "student.h"
 #include <memory>
-#include <string>
-#include <vector>
+#include <QList>
+#include <QString>
+
 
 class StudentFactory
 {
 public:
     static std::unique_ptr<Student> create(
         unsigned ID,
-        const std::string &firstName,
-        const std::string &lastName,
+        const QString &firstName,
+        const QString &lastName,
         Gender gender,
-        const std::vector<double> &grades);
+        const QList<double> &grades);
     static std::unique_ptr<Student> copy(const IStudent &studentToCopy);
 };
 

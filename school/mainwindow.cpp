@@ -104,14 +104,12 @@ void MainWindow::doDeleteAction() {
 
 void MainWindow::doAddAction() {
     unsigned studentID = mNextStudentID++;
-    std::string studentFirstName =
-            mStudentDataForm->getFirstName().toStdString();
-    std::string studentLastName =
-            mStudentDataForm->getLastName().toStdString();
+    QString studentFirstName = mStudentDataForm->getFirstName();
+    QString studentLastName = mStudentDataForm->getLastName();
     Gender studentGender = mStudentDataForm->getGender();
 
     auto tempGrades = mStudentDataForm->getGrades();
-    std::vector<double> studentGrades;
+    QList<double> studentGrades;
     for(int i = 0; i < tempGrades.size(); ++i) {
         studentGrades.push_back(tempGrades.at(i));
     }
@@ -138,13 +136,11 @@ void MainWindow::doEditAction() {
                     static_cast<size_t>(indexOfStudentToEdit));
 
         unsigned studentID = studentToEdit.getID();
-        std::string studentFirstName =
-                mStudentDataForm->getFirstName().toStdString();
-        std::string studentLastName =
-                mStudentDataForm->getLastName().toStdString();
+        QString studentFirstName = mStudentDataForm->getFirstName();
+        QString studentLastName = mStudentDataForm->getLastName();
         Gender studentGender = mStudentDataForm->getGender();
-        std::vector<double> studentGrades =
-                mStudentDataForm->getGrades().toVector().toStdVector();
+        QList<double> studentGrades = mStudentDataForm->getGrades();
+
         std::unique_ptr<IStudent> newStudent(
                 StudentFactory::create(
                         studentID,
@@ -189,9 +185,11 @@ void MainWindow::readDataFromRepository() {
     for (size_t i = 0; i < mStudentClass->count(); ++i) {
         const auto& student = mStudentClass->getStudent(i);
         const auto& personalData = student.getPersonalData();
-        std::string studentFullName =
-                personalData.getFirstName() + " " + personalData.getLastName();
-        studentList->addItem(QString::fromStdString(studentFullName));
+        QString studentFullName =
+                QString("%1 %2")
+                .arg(personalData.getFirstName())
+                .arg(personalData.getLastName());
+        studentList->addItem(studentFullName);
 
         if (mNextStudentID <= student.getID()) {
            mNextStudentID = student.getID() + 1;
@@ -210,11 +208,9 @@ void MainWindow::prepareStudentDataWidgetToDisplay(size_t studentIndex) {
     QString studentID = QString::number(student.getID());
     mStudentDataWidget->setID(studentID);
     const auto& studentPersonalData = student.getPersonalData();
-    QString studentFirstName =
-            QString::fromStdString(studentPersonalData.getFirstName());
+    QString studentFirstName = studentPersonalData.getFirstName();
     mStudentDataWidget->setFirstName(studentFirstName);
-    QString studentLastName =
-            QString::fromStdString(studentPersonalData.getLastName());
+    QString studentLastName = studentPersonalData.getLastName();
     mStudentDataWidget->setLastName(studentLastName);
 
     Gender studentGenderEnum = studentPersonalData.getGender();
@@ -265,10 +261,8 @@ void MainWindow::prepareStudentDataFormToDisplay(
         const auto& studentGrades = studentToEdit.getGrades();
 
         mStudentDataForm->setHeader("Edit Student");
-        mStudentDataForm->setFirstName(
-                QString::fromStdString(studentPersonalData.getFirstName()));
-        mStudentDataForm->setLastName(
-                QString::fromStdString(studentPersonalData.getLastName()));
+        mStudentDataForm->setFirstName(studentPersonalData.getFirstName());
+        mStudentDataForm->setLastName(studentPersonalData.getLastName());
         mStudentDataForm->setGender(studentPersonalData.getGender());
         mStudentDataForm->deleteAllGrades();
         for (unsigned i = 0; i < studentGrades.count(); ++i) {

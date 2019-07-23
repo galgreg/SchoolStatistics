@@ -8,12 +8,12 @@ class PersonalDataMock : public IPersonalData
 public:
     PersonalDataMock() = default;
     PersonalDataMock(const IPersonalData &originalPersonalData);
-    std::string getFirstName() const override;
-    std::string getLastName() const override;
+    QString getFirstName() const override;
+    QString getLastName() const override;
     Gender getGender() const override;
 
-    void setFirstName(const std::string &firstName) override;
-    void setLastName(const std::string &lastName) override;
+    void setFirstName(const QString &firstName) override;
+    void setLastName(const QString &lastName) override;
     void setGender(Gender gender) override;
 };
 

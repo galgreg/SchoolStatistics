@@ -1,19 +1,19 @@
 #include "studentfactory.h"
-#include "student.h"
-#include "personaldata.h"
 #include "grades.h"
+#include "personaldata.h"
 
 std::unique_ptr<Student> StudentFactory::create(
         unsigned ID,
-        const std::string &firstName,
-        const std::string &lastName,
+        const QString &firstName,
+        const QString &lastName,
         Gender gender,
-        const std::vector<double> &grades) {
+        const QList<double> &grades) {
     std::unique_ptr<Student> student(new Student(ID));
+    std::unique_ptr<IGrades> studentGrades(
+            new Grades(static_cast<size_t>(grades.size())));
 
-    std::unique_ptr<IGrades> studentGrades(new Grades(grades.size()));
-    for(auto grade : grades) {
-        studentGrades->add(grade);
+    for (int i = 0; i < grades.size(); ++i) {
+        studentGrades->add(grades.at(i));
     }
 
     student->setPersonalData(PersonalData(firstName, lastName, gender));
@@ -23,11 +23,11 @@ std::unique_ptr<Student> StudentFactory::create(
 
 std::unique_ptr<Student> StudentFactory::copy(const IStudent &studentToCopy) {
     unsigned studentID = studentToCopy.getID();
-    std::string studentFirstName = studentToCopy.getPersonalData().getFirstName();
-    std::string studentLastName = studentToCopy.getPersonalData().getLastName();
+    QString studentFirstName = studentToCopy.getPersonalData().getFirstName();
+    QString studentLastName = studentToCopy.getPersonalData().getLastName();
     Gender studentGender = studentToCopy.getPersonalData().getGender();
 
-    std::vector<double> studentGrades;
+    QList<double> studentGrades;
     const IGrades& gradesToCopy = studentToCopy.getGrades();
     for (unsigned i = 0; i < gradesToCopy.count(); ++i) {
         studentGrades.push_back(gradesToCopy.getGrade(i));

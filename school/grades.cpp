@@ -8,7 +8,7 @@ Grades::Grades(const IGrades& originalGrades) :
     }
 }
 
-Grades::Grades(size_t maximumCount, const std::initializer_list<double> &grades) :
+Grades::Grades(size_t maximumCount, const QList<double> &grades) :
         mGrades(grades), mMaxCount(maximumCount) {
 }
 

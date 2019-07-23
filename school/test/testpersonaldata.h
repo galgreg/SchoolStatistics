@@ -18,8 +18,8 @@ private slots:
 private:
     void testPersonalDataState(
             const PersonalData &actualPersonalData,
-            const std::string &expectedFirstName,
-            const std::string &expectedLastName,
+            const QString &expectedFirstName,
+            const QString &expectedLastName,
             Gender expectedGender);
 };
 

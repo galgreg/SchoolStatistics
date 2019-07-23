@@ -15,7 +15,7 @@ void TestPersonalData::cleanup() {
 }
 
 void TestPersonalData::testGetters() {
-    const std::string expectedFirstName = "Jan", expectedLastName = "Kowalski";
+    const QString expectedFirstName = "Jan", expectedLastName = "Kowalski";
     const Gender expectedGender = MALE;
 
     PersonalData actualPersonalData(
@@ -28,8 +28,8 @@ void TestPersonalData::testGetters() {
 }
 
 void TestPersonalData::testSetters() {
-    const std::string expectedFirstName_Init = "Jan";
-    const std::string expectedLastName_Init = "Kowalski";
+    const QString expectedFirstName_Init = "Jan";
+    const QString expectedLastName_Init = "Kowalski";
     const Gender expectedGender_Init = MALE;
 
     PersonalData actualPersonalData(
@@ -42,8 +42,8 @@ void TestPersonalData::testSetters() {
             expectedLastName_Init,
             expectedGender_Init);
 
-    const std::string expectedFirstName_Set = "Maria";
-    const std::string expectedLastName_Set = "Nowak";
+    const QString expectedFirstName_Set = "Maria";
+    const QString expectedLastName_Set = "Nowak";
     const Gender expectedGender_Set = FEMALE;
 
     actualPersonalData.setFirstName(expectedFirstName_Set);
@@ -59,8 +59,8 @@ void TestPersonalData::testSetters() {
 
 void TestPersonalData::testPersonalDataState(
         const PersonalData &actualPersonalData,
-        const std::string &expectedFirstName,
-        const std::string &expectedLastName,
+        const QString &expectedFirstName,
+        const QString &expectedLastName,
         Gender expectedGender) {
     QCOMPARE(actualPersonalData.getFirstName(), expectedFirstName);
     QCOMPARE(actualPersonalData.getLastName(), expectedLastName);

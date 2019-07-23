@@ -10,10 +10,10 @@ TestStudentFactory::TestStudentFactory(unsigned &passed, unsigned &failed) :
 
 void TestStudentFactory::test_createStudent() {
     unsigned expectedID = 10;
-    std::string expectedFirstName = "Jan";
-    std::string expectedLastName = "Kowalski";
+    QString expectedFirstName = "Jan";
+    QString expectedLastName = "Kowalski";
     Gender expectedGender = MALE;
-    std::initializer_list<double> expectedGrades = {3.5, 4.5, 5.0};
+    QList<double> expectedGrades = {3.5, 4.5, 5.0};
 
     std::unique_ptr<IPersonalData> expectedPersonalData(
             new PersonalData(
@@ -38,10 +38,10 @@ void TestStudentFactory::test_createStudent() {
 
 void TestStudentFactory::test_copyStudent() {
     unsigned expectedID = 10;
-    std::string expectedFirstName = "Jan";
-    std::string expectedLastName = "Kowalski";
+    QString expectedFirstName = "Jan";
+    QString expectedLastName = "Kowalski";
     Gender expectedGender = MALE;
-    std::initializer_list<double> expectedGrades = {3.5, 4.5, 5.0};
+    QList<double> expectedGrades = {3.5, 4.5, 5.0};
 
     std::unique_ptr<IPersonalData> expectedPersonalData(
             new PersonalData(

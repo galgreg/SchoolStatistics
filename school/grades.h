@@ -10,7 +10,7 @@ public:
     Grades(const IGrades &);
     explicit Grades(
         size_t maximumCount = 3,
-        const std::initializer_list<double> &grades = {});
+        const QList<double> &grades = {});
 
     void add(double grade) override;
     void remove(size_t whichGrade) override;

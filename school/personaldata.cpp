@@ -1,10 +1,12 @@
 #include "personaldata.h"
 
 PersonalData::PersonalData(
-        const std::string &firstName,
-        const std::string &lastName,
+        const QString &firstName,
+        const QString &lastName,
         Gender gender) :
-            mFirstName(firstName), mLastName(lastName), mGender(gender) {
+                mFirstName(firstName),
+                mLastName(lastName),
+                mGender(gender) {
 
 }
 
@@ -14,11 +16,11 @@ PersonalData::PersonalData(const IPersonalData& originalData) {
     mGender = originalData.getGender();
 }
 
-std::string PersonalData::getFirstName() const {
+QString PersonalData::getFirstName() const {
     return mFirstName;
 }
 
-std::string PersonalData::getLastName() const {
+QString PersonalData::getLastName() const {
     return mLastName;
 }
 
@@ -26,11 +28,11 @@ Gender PersonalData::getGender() const {
     return mGender;
 }
 
-void PersonalData::setFirstName(const std::string &firstName) {
+void PersonalData::setFirstName(const QString &firstName) {
     mFirstName = firstName;
 }
 
-void PersonalData::setLastName(const std::string &lastName) {
+void PersonalData::setLastName(const QString &lastName) {
     mLastName = lastName;
 }
 

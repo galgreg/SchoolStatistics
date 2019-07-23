@@ -2,27 +2,25 @@
 #define PERSONALDATA_H
 
 #include "ipersonaldata.h"
-#include "gender.h"
-#include <string>
 
 class PersonalData : public IPersonalData
 {
 public:
     PersonalData(
-        const std::string &firstName,
-        const std::string &lastName,
+        const QString &firstName,
+        const QString &lastName,
         Gender gender);
     PersonalData(const IPersonalData &);
-    std::string getFirstName() const override;
-    std::string getLastName() const override;
+    QString getFirstName() const override;
+    QString getLastName() const override;
     Gender getGender() const override;
 
-    void setFirstName(const std::string &firstName) override;
-    void setLastName(const std::string &lastName) override;
+    void setFirstName(const QString &firstName) override;
+    void setLastName(const QString &lastName) override;
     void setGender(Gender gender) override;
 
 private:
-    std::string mFirstName, mLastName;
+    QString mFirstName, mLastName;
     Gender mGender;
 };
 

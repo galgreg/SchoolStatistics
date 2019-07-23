@@ -216,7 +216,7 @@ void TestMainWindow::testDoAction_AddStudent() {
     mMainWindow->mStudentDataForm->setLastName(lastName);
     Gender studentGender = MALE;
     mMainWindow->mStudentDataForm->setGender(studentGender);
-    std::vector<double> studentGrades = {4.0, 5.0, 3.0};
+    QList<double> studentGrades = {4.0, 5.0, 3.0};
     for (auto grade : studentGrades) {
         mMainWindow->mStudentDataForm->addGrade(grade);
     }
@@ -238,8 +238,8 @@ void TestMainWindow::testDoAction_AddStudent() {
     std::unique_ptr<IStudent> expectedNewStudent(
                 StudentFactory::create(
                         expectedStudentIdBeforeAdd,
-                        firstName.toStdString(),
-                        lastName.toStdString(),
+                        firstName,
+                        lastName,
                         studentGender,
                         studentGrades));
     const IStudent& actualNewStudent = mMainWindow->mStudentClass->getStudent(3);
@@ -285,10 +285,7 @@ void TestMainWindow::testDoAction_EditStudent() {
                     mStudentClassData->getStudent(indexOfStudentToEdit)));
 
     std::unique_ptr<IPersonalData> newPersonalData(
-            new PersonalData(
-                    newFirstName.toStdString(),
-                    newLastName.toStdString(),
-                    studentGender));
+            new PersonalData(newFirstName, newLastName, studentGender));
     expectedStudentAfterEdit->setPersonalData(*newPersonalData);
 
     const auto& actualStudentAfterEdit =
@@ -320,7 +317,7 @@ void TestMainWindow::testDoAddAction() {
     mMainWindow->mStudentDataForm->setLastName(lastName);
     Gender studentGender = MALE;
     mMainWindow->mStudentDataForm->setGender(studentGender);
-    std::vector<double> studentGrades = {4.0, 5.0, 3.0};
+    QList<double> studentGrades = {4.0, 5.0, 3.0};
     for (auto grade : studentGrades) {
         mMainWindow->mStudentDataForm->addGrade(grade);
     }
@@ -342,8 +339,8 @@ void TestMainWindow::testDoAddAction() {
     std::unique_ptr<IStudent> expectedNewStudent(
                 StudentFactory::create(
                         expectedStudentIdBeforeAdd,
-                        firstName.toStdString(),
-                        lastName.toStdString(),
+                        firstName,
+                        lastName,
                         studentGender,
                         studentGrades));
     const IStudent& actualNewStudent = mMainWindow->mStudentClass->getStudent(3);
@@ -389,10 +386,7 @@ void TestMainWindow::testDoEditAction() {
                     mStudentClassData->getStudent(indexOfStudentToEdit)));
 
     std::unique_ptr<IPersonalData> newPersonalData(
-            new PersonalData(
-                    newFirstName.toStdString(),
-                    newLastName.toStdString(),
-                    studentGender));
+            new PersonalData(newFirstName, newLastName, studentGender));
     expectedStudentAfterEdit->setPersonalData(*newPersonalData);
 
     const auto& actualStudentAfterEdit =
@@ -467,16 +461,14 @@ void TestMainWindow::testPrepareStudentDataFormToDisplay_EditStudent() {
 
     const auto& studentToEdit = mStudentClassData->getStudent(1);
 
-    std::string expectedFirstName =
+    QString expectedFirstName =
             studentToEdit.getPersonalData().getFirstName();
-    std::string actualFirstName =
-            mMainWindow->mStudentDataForm->getFirstName().toStdString();
+    QString actualFirstName =
+            mMainWindow->mStudentDataForm->getFirstName();
     QCOMPARE(actualFirstName, expectedFirstName);
 
-    std::string expectedLastName =
-            studentToEdit.getPersonalData().getLastName();
-    std::string actualLastName =
-            mMainWindow->mStudentDataForm->getLastName().toStdString();
+    QString expectedLastName = studentToEdit.getPersonalData().getLastName();
+    QString actualLastName = mMainWindow->mStudentDataForm->getLastName();
     QCOMPARE(actualLastName, expectedLastName);
 
     Gender expectedGender = studentToEdit.getPersonalData().getGender();
@@ -504,16 +496,12 @@ void TestMainWindow::testShowEditStudentForm() {
 
     const auto& studentToEdit = mStudentClassData->getStudent(1);
 
-    std::string expectedFirstName =
-            studentToEdit.getPersonalData().getFirstName();
-    std::string actualFirstName =
-            mMainWindow->mStudentDataForm->getFirstName().toStdString();
+    QString expectedFirstName = studentToEdit.getPersonalData().getFirstName();
+    QString actualFirstName = mMainWindow->mStudentDataForm->getFirstName();
     QCOMPARE(actualFirstName, expectedFirstName);
 
-    std::string expectedLastName =
-            studentToEdit.getPersonalData().getLastName();
-    std::string actualLastName =
-            mMainWindow->mStudentDataForm->getLastName().toStdString();
+    QString expectedLastName = studentToEdit.getPersonalData().getLastName();
+    QString actualLastName = mMainWindow->mStudentDataForm->getLastName();
     QCOMPARE(actualLastName, expectedLastName);
 
     Gender expectedGender = studentToEdit.getPersonalData().getGender();

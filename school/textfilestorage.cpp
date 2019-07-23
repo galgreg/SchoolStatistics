@@ -48,7 +48,7 @@ std::unique_ptr<IStudentClass> TextFileStorage::read(
                         "invalid value for student gender!");
             }
 
-            std::vector<double> grades;
+            QList<double> grades;
             while (!words.empty() && maxGradesPerStudent > 0) {
                 QString gradeString = words.takeFirst();
 
@@ -60,12 +60,13 @@ std::unique_ptr<IStudentClass> TextFileStorage::read(
                     --maxGradesPerStudent;
                 }
             }
-            std::unique_ptr<IStudent> newStudent(StudentFactory::create(
-                    studentID,
-                    firstName.toStdString(),
-                    lastName.toStdString(),
-                    gender,
-                    grades));
+            std::unique_ptr<IStudent> newStudent(
+                    StudentFactory::create(
+                            studentID,
+                            firstName,
+                            lastName,
+                            gender,
+                            grades));
             studentClass->addStudent(std::move(newStudent));
         }
         return studentClass;
@@ -83,10 +84,8 @@ void TextFileStorage::write(const IStudentClass& studentClass) {
             const auto& studentPersonalData = student.getPersonalData();
             const auto& studentGrades = student.getGrades();
 
-            QString studentFirstName =
-                    QString::fromStdString(studentPersonalData.getFirstName());
-            QString studentLastName =
-                    QString::fromStdString(studentPersonalData.getLastName());
+            QString studentFirstName = studentPersonalData.getFirstName();
+            QString studentLastName = studentPersonalData.getLastName();
             Gender studentGender = studentPersonalData.getGender();
             QString studentGenderSymbol;
 
