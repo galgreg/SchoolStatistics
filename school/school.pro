@@ -4,7 +4,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = school
 TEMPLATE = app
 DEFINES += QT_DEPRECATED_WARNINGS
-QMAKE_CXXFLAGS += -std=c++17
+QMAKE_CXXFLAGS += -std=c++14
 
 SOURCES += classstatistics.cpp \
     confirmdialog.cpp \
