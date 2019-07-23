@@ -2,24 +2,21 @@
 #define STUDENT_H
 #include "istudent.h"
 #include "igrades.h"
-#include "grades.h"
 #include "ipersonaldata.h"
-#include "personaldata.h"
-#include <memory>
 
 class Student : public IStudent
 {
 public:
-    explicit Student(
+    Student(
         unsigned ID,
-        const IPersonalData& personalData = PersonalData("", "", UNKNOWN),
-        const IGrades& grades = Grades(3));
+        std::unique_ptr<IPersonalData> personalData,
+        std::unique_ptr<IGrades> grades);
 
     unsigned getID() const override;
     const IPersonalData& getPersonalData() const override;
     const IGrades& getGrades() const override;
-    void setPersonalData(const IPersonalData& newData) override;
-    void setGrades(const IGrades& newGrades) override;
+    void setPersonalData(std::unique_ptr<IPersonalData> newData) override;
+    void setGrades(std::unique_ptr<IGrades> newGrades) override;
 
 private:
     unsigned mID;

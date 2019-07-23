@@ -17,7 +17,6 @@ public:
 private slots:
     void cleanup();
     void testState_DefaultInitialized();
-    void testState_DataInitialized();
     void testChangeStateBySetters();
 
 private:

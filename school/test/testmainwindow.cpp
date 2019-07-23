@@ -1,6 +1,7 @@
 #include "testmainwindow.h"
 #include "confirmdialogmock.h"
 #include "datarepositorymock.h"
+#include "personaldata.h"
 #include "studentclass.h"
 #include "studentdataformmock.h"
 #include "studentdatawidgetmock.h"
@@ -284,9 +285,9 @@ void TestMainWindow::testDoAction_EditStudent() {
             StudentFactory::copy(
                     mStudentClassData->getStudent(indexOfStudentToEdit)));
 
-    std::unique_ptr<IPersonalData> newPersonalData(
-            new PersonalData(newFirstName, newLastName, studentGender));
-    expectedStudentAfterEdit->setPersonalData(*newPersonalData);
+    expectedStudentAfterEdit->setPersonalData(
+            std::make_unique<PersonalData>(
+                    newFirstName, newLastName, studentGender));
 
     const auto& actualStudentAfterEdit =
             mMainWindow->mStudentClass->getStudent(indexOfStudentToEdit);
@@ -385,9 +386,9 @@ void TestMainWindow::testDoEditAction() {
             StudentFactory::copy(
                     mStudentClassData->getStudent(indexOfStudentToEdit)));
 
-    std::unique_ptr<IPersonalData> newPersonalData(
-            new PersonalData(newFirstName, newLastName, studentGender));
-    expectedStudentAfterEdit->setPersonalData(*newPersonalData);
+    expectedStudentAfterEdit->setPersonalData(
+                std::make_unique<PersonalData>(
+                        newFirstName, newLastName, studentGender));
 
     const auto& actualStudentAfterEdit =
             mMainWindow->mStudentClass->getStudent(indexOfStudentToEdit);

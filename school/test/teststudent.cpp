@@ -20,20 +20,10 @@ void TestStudent::testState_DefaultInitialized() {
     const unsigned expectedID = 1;
     const IPersonalData& expectedPersonalData = PersonalDataMock();
     const IGrades& expectedGrades = GradesMock();
-    Student actualStudent(expectedID, expectedPersonalData, expectedGrades);
-
-    checkObjectState(
-            actualStudent,
+    Student actualStudent(
             expectedID,
-            expectedPersonalData,
-            expectedGrades);
-}
-
-void TestStudent::testState_DataInitialized() {
-    const unsigned expectedID = 1;
-    const IPersonalData& expectedPersonalData = PersonalDataMock();
-    const IGrades& expectedGrades = GradesMock();
-    Student actualStudent(expectedID, expectedPersonalData, expectedGrades);
+            std::make_unique<PersonalDataMock>(expectedPersonalData),
+            std::make_unique<GradesMock>(expectedGrades));
 
     checkObjectState(
             actualStudent,
@@ -44,36 +34,36 @@ void TestStudent::testState_DataInitialized() {
 
 void TestStudent::testChangeStateBySetters() {
     const unsigned expectedID_BeforeSet = 1;
-    std::unique_ptr<IPersonalData> expectedPersonalData_BeforeSet(new PersonalDataMock);
-    std::unique_ptr<IGrades> expectedGrades_BeforeSet(new GradesMock);
+    const IPersonalData& expectedPersonalData_BeforeSet = PersonalDataMock();
+    const IGrades& expectedGrades_BeforeSet = GradesMock();
 
     Student actualStudent(
             expectedID_BeforeSet,
-            *expectedPersonalData_BeforeSet,
-            *expectedGrades_BeforeSet);
+            std::make_unique<PersonalDataMock>(expectedPersonalData_BeforeSet),
+            std::make_unique<GradesMock>(expectedGrades_BeforeSet));
 
     checkObjectState(
             actualStudent,
             expectedID_BeforeSet,
-            *expectedPersonalData_BeforeSet,
-            *expectedGrades_BeforeSet);
+            expectedPersonalData_BeforeSet,
+            expectedGrades_BeforeSet);
 
     const unsigned expectedID_AfterSet = expectedID_BeforeSet;
-    std::unique_ptr<IPersonalData> expectedPersonalData_AfterSet(new PersonalDataMock);
-    std::unique_ptr<IGrades> expectedGrades_AfterSet(new GradesMock);
+    const IPersonalData& expectedPersonalData_AfterSet = PersonalDataMock();
+    const IGrades& expectedGrades_AfterSet = GradesMock();
 
     QCOMPARE(expectedID_BeforeSet, expectedID_AfterSet);
-    QVERIFY(expectedPersonalData_BeforeSet != expectedPersonalData_AfterSet);
-    QVERIFY(expectedGrades_BeforeSet != expectedGrades_AfterSet);
 
-    actualStudent.setPersonalData(*expectedPersonalData_AfterSet);
-    actualStudent.setGrades(*expectedGrades_AfterSet);
+    actualStudent.setPersonalData(
+            std::make_unique<PersonalDataMock>(expectedPersonalData_AfterSet));
+    actualStudent.setGrades(
+            std::make_unique<GradesMock>(expectedGrades_AfterSet));
 
     checkObjectState(
             actualStudent,
             expectedID_AfterSet,
-            *expectedPersonalData_AfterSet,
-            *expectedGrades_AfterSet);
+            expectedPersonalData_AfterSet,
+            expectedGrades_AfterSet);
 }
 
 void TestStudent::checkObjectState(

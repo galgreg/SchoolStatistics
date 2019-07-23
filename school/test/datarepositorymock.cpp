@@ -1,4 +1,5 @@
 #include "datarepositorymock.h"
+#include "grades.h"
 #include "studentfactory.h"
 
 DataRepositoryMock::DataRepositoryMock(const QString &repositoryPath) :
@@ -18,7 +19,7 @@ std::unique_ptr<IStudentClass> DataRepositoryMock::read(
         for (unsigned k = 0; k < maxGradesCount; ++k) {
             studentGrades->add(studentCopy->getGrades().getGrade(k));
         }
-        studentCopy->setGrades(*studentGrades);
+        studentCopy->setGrades(std::move(studentGrades));
         classFromFile->addStudent(std::move(studentCopy));
     }
     return classFromFile;

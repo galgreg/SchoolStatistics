@@ -1,7 +1,7 @@
 #include "studentmock.h"
 #include "gradesmock.h"
 
-StudentMock::StudentMock(const std::initializer_list<double>& grades) :
+StudentMock::StudentMock(const std::initializer_list<double> &grades) :
         mPersonalData(new PersonalDataMock),
         mGrades(new GradesMock(grades)) {
 }
@@ -24,9 +24,9 @@ const IGrades& StudentMock::getGrades() const {
     return *mGrades;
 }
 
-void StudentMock::setPersonalData(const IPersonalData &) {
+void StudentMock::setPersonalData(std::unique_ptr<IPersonalData>) {
 }
 
-void StudentMock::setGrades(const IGrades&) {
+void StudentMock::setGrades(std::unique_ptr<IGrades>) {
 
 }

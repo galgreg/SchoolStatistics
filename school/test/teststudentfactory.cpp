@@ -1,5 +1,7 @@
 #include "teststudentfactory.h"
 #include "gender.h"
+#include "grades.h"
+#include "personaldata.h"
 #include "studentfactory.h"
 #include <memory>
 
@@ -24,8 +26,8 @@ void TestStudentFactory::test_createStudent() {
     std::unique_ptr<IStudent> expectedStudent(
             new Student(
                     expectedID,
-                    *expectedPersonalData,
-                    *expectedGradesObject));
+                    std::move(expectedPersonalData),
+                    std::move(expectedGradesObject)));
 
     std::unique_ptr<IStudent> actualStudent(StudentFactory::create(
             expectedID,
@@ -52,8 +54,8 @@ void TestStudentFactory::test_copyStudent() {
     std::unique_ptr<IStudent> expectedStudent(
             new Student(
                     expectedID,
-                    *expectedPersonalData,
-                    *expectedGradesObject));
+                    std::move(expectedPersonalData),
+                    std::move(expectedGradesObject)));
 
     std::unique_ptr<IStudent> actualStudent(
             StudentFactory::copy(*expectedStudent));
