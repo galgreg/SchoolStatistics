@@ -1,75 +1,57 @@
-#-------------------------------------------------
-#
-# Project created by QtCreator 2019-03-26T13:06:43
-#
-#-------------------------------------------------
-
 QT       += core gui
-
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = school
 TEMPLATE = app
-
-# The following define makes your compiler emit warnings if you use
-# any feature of Qt which has been marked as deprecated (the exact warnings
-# depend on your compiler). Please consult the documentation of the
-# deprecated API in order to know how to port your code away from it.
 DEFINES += QT_DEPRECATED_WARNINGS
-
-# You can also make your code fail to compile if you use deprecated APIs.
-# In order to do so, uncomment the following line.
-# You can also select to disable deprecated APIs only up to a certain version of Qt.
-#DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
-
 QMAKE_CXXFLAGS += -std=c++17
 
-SOURCES += main.cpp \
-    mainwindow.cpp \
-    studentdatawindow.cpp \
+SOURCES += classstatistics.cpp \
     confirmdialog.cpp \
     grades.cpp \
+    idatarepository.cpp \
+    igrades.cpp \
+    ipersonaldata.cpp \
+    istudent.cpp \
+    istudentclass.cpp \
+    main.cpp \
+    mainwindow.cpp \
     personaldata.cpp \
+    signaltransmitter.cpp \
     student.cpp \
     studentclass.cpp \
-    classstatistics.cpp \
-    textfilestorage.cpp \
-    idatarepository.cpp \
-    studentfactory.cpp \
-    istudentclass.cpp \
-    istudent.cpp \
     studentdataform.cpp \
-    signaltransmitter.cpp \
-    igrades.cpp \
-    ipersonaldata.cpp
+    studentdatawindow.cpp \
+    studentfactory.cpp \
+    textfilestorage.cpp
 
-HEADERS += mainwindow.h \
-    studentdatawindow.h \
+HEADERS += classstatistics.h \
     confirmdialog.h \
-    grades.h \
     gender.h \
-    personaldata.h \
-    ipersonaldata.h \
+    grades.h \
+    iconfirmdialog.h \
+    idatarepository.h \
     igrades.h \
-    student.h \
-    studentclass.h \
+    ipersonaldata.h \
     istudent.h \
     istudentclass.h \
-    classstatistics.h \
-    idatarepository.h \
-    textfilestorage.h \
-    studentfactory.h \
-    istudentdatawidget.h \
-    studentdataform.h \
-    iconfirmdialog.h \
-    signaltransmitter.h \
     istudentdataform.h \
-    studentdataaction.h
+    istudentdatawidget.h \
+    mainwindow.h \
+    personaldata.h \
+    signaltransmitter.h \
+    student.h \
+    studentclass.h \
+    studentdataaction.h \
+    studentdataform.h \
+    studentdatawindow.h \
+    studentfactory.h \
+    textfilestorage.h
 
-FORMS += mainwindow.ui \
-    studentdatawindow.ui \
-    confirmdialog.ui \
-    studentdataform.ui
+FORMS += confirmdialog.ui \
+    mainwindow.ui \
+    studentdataform.ui \
+    studentdatawindow.ui
 
 test {
     message(Test build)
@@ -78,51 +60,50 @@ test {
 
     SOURCES -= main.cpp
 
-    HEADERS += test/testexecutioncounter.h \
-    test/testgrades.h \
-    test/testpersonaldata.h \
-    test/teststudent.h \
-    test/personaldatamock.h \
-    test/gradesmock.h \
-    test/teststudentclass.h \
-    test/studentmock.h \
-    test/testclassstatistics.h \
-    test/studentclassmock.h \
-    test/testtextfilestorage.h \
-    test/teststudentfactory.h \
-    test/testmainwindow.h \
-    test/studentdatawidgetmock.h \
-    test/confirmdialogmock.h \
-    test/testconfirmdialog.h \
-    test/teststudentdatawindow.h \
-    test/testsignaltransmitter.h \
-    test/studentdataformmock.h \
-    test/teststudentdataform.h \
-    test/datarepositorymock.h
-
+    HEADERS += test/confirmdialogmock.h \
+        test/datarepositorymock.h \
+        test/gradesmock.h \
+        test/personaldatamock.h \
+        test/studentclassmock.h \
+        test/studentdataformmock.h \
+        test/studentdatawidgetmock.h \
+        test/studentmock.h \
+        test/testclassstatistics.h \
+        test/testconfirmdialog.h \
+        test/testexecutioncounter.h \
+        test/testgrades.h \
+        test/testmainwindow.h \
+        test/testpersonaldata.h \
+        test/testsignaltransmitter.h \
+        test/teststudent.h \
+        test/teststudentclass.h \
+        test/teststudentdataform.h \
+        test/teststudentdatawindow.h \
+        test/teststudentfactory.h \
+        test/testtextfilestorage.h \
 
     SOURCES += test/test_main.cpp \
-    test/testexecutioncounter.cpp \
-    test/testgrades.cpp \
-    test/testpersonaldata.cpp \
-    test/teststudent.cpp \
-    test/personaldatamock.cpp \
-    test/gradesmock.cpp \
-    test/teststudentclass.cpp \
-    test/studentmock.cpp \
-    test/testclassstatistics.cpp \
-    test/studentclassmock.cpp \
-    test/testtextfilestorage.cpp \
-    test/teststudentfactory.cpp \
-    test/testmainwindow.cpp \
-    test/studentdatawidgetmock.cpp \
-    test/confirmdialogmock.cpp \
-    test/testconfirmdialog.cpp \
-    test/teststudentdatawindow.cpp \
-    test/testsignaltransmitter.cpp \
-    test/studentdataformmock.cpp \
-    test/teststudentdataform.cpp \
-    test/datarepositorymock.cpp
+        test/confirmdialogmock.cpp \
+        test/datarepositorymock.cpp \
+        test/gradesmock.cpp \
+        test/personaldatamock.cpp \
+        test/studentclassmock.cpp \
+        test/studentdataformmock.cpp \
+        test/studentdatawidgetmock.cpp \
+        test/studentmock.cpp \
+        test/testclassstatistics.cpp \
+        test/testconfirmdialog.cpp \
+        test/testexecutioncounter.cpp \
+        test/testgrades.cpp \
+        test/testmainwindow.cpp \
+        test/testpersonaldata.cpp \
+        test/testsignaltransmitter.cpp \
+        test/teststudent.cpp \
+        test/teststudentclass.cpp \
+        test/teststudentdataform.cpp \
+        test/teststudentdatawindow.cpp \
+        test/teststudentfactory.cpp \
+        test/testtextfilestorage.cpp \
 
 } else {
     message(Normal build)
