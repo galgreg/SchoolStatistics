@@ -15,20 +15,18 @@ size_t StudentClass::count() const {
 void StudentClass::addStudent(std::unique_ptr<IStudent> newStudent) {
     if (newStudent == nullptr) {
         throw std::bad_alloc();
-    }
-
-    if(count() >= maxAllowedCount()) {
+    } else if(count() >= maxAllowedCount()) {
         throw std::out_of_range(
-                "StudentClass::addStudent() : StudentClass overflow");
+                "StudentClass::addStudent() error: StudentClass overflow");
     }
-
     mStudents.push_back(std::move(newStudent));
 }
 
 void StudentClass::removeStudent(size_t whichStudent) {
     if (whichStudent >= count()) {
         throw std::out_of_range(
-                "StudentClass::removeStudent() : No such element");
+                "StudentClass::removeStudent() error: "
+                "whichStudent is out of range!");
     }
     long position = static_cast<long>(whichStudent);
     mStudents.erase(mStudents.cbegin() + position);

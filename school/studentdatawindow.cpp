@@ -70,7 +70,3 @@ void StudentDataWindow::setGrades(const QString &newGrades) {
 void StudentDataWindow::setGradesAverage(const QString &newGradesAverage) {
     ui->gradesAverageValue->setText(newGradesAverage);
 }
-
-
-
-

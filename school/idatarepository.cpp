@@ -6,12 +6,6 @@ IDataRepository::IDataRepository(
 
 }
 
-IDataRepository::~IDataRepository() {
-
-}
-
 QString IDataRepository::getPath() {
     return mRepositoryPath;
 }
-
-

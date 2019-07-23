@@ -1,9 +1,9 @@
 #include "mainwindow.h"
 #include "classstatistics.h"
-#include "ui_mainwindow.h"
 #include "studentclass.h"
 #include "studentfactory.h"
 #include "textfilestorage.h"
+#include "ui_mainwindow.h"
 
 MainWindow::MainWindow(
         std::unique_ptr<IDataRepository> dataRepository,
@@ -75,21 +75,21 @@ void MainWindow::showEditStudentForm() {
 }
 
 void MainWindow::doAction(StudentDataAction actionToDo) {
-    if (actionToDo == DELETE_STUDENT) {
-        doDeleteAction();
-    } else if (actionToDo == ADD_STUDENT) {
+    if (actionToDo == ADD_STUDENT) {
         doAddAction();
     } else if (actionToDo == EDIT_STUDENT) {
         doEditAction();
+    } else if (actionToDo == DELETE_STUDENT) {
+        doDeleteAction();
     }
 }
 
 void MainWindow::beginFormTransaction(StudentDataAction formAction) {
     if (formAction == ADD_STUDENT || formAction == EDIT_STUDENT) {
         QString studentName =
-        QString("%1 %2")
-        .arg(mStudentDataForm->getFirstName())
-        .arg(mStudentDataForm->getLastName());
+                QString("%1 %2")
+                    .arg(mStudentDataForm->getFirstName())
+                    .arg(mStudentDataForm->getLastName());
         mConfirmDialog->customizeDialogMessage(formAction, studentName);
         mConfirmDialog->showDialog();
     }
@@ -107,12 +107,8 @@ void MainWindow::doAddAction() {
     QString studentFirstName = mStudentDataForm->getFirstName();
     QString studentLastName = mStudentDataForm->getLastName();
     Gender studentGender = mStudentDataForm->getGender();
+    QList<double> studentGrades = mStudentDataForm->getGrades();
 
-    auto tempGrades = mStudentDataForm->getGrades();
-    QList<double> studentGrades;
-    for(int i = 0; i < tempGrades.size(); ++i) {
-        studentGrades.push_back(tempGrades.at(i));
-    }
     std::unique_ptr<IStudent> newStudent(
             StudentFactory::create(
                     studentID,
@@ -131,7 +127,7 @@ void MainWindow::doEditAction() {
     int indexOfStudentToEdit = ui->studentList->currentRow();
 
     if (indexOfStudentToEdit > -1) {
-        const auto& studentToEdit =
+        const IStudent& studentToEdit =
                 mStudentClass->getStudent(
                     static_cast<size_t>(indexOfStudentToEdit));
 
@@ -148,6 +144,7 @@ void MainWindow::doEditAction() {
                         studentLastName,
                         studentGender,
                         studentGrades));
+
         mStudentClass->editStudent(
                 static_cast<size_t>(indexOfStudentToEdit),
                 std::move(newStudent));
@@ -183,8 +180,8 @@ void MainWindow::readDataFromRepository() {
     auto& studentList = ui->studentList;
     studentList->clear();
     for (size_t i = 0; i < mStudentClass->count(); ++i) {
-        const auto& student = mStudentClass->getStudent(i);
-        const auto& personalData = student.getPersonalData();
+        const IStudent& student = mStudentClass->getStudent(i);
+        const IPersonalData& personalData = student.getPersonalData();
         QString studentFullName =
                 QString("%1 %2")
                 .arg(personalData.getFirstName())
@@ -204,10 +201,10 @@ void MainWindow::deleteStudent(size_t studentIndex) {
 }
 
 void MainWindow::prepareStudentDataWidgetToDisplay(size_t studentIndex) {
-    const auto& student = mStudentClass->getStudent(studentIndex);
+    const IStudent& student = mStudentClass->getStudent(studentIndex);
     QString studentID = QString::number(student.getID());
     mStudentDataWidget->setID(studentID);
-    const auto& studentPersonalData = student.getPersonalData();
+    const IPersonalData& studentPersonalData = student.getPersonalData();
     QString studentFirstName = studentPersonalData.getFirstName();
     mStudentDataWidget->setFirstName(studentFirstName);
     QString studentLastName = studentPersonalData.getLastName();
@@ -225,7 +222,7 @@ void MainWindow::prepareStudentDataWidgetToDisplay(size_t studentIndex) {
     }
     mStudentDataWidget->setGender(studentGender);
 
-    const auto& studentGrades = student.getGrades();
+    const IGrades& studentGrades = student.getGrades();
     QString gradesString = "";
 
     for (unsigned i = 0; i < studentGrades.count(); ++i) {
@@ -256,9 +253,10 @@ void MainWindow::prepareStudentDataFormToDisplay(
     } else if(actionToPerform == EDIT_STUDENT) {
         size_t currentIndex =
                 static_cast<size_t>(ui->studentList->currentRow());
-        const auto& studentToEdit = mStudentClass->getStudent(currentIndex);
-        const auto& studentPersonalData = studentToEdit.getPersonalData();
-        const auto& studentGrades = studentToEdit.getGrades();
+        const IStudent& studentToEdit = mStudentClass->getStudent(currentIndex);
+        const IPersonalData& studentPersonalData =
+                studentToEdit.getPersonalData();
+        const IGrades& studentGrades = studentToEdit.getGrades();
 
         mStudentDataForm->setHeader("Edit Student");
         mStudentDataForm->setFirstName(studentPersonalData.getFirstName());
