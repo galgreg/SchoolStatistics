@@ -33,11 +33,10 @@ void TestConfirmDialog::testInitialState() {
 
 void TestConfirmDialog::testCustomizeDialogMessage() {
     StudentDataAction actionToDo = ADD_STUDENT;
-    QString actionString = "add";
     QString studentName = "Jan Kowalski";
-    mConfirmDialog->customizeDialogMessage(actionToDo,actionString, studentName);
+    mConfirmDialog->customizeDialogMessage(actionToDo, studentName);
 
-    QString expectedActionString = actionString;
+    QString expectedActionString = "add";
     QString actualActionString = mConfirmDialog->getCurrentActionString();
     QCOMPARE(actualActionString, expectedActionString);
 
@@ -91,4 +90,21 @@ void TestConfirmDialog::testConfirmButtonClicked() {
 
     bool isDialogVisible = mConfirmDialog->isVisible();
     QVERIFY(isDialogVisible == false);
+}
+
+void TestConfirmDialog::testConvertActionToString_data() {
+    QTest::addColumn<StudentDataAction>("actionToConvert");
+    QTest::addColumn<QString>("expectedActionString");
+
+    QTest::newRow("Convert ADD_STUDENT") << ADD_STUDENT << "add";
+    QTest::newRow("Convert EDIT_STUDENT") << EDIT_STUDENT << "edit";
+    QTest::newRow("Convert DELETE_STUDENT") << DELETE_STUDENT << "delete";
+}
+
+void TestConfirmDialog::testConvertActionToString() {
+    QFETCH(StudentDataAction, actionToConvert);
+    QFETCH(QString, expectedActionString);
+    QString actualActionString =
+            mConfirmDialog->convertActionToString(actionToConvert);
+    QCOMPARE(actualActionString, expectedActionString);
 }

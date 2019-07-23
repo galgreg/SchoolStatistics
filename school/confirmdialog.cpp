@@ -30,16 +30,15 @@ void ConfirmDialog::hideDialog() {
 
 void ConfirmDialog::customizeDialogMessage(
          StudentDataAction actionToDo,
-        const QString &actionString,
         const QString &studentName) {
     mActionToDo = actionToDo;
-    mCurrentActionString = actionString;
+    mCurrentActionString = convertActionToString(actionToDo);
     mCurrentStudentName = studentName;
     QString dialogMessage = QString(
             "<html><head/><body>"
             "<p align=\"center\"> You asked to %1 data about %2. </p>"
             "<p align=\"center\">Are you sure?</p>"
-            "</body></html>").arg(actionString).arg(studentName);
+            "</body></html>").arg(mCurrentActionString).arg(studentName);
     ui->dialogMessage->setText(dialogMessage);
 }
 
@@ -54,6 +53,18 @@ QString ConfirmDialog::getCurrentStudentName() {
 void ConfirmDialog::confirmButtonClicked() {
     emit commit(mActionToDo);
     this->hide();
+}
+
+QString ConfirmDialog::convertActionToString(StudentDataAction actionToConvert) {
+    if (actionToConvert == ADD_STUDENT) {
+        return "add";
+    } else if (actionToConvert == EDIT_STUDENT) {
+        return "edit";
+    } else if (actionToConvert == DELETE_STUDENT) {
+        return "delete";
+    } else {
+        return "";
+    }
 }
 
 

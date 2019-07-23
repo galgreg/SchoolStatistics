@@ -251,19 +251,7 @@ void MainWindow::prepareStudentDataWidgetToDisplay(size_t studentIndex) {
 void MainWindow::prepareConfirmDialogToDisplay(
         StudentDataAction actionToConfirm,
         QString studentName) {
-    QString actionString;
-
-    if (actionToConfirm == ADD_STUDENT) {
-        actionString = "add";
-    } else if (actionToConfirm == EDIT_STUDENT) {
-        actionString = "edit";
-    } else if (actionToConfirm == DELETE_STUDENT) {
-        actionString = "delete";
-    }
-    mConfirmDialog->customizeDialogMessage(
-            actionToConfirm,
-            actionString,
-                studentName);
+    mConfirmDialog->customizeDialogMessage(actionToConfirm, studentName);
 }
 
 void MainWindow::prepareStudentDataFormToDisplay(

@@ -12,7 +12,6 @@ public:
 
     virtual void customizeDialogMessage(
             StudentDataAction actionToDo,
-            const QString &actionString,
             const QString &studentName) = 0;
 
     virtual QString getCurrentActionString() = 0;

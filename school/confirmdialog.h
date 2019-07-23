@@ -1,15 +1,15 @@
 #ifndef CONFIRMDIALOG_H
 #define CONFIRMDIALOG_H
 
-#include <QWidget>
 #include "iconfirmdialog.h"
+#include <QWidget>
 #include "signaltransmitter.h"
 #include <memory>
 
 class TestConfirmDialog;
 
 namespace Ui {
-class ConfirmDialog;
+    class ConfirmDialog;
 }
 
 class ConfirmDialog : public QWidget, public IConfirmDialog
@@ -27,7 +27,6 @@ public:
 
     void customizeDialogMessage(
         StudentDataAction actionToDo,
-        const QString &actionString,
         const QString &studentName) override;
 
     QString getCurrentActionString() override;
@@ -40,6 +39,8 @@ private slots:
     void confirmButtonClicked();
 
 private:
+    QString convertActionToString(StudentDataAction actionToConvert);
+
     std::unique_ptr<Ui::ConfirmDialog> ui;
     std::shared_ptr<SignalTransmitter> mSignalTransmitter;
     StudentDataAction mActionToDo;

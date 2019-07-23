@@ -17,10 +17,17 @@ void ConfirmDialogMock::hideDialog() {
 }
 
 void ConfirmDialogMock::customizeDialogMessage(
-        StudentDataAction /* actionToDo */,
-        const QString &actionString,
+        StudentDataAction actionToDo,
         const QString &studentName) {
-    mActionString = actionString;
+    if (actionToDo == ADD_STUDENT) {
+        mActionString = "add";
+    } else if (actionToDo == EDIT_STUDENT) {
+        mActionString = "edit";
+    } else if (actionToDo == DELETE_STUDENT) {
+        mActionString = "delete";
+    } else {
+        mActionString = "";
+    }
     mStudentName = studentName;
 }
 

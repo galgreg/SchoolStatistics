@@ -21,6 +21,9 @@ private slots:
     void testConfirmButtonClicked_data();
     void testConfirmButtonClicked();
 
+    void testConvertActionToString_data();
+    void testConvertActionToString();
+
 private:
     std::unique_ptr<ConfirmDialog> mConfirmDialog;
 };

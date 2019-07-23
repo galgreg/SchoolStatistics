@@ -16,7 +16,6 @@ public:
 
     void customizeDialogMessage(
             StudentDataAction actionToDo,
-            const QString &actionString,
             const QString &studentName) override;
 
     QString getCurrentActionString() override;
