@@ -51,9 +51,6 @@ private:
     void deleteStudent(size_t studentIndex);
 
     void prepareStudentDataWidgetToDisplay(size_t studentIndex);
-    void prepareConfirmDialogToDisplay(
-            StudentDataAction actionToConfirm,
-            QString studentName);
     void prepareStudentDataFormToDisplay(StudentDataAction actionToPerform);
 
     std::unique_ptr<Ui::MainWindow> ui;

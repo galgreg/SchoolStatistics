@@ -20,8 +20,6 @@ private slots:
     void testReadDataFromRepository();
     void testDeleteStudent();
     void testPrepareStudentDataWidgetToDisplay();
-    void testPrepareConfirmDialogToDisplay_data();
-    void testPrepareConfirmDialogToDisplay();
     void testDoAction_DeleteStudent();
     void testDoAction_AddStudent();
     void testDoAction_EditStudent();

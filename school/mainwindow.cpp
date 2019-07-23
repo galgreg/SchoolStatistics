@@ -59,7 +59,7 @@ void MainWindow::beginDeleteTransaction() {
 
     if (ui->studentList->currentRow() > -1) {
         QString studentName = ui->studentList->currentItem()->text();
-        prepareConfirmDialogToDisplay(actionToConfirm, studentName);
+        mConfirmDialog->customizeDialogMessage(actionToConfirm, studentName);
         mConfirmDialog->showDialog();
     }
 }
@@ -90,7 +90,7 @@ void MainWindow::beginFormTransaction(StudentDataAction formAction) {
         QString("%1 %2")
         .arg(mStudentDataForm->getFirstName())
         .arg(mStudentDataForm->getLastName());
-        prepareConfirmDialogToDisplay(formAction, studentName);
+        mConfirmDialog->customizeDialogMessage(formAction, studentName);
         mConfirmDialog->showDialog();
     }
 }
@@ -246,12 +246,6 @@ void MainWindow::prepareStudentDataWidgetToDisplay(size_t studentIndex) {
             'f',
             1);
     mStudentDataWidget->setGradesAverage(gradesAverage);
-}
-
-void MainWindow::prepareConfirmDialogToDisplay(
-        StudentDataAction actionToConfirm,
-        QString studentName) {
-    mConfirmDialog->customizeDialogMessage(actionToConfirm, studentName);
 }
 
 void MainWindow::prepareStudentDataFormToDisplay(

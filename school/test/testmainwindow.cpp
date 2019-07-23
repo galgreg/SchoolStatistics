@@ -192,35 +192,6 @@ void TestMainWindow::testPrepareStudentDataWidgetToDisplay() {
     QCOMPARE(actualGradesAverage, expectedGradesAverage);
 }
 
-void TestMainWindow::testPrepareConfirmDialogToDisplay_data() {
-    QTest::addColumn<StudentDataAction>("actionToConfirm");
-    QTest::addColumn<QString>("studentName");
-    QTest::addColumn<QString>("expectedActionString");
-
-    QTest::newRow("add_jan_kowalski")
-            << ADD_STUDENT << "Jan Kowalski" << "add";
-    QTest::newRow("edit_maria_nowak")
-            << EDIT_STUDENT << "Maria Nowak" << "edit";
-    QTest::newRow("delete_gal_anonim")
-            << DELETE_STUDENT << "Gal Anonim" << "delete";
-}
-
-void TestMainWindow::testPrepareConfirmDialogToDisplay() {
-    QFETCH(StudentDataAction, actionToConfirm);
-    QFETCH(QString, studentName);
-    mMainWindow->prepareConfirmDialogToDisplay(actionToConfirm, studentName);
-
-    QFETCH(QString, expectedActionString);
-    QString actualActionString =
-            mMainWindow->mConfirmDialog->getCurrentActionString();
-    QCOMPARE(actualActionString, expectedActionString);
-
-    QString expectedStudentName = studentName;
-    QString actualStudentName =
-            mMainWindow->mConfirmDialog->getCurrentStudentName();
-    QCOMPARE(actualStudentName, expectedStudentName);
-}
-
 void TestMainWindow::testDoAction_DeleteStudent() {
     size_t studentIndex = 1;
     mMainWindow->ui->studentList->setCurrentRow(static_cast<int>(studentIndex));
