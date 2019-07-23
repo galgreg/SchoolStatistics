@@ -9,7 +9,7 @@ class DataRepositoryMock : public IDataRepository
 {
 public:
     explicit DataRepositoryMock(
-        const std::string &repositoryPath = "STUDENT_DATA_REPO_MOCK_PATH");
+        const QString &repositoryPath = "STUDENT_DATA_REPO_MOCK_PATH");
     std::unique_ptr<IStudentClass> read(
         size_t maxStudentCount,
         size_t maxGradesCount) override;

@@ -23,7 +23,7 @@ private:
         const IStudentClass &actualClass,
         const IStudentClass &expectedClass);
 
-    const std::string testFilePath = "testFile.txt";
+    const QString testFilePath = "testFile.txt";
 };
 
 #endif // TESTTEXTFILESTORAGE_H

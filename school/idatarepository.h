@@ -3,11 +3,12 @@
 
 #include "istudentclass.h"
 #include <memory>
+#include <QString>
 
 class IDataRepository
 {
 public:
-    explicit IDataRepository(const std::string &repositoryPath);
+    explicit IDataRepository(const QString &repositoryPath);
     virtual ~IDataRepository();
 
     virtual std::unique_ptr<IStudentClass> read(
@@ -15,9 +16,9 @@ public:
     virtual void write(const IStudentClass& studentClass) = 0;
     virtual bool exist() = 0;
 
-    std::string getPath();
+    QString getPath();
 private:
-    const std::string mRepositoryPath;
+    const QString mRepositoryPath;
 };
 
 #endif // IDATAREPOSITORY_H

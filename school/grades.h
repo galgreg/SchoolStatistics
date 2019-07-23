@@ -2,7 +2,7 @@
 #define GRADES_H
 
 #include "igrades.h"
-#include <vector>
+#include <QList>
 
 class Grades : public IGrades
 {
@@ -16,10 +16,10 @@ public:
     void remove(size_t whichGrade) override;
     void edit(size_t whichGrade, double newValue) override;
     size_t count() const override;
-    double getGrade(unsigned whichGrade) const override;
+    double getGrade(size_t whichGrade) const override;
     size_t maxAllowedCount() const override;
 private:
-    std::vector<double> mGrades;
+    QList<double> mGrades;
     const size_t mMaxCount;
 };
 

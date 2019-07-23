@@ -22,15 +22,15 @@ void GradesMock::edit(size_t, double) {
 }
 
 size_t GradesMock::count() const {
-    return mGrades.size();
+    return static_cast<size_t>(mGrades.size());
 }
 
-double GradesMock::getGrade(unsigned whichGrade) const {
-    return mGrades.at(whichGrade);
+double GradesMock::getGrade(size_t whichGrade) const {
+    return mGrades.at(static_cast<int>(whichGrade));
 }
 
 size_t GradesMock::maxAllowedCount() const {
-    return mGrades.size();
+    return static_cast<size_t>(mGrades.size());
 }
 
 

@@ -7,7 +7,7 @@
 #include <QTextStream>
 
 TextFileStorage::TextFileStorage(
-        const std::string &filePath) : IDataRepository(filePath) {
+        const QString &filePath) : IDataRepository(filePath) {
 
 }
 
@@ -15,11 +15,14 @@ std::unique_ptr<IStudentClass> TextFileStorage::read(
         size_t maxStudentCount,
         size_t maxGradesCount) {
     if (!exist()) {
-        throw std::ios_base::failure("TextFileStorage::read() error: "
-                "Cannot open file " + getPath() +
-                " (file does not exist)");
+        QString errorMessage =
+                QString("TextFileStorage::read() error: "
+                        "Cannot open file %1 (file does not exist)")
+                        .arg(getPath());
+
+        throw std::ios_base::failure(errorMessage.toStdString());
     }
-    QFile textFile(QString::fromStdString(getPath()));
+    QFile textFile(getPath());
     if (textFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
         std::unique_ptr<IStudentClass> studentClass(
                     new StudentClass(maxStudentCount));
@@ -72,7 +75,7 @@ std::unique_ptr<IStudentClass> TextFileStorage::read(
 }
 
 void TextFileStorage::write(const IStudentClass& studentClass) {
-    QFile fileStorage(QString::fromStdString(getPath()));
+    QFile fileStorage(getPath());
     if (fileStorage.open(QIODevice::WriteOnly | QIODevice::Text)) {
         QTextStream outputStream(&fileStorage);
         for (size_t i = 0; i < studentClass.count(); ++i) {
@@ -113,7 +116,6 @@ void TextFileStorage::write(const IStudentClass& studentClass) {
 }
 
 bool TextFileStorage::exist() {
-    QString filePath = QString::fromStdString(getPath());
-    QFile tempFile(filePath);
+    QFile tempFile(getPath());
     return tempFile.exists();
 }

@@ -13,7 +13,7 @@ TestTextFileStorage::TestTextFileStorage(
 }
 
 void TestTextFileStorage::init() {
-    const QString filePath = QString::fromStdString(testFilePath);
+    const QString filePath = testFilePath;
     QFile file(filePath);
 
     if (file.open(QIODevice::WriteOnly | QIODevice::Text)) {
@@ -31,18 +31,18 @@ void TestTextFileStorage::cleanup() {
     } else {
         incrementPassCounter();
     }
-    remove(testFilePath.c_str());
+    QFile::remove(testFilePath);
 }
 
 void TestTextFileStorage::testDefaultState() {
-    const std::string expectedFilePath = "file.txt";
+    const QString expectedFilePath = "file.txt";
     TextFileStorage fileStorage(expectedFilePath);
-    const std::string actualFilePath = fileStorage.getPath();
+    const QString actualFilePath = fileStorage.getPath();
     QCOMPARE(actualFilePath, expectedFilePath);
 }
 
 void TestTextFileStorage::testRead_Error_NoSuchFile() {
-    const std::string nonExistentFilePath = "nonExistent.txt";
+    const QString nonExistentFilePath = "nonExistent.txt";
     TextFileStorage fileStorage(nonExistentFilePath);
     bool expectedDoesFileExist = false;
     bool actualDoesFileExist = fileStorage.exist();
@@ -95,13 +95,13 @@ void TestTextFileStorage::testWrite_OK() {
     studentClass.addStudent(StudentFactory::create(
             3, "Gal", "Anonim", UNKNOWN, {2.0, 2.0, 2.0}));
 
-    std::string pathToStudentListFile = "test_students.txt";
+    QString pathToStudentListFile = "test_students.txt";
     TextFileStorage studentDataStorage(pathToStudentListFile);
 
     studentDataStorage.write(studentClass);
 
     QString actualFileContent = "";
-    QFile file(QString::fromStdString(pathToStudentListFile));
+    QFile file(pathToStudentListFile);
     if (file.open(QIODevice::ReadOnly | QIODevice::Text)) {
         QTextStream textStream(&file);
         actualFileContent = textStream.readAll();
@@ -113,7 +113,7 @@ void TestTextFileStorage::testWrite_OK() {
     QCOMPARE(actualFileContent, expectedFileContent);
 
     if (studentDataStorage.exist()) {
-        remove(pathToStudentListFile.c_str());
+        file.remove();
     }
 }
 

@@ -1,7 +1,7 @@
 #include "datarepositorymock.h"
 #include "studentfactory.h"
 
-DataRepositoryMock::DataRepositoryMock(const std::string &repositoryPath) :
+DataRepositoryMock::DataRepositoryMock(const QString &repositoryPath) :
     IDataRepository(repositoryPath) {
 
 }

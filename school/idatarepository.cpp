@@ -1,7 +1,7 @@
 #include "idatarepository.h"
 
 IDataRepository::IDataRepository(
-            const std::string &repositoryPath) :
+            const QString &repositoryPath) :
                 mRepositoryPath(repositoryPath) {
 
 }
@@ -10,7 +10,7 @@ IDataRepository::~IDataRepository() {
 
 }
 
-std::string IDataRepository::getPath() {
+QString IDataRepository::getPath() {
     return mRepositoryPath;
 }
 

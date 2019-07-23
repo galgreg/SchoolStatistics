@@ -6,7 +6,7 @@
 class TextFileStorage : public IDataRepository
 {
 public:
-    TextFileStorage(const std::string &filePath);
+    TextFileStorage(const QString &filePath);
 
     std::unique_ptr<IStudentClass> read(
             size_t maxStudentCount,

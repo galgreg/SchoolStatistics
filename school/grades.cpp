@@ -28,18 +28,24 @@ void Grades::remove(size_t whichGrade) {
         std::string index = std::to_string(whichGrade);
         throw std::out_of_range("Cannot remove grade, no such index: " + index);
     }
-    long index = static_cast<long>(whichGrade);
-    mGrades.erase(mGrades.cbegin() + index);
+    mGrades.removeAt(static_cast<int>(whichGrade));
 }
 
 void Grades::edit(size_t whichGrade, double newValue) {
-    mGrades.at(whichGrade) = newValue;
+    int listIndex = static_cast<int>(whichGrade);
+    if (listIndex >= mGrades.size()) {
+        throw std::out_of_range(
+                "Grades::edit() error: whichGrade is out of range!");
+    }
+
+    mGrades.replace(listIndex, newValue);
 }
 
 size_t Grades::count() const {
-    return mGrades.size();
+    size_t gradesCount = static_cast<size_t>(mGrades.size());
+    return gradesCount;
 }
 
-double Grades::getGrade(unsigned whichGrade) const {
-    return mGrades.at(whichGrade);
+double Grades::getGrade(size_t whichGrade) const {
+    return mGrades.at(static_cast<int>(whichGrade));
 }

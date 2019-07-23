@@ -12,7 +12,7 @@ public:
     virtual void remove(size_t whichGrade) = 0;
     virtual void edit(size_t whichGrade, double newValue) = 0;
     virtual size_t count() const = 0;
-    virtual double getGrade(unsigned whichGrade) const = 0;
+    virtual double getGrade(size_t whichGrade) const = 0;
     virtual size_t maxAllowedCount() const = 0;
 };
 
