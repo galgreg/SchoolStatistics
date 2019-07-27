@@ -11,7 +11,7 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     QDir tempDir;
-    QString fileStorageDirLocation = tempDir.absolutePath() + "/../school/";
+    QString fileStorageDirLocation = tempDir.absolutePath() + "/../";
     const QString PATH_TO_STORAGE = fileStorageDirLocation + "students.txt";
     auto signalTransmitter = std::make_shared<SignalTransmitter>();
     MainWindow w(
