@@ -1,47 +1,47 @@
 #include "studentdataformmock.h"
 
-StudentDataFormMock::StudentDataFormMock() :
+StudentDataFormMock::StudentDataFormMock() noexcept :
         mHeader(""), mFirstName(""), mLastName(""), mGender(UNKNOWN) {
 
 }
 
-void StudentDataFormMock::showForm() {
+void StudentDataFormMock::showForm() noexcept {
 
 }
 
-void StudentDataFormMock::hideForm() {
+void StudentDataFormMock::hideForm() noexcept {
 
 }
 
-void StudentDataFormMock::setFormAction(StudentDataAction newFormAction) {
+void StudentDataFormMock::setFormAction(StudentDataAction newFormAction) noexcept {
     mFormAction = newFormAction;
 }
 
-StudentDataAction StudentDataFormMock::getFormAction() {
+StudentDataAction StudentDataFormMock::getFormAction() noexcept {
     return mFormAction;
 }
 
-void StudentDataFormMock::setHeader(const QString &newHeader) {
+void StudentDataFormMock::setHeader(const QString &newHeader) noexcept {
     mHeader = newHeader;
 }
 
-void StudentDataFormMock::setFirstName(const QString &newFirstName) {
+void StudentDataFormMock::setFirstName(const QString &newFirstName) noexcept {
     mFirstName = newFirstName;
 }
 
-void StudentDataFormMock::setLastName(const QString &newLastName) {
+void StudentDataFormMock::setLastName(const QString &newLastName) noexcept {
     mLastName = newLastName;
 }
 
-void StudentDataFormMock::setGender(Gender newGender) {
+void StudentDataFormMock::setGender(Gender newGender) noexcept {
     mGender = newGender;
 }
 
-void StudentDataFormMock::setMaxGradesCount(size_t newMaxGradesCount) {
+void StudentDataFormMock::setMaxGradesCount(size_t newMaxGradesCount) noexcept {
     mMaxGradesCount = newMaxGradesCount;
 }
 
-size_t StudentDataFormMock::getMaxGradesCount() {
+size_t StudentDataFormMock::getMaxGradesCount() noexcept {
     return mMaxGradesCount;
 }
 
@@ -57,26 +57,26 @@ void StudentDataFormMock::deleteGrade(size_t whichGrade) {
     mGrades.removeAt(static_cast<int>(whichGrade));
 }
 
-void StudentDataFormMock::deleteAllGrades() {
+void StudentDataFormMock::deleteAllGrades() noexcept {
     mGrades.clear();
 }
 
-QString StudentDataFormMock::getHeader() {
+QString StudentDataFormMock::getHeader() noexcept {
     return mHeader;
 }
 
-QString StudentDataFormMock::getFirstName() {
+QString StudentDataFormMock::getFirstName() noexcept {
     return mFirstName;
 }
 
-QString StudentDataFormMock::getLastName() {
+QString StudentDataFormMock::getLastName() noexcept {
     return mLastName;
 }
 
-Gender StudentDataFormMock::getGender() {
+Gender StudentDataFormMock::getGender() noexcept {
     return mGender;
 }
 
-QList<double> StudentDataFormMock::getGrades() {
+QList<double> StudentDataFormMock::getGrades() noexcept {
     return mGrades;
 }

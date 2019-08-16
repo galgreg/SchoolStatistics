@@ -1,6 +1,6 @@
 #include "testgrades.h"
 
-TestGrades::TestGrades(unsigned &passed, unsigned &failed) :
+TestGrades::TestGrades(unsigned &passed, unsigned &failed) noexcept :
         TestExecutionCounter(passed, failed) {
 
 }
@@ -9,13 +9,13 @@ void TestGrades::init() {
     grades.reset(new Grades);
 }
 
-void TestGrades::testDefaultState() {
+void TestGrades::testDefaultState() noexcept {
     const size_t expectedInitialCount = 0;
     const size_t actualInitialCount = grades->count();
     QCOMPARE(actualInitialCount, expectedInitialCount);
 }
 
-void TestGrades::cleanup() {
+void TestGrades::cleanup() noexcept {
     if (QTest::currentTestFailed()) {
         incrementFailCounter();
     } else {
@@ -23,7 +23,7 @@ void TestGrades::cleanup() {
     }
 }
 
-void TestGrades::testAddGrade_OK() {
+void TestGrades::testAddGrade_OK() noexcept {
     const double expectedGrade = 5.0;
     grades->add(expectedGrade);
 
@@ -36,7 +36,7 @@ void TestGrades::testAddGrade_OK() {
     QCOMPARE(actualGrade, expectedGrade);
 }
 
-void TestGrades::testAddGrade_GradesOverflow() {
+void TestGrades::testAddGrade_GradesOverflow() noexcept {
     const size_t maxCount = grades->maxAllowedCount();
     for (unsigned i = 0; i != maxCount; ++i) {
         grades->add(5.0);
@@ -44,7 +44,7 @@ void TestGrades::testAddGrade_GradesOverflow() {
     QVERIFY_EXCEPTION_THROWN(grades->add(5.0), std::out_of_range);
 }
 
-void TestGrades::testRemoveGrade_OK() {
+void TestGrades::testRemoveGrade_OK() noexcept {
     grades->add(5.0);
     const size_t whichGrade = 0;
     grades->remove(whichGrade);
@@ -54,12 +54,12 @@ void TestGrades::testRemoveGrade_OK() {
     QCOMPARE(actualCount, expectedCount);
 }
 
-void TestGrades::testRemoveGrade_Error_NoSuchGrade() {
+void TestGrades::testRemoveGrade_Error_NoSuchGrade() noexcept {
     const size_t whichGrade = 0;
     QVERIFY_EXCEPTION_THROWN(grades->remove(whichGrade), std::out_of_range);
 }
 
-void TestGrades::testEditGrade_OK() {
+void TestGrades::testEditGrade_OK() noexcept {
     const double expectedGradeBeforeEdit = 5.0;
     grades->add(expectedGradeBeforeEdit);
     const size_t whichGrade = 0;
@@ -72,7 +72,7 @@ void TestGrades::testEditGrade_OK() {
     QCOMPARE(actualGradeAfterEdit, expectedGradeAfterEdit);
 }
 
-void TestGrades::testEditGrade_Error_NoSuchGrade() {
+void TestGrades::testEditGrade_Error_NoSuchGrade() noexcept {
     const size_t whichGrade = 2;
     const double newValue = 4.0;
     QVERIFY_EXCEPTION_THROWN(

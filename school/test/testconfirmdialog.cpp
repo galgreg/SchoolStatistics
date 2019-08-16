@@ -2,7 +2,7 @@
 #include "ui_confirmdialog.h"
 #include <QSignalSpy>
 
-TestConfirmDialog::TestConfirmDialog(unsigned &passed, unsigned &failed) :
+TestConfirmDialog::TestConfirmDialog(unsigned &passed, unsigned &failed) noexcept :
         TestExecutionCounter(passed, failed),
         mConfirmDialog(nullptr) {
 
@@ -13,7 +13,7 @@ void TestConfirmDialog::init() {
             new ConfirmDialog(std::make_shared<SignalTransmitter>()));
 }
 
-void TestConfirmDialog::cleanup() {
+void TestConfirmDialog::cleanup() noexcept {
     if (QTest::currentTestFailed()) {
         incrementFailCounter();
     } else {
@@ -21,7 +21,7 @@ void TestConfirmDialog::cleanup() {
     }
 }
 
-void TestConfirmDialog::testInitialState() {
+void TestConfirmDialog::testInitialState() noexcept {
     QString expectedInitialActionString = "";
     QString actualInitialActionString = mConfirmDialog->getCurrentActionString();
     QCOMPARE(actualInitialActionString, expectedInitialActionString);
@@ -31,7 +31,7 @@ void TestConfirmDialog::testInitialState() {
     QCOMPARE(actualInitialStudentName, expectedInitialStudentName);
 }
 
-void TestConfirmDialog::testCustomizeDialogMessage() {
+void TestConfirmDialog::testCustomizeDialogMessage() noexcept {
     StudentDataAction actionToDo = ADD_STUDENT;
     QString studentName = "Jan Kowalski";
     mConfirmDialog->customizeDialogMessage(actionToDo, studentName);
@@ -53,19 +53,19 @@ void TestConfirmDialog::testCustomizeDialogMessage() {
     QCOMPARE(actualDialogMessage, expectedDialogMessage);
 }
 
-void TestConfirmDialog::testShowDialog() {
+void TestConfirmDialog::testShowDialog() noexcept {
     mConfirmDialog->showDialog();
     bool isDialogVisible = mConfirmDialog->isVisible();
     QVERIFY(isDialogVisible == true);
 }
 
-void TestConfirmDialog::testHideDialog() {
+void TestConfirmDialog::testHideDialog() noexcept {
     mConfirmDialog->hideDialog();
     bool isDialogVisible = mConfirmDialog->isVisible();
     QVERIFY(isDialogVisible == false);
 }
 
-void TestConfirmDialog::testConfirmButtonClicked_data() {
+void TestConfirmDialog::testConfirmButtonClicked_data() noexcept {
     QTest::addColumn<StudentDataAction>("actionToCommit");
 
     QTest::newRow("commit_add_student") << ADD_STUDENT;
@@ -73,7 +73,7 @@ void TestConfirmDialog::testConfirmButtonClicked_data() {
     QTest::newRow("commit_delete_student") << DELETE_STUDENT;
 }
 
-void TestConfirmDialog::testConfirmButtonClicked() {
+void TestConfirmDialog::testConfirmButtonClicked() noexcept {
     QFETCH(StudentDataAction, actionToCommit);
     QSignalSpy signalSpy(mConfirmDialog.get(), &ConfirmDialog::commit);
 
@@ -92,7 +92,7 @@ void TestConfirmDialog::testConfirmButtonClicked() {
     QVERIFY(isDialogVisible == false);
 }
 
-void TestConfirmDialog::testConvertActionToString_data() {
+void TestConfirmDialog::testConvertActionToString_data() noexcept {
     QTest::addColumn<StudentDataAction>("actionToConvert");
     QTest::addColumn<QString>("expectedActionString");
 
@@ -101,7 +101,7 @@ void TestConfirmDialog::testConvertActionToString_data() {
     QTest::newRow("Convert DELETE_STUDENT") << DELETE_STUDENT << "delete";
 }
 
-void TestConfirmDialog::testConvertActionToString() {
+void TestConfirmDialog::testConvertActionToString() noexcept {
     QFETCH(StudentDataAction, actionToConvert);
     QFETCH(QString, expectedActionString);
     QString actualActionString =

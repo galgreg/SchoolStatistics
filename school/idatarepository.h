@@ -8,7 +8,7 @@
 class IDataRepository
 {
 public:
-    explicit IDataRepository(const QString &repositoryPath);
+    explicit IDataRepository(const QString &repositoryPath) noexcept;
     virtual ~IDataRepository() = default;
 
     virtual std::unique_ptr<IStudentClass> read(
@@ -17,7 +17,7 @@ public:
     virtual void write(const IStudentClass& studentClass) = 0;
     virtual bool exist() = 0;
 
-    QString getPath();
+    QString getPath() noexcept;
 private:
     const QString mRepositoryPath;
 };

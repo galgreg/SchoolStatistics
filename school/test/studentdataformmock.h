@@ -5,29 +5,29 @@
 
 class StudentDataFormMock : public IStudentDataForm {
 public:
-    StudentDataFormMock();
-    void showForm() override;
-    void hideForm() override;
-    void setFormAction(StudentDataAction newFormAction) override;
-    StudentDataAction getFormAction() override;
+    StudentDataFormMock() noexcept;
+    void showForm() noexcept override;
+    void hideForm() noexcept override;
+    void setFormAction(StudentDataAction newFormAction) noexcept override;
+    StudentDataAction getFormAction() noexcept override;
 
-    void setHeader(const QString &newHeader) override;
-    void setFirstName(const QString &newFirstName) override;
-    void setLastName(const QString &newLastName) override;
-    void setGender(Gender newGender) override;
+    void setHeader(const QString &newHeader) noexcept override;
+    void setFirstName(const QString &newFirstName) noexcept override;
+    void setLastName(const QString &newLastName) noexcept override;
+    void setGender(Gender newGender) noexcept override;
 
-    void setMaxGradesCount(size_t newMaxGradesCount) override;
-    size_t getMaxGradesCount() override;
+    void setMaxGradesCount(size_t newMaxGradesCount) noexcept override;
+    size_t getMaxGradesCount() noexcept override;
     void addGrade(double newGrade) override;
     void editGrade(size_t whichGrade, double newGrade) override;
     void deleteGrade(size_t whichGrade) override;
-    void deleteAllGrades() override;
+    void deleteAllGrades() noexcept override;
 
-    QString getHeader() override;
-    QString getFirstName() override;
-    QString getLastName() override;
-    Gender getGender() override;
-    QList<double> getGrades() override;
+    QString getHeader() noexcept override;
+    QString getFirstName() noexcept override;
+    QString getLastName() noexcept override;
+    Gender getGender() noexcept override;
+    QList<double> getGrades() noexcept override;
 
 private:
     QString mHeader, mFirstName, mLastName;

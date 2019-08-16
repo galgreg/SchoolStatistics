@@ -8,7 +8,7 @@
 class IStudentClass {
 public:
     virtual ~IStudentClass() = default;
-    bool operator==(const IStudentClass &classToCompare) const;
+    bool operator==(const IStudentClass &classToCompare) const noexcept ;
     virtual size_t maxAllowedCount() const = 0;
     virtual size_t count() const = 0;
     virtual void addStudent(std::unique_ptr<IStudent> newStudent) = 0;

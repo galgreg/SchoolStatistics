@@ -8,8 +8,8 @@
 class IStudent {
 public:
     virtual ~IStudent() = default;
-    bool operator==(const IStudent& studentToCompare) const;
-    bool operator!=(const IStudent& studentToCompare) const;
+    bool operator==(const IStudent& studentToCompare) const noexcept;
+    bool operator!=(const IStudent& studentToCompare) const noexcept;
 
     virtual unsigned getID() const = 0;
     virtual const IPersonalData& getPersonalData() const = 0;

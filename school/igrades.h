@@ -6,7 +6,7 @@
 class IGrades {
 public:
     virtual ~IGrades() = default;
-    bool operator==(const IGrades &gradesToCompare) const;
+    bool operator==(const IGrades &gradesToCompare) const noexcept;
 
     virtual void add(double grade) = 0;
     virtual void remove(size_t whichGrade) = 0;

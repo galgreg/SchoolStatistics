@@ -1,6 +1,6 @@
 #include "istudentclass.h"
 
-bool IStudentClass::operator==(const IStudentClass &classToCompare) const {
+bool IStudentClass::operator==(const IStudentClass &classToCompare) const noexcept {
     bool comparisonResult =
         (this->count() == classToCompare.count());
     if (comparisonResult) {

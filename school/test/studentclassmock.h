@@ -9,15 +9,15 @@ class StudentClassMock : public IStudentClass
 {
 public:
     StudentClassMock(const std::initializer_list<double> &studentGrades = {});
-    size_t maxAllowedCount() const override;
-    size_t count() const override;
-    void addStudent(std::unique_ptr<IStudent> newStudent) override;
-    void removeStudent(size_t whichStudent) override;
-    const IStudent& getStudent(size_t whichStudent) const override;
+    size_t maxAllowedCount() const noexcept override;
+    size_t count() const noexcept override;
+    void addStudent(std::unique_ptr<IStudent> newStudent) noexcept override;
+    void removeStudent(size_t whichStudent) noexcept override;
+    const IStudent& getStudent(size_t whichStudent) const noexcept override;
     void editStudent(
         size_t whichStudent,
-        std::unique_ptr<IStudent> newValue) override;
-    void removeAll() override;
+        std::unique_ptr<IStudent> newValue) noexcept override;
+    void removeAll() noexcept override;
 private:
     std::vector<StudentMock> mStudents;
 };

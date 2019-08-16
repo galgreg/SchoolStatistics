@@ -1,6 +1,6 @@
 #include "igrades.h"
 
-bool IGrades::operator==(const IGrades &gradesToCompare) const {
+bool IGrades::operator==(const IGrades &gradesToCompare) const noexcept {
     bool comparisonResult = true;
     bool maxAllowedCountIsTheSame =
             this->maxAllowedCount() == gradesToCompare.maxAllowedCount();

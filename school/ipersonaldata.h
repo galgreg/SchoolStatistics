@@ -7,7 +7,7 @@
 class IPersonalData {
 public:
     virtual ~IPersonalData() = default;
-    bool operator==(const IPersonalData &dataToCompare) const;
+    bool operator==(const IPersonalData &dataToCompare) const noexcept;
 
     virtual QString getFirstName() const = 0;
     virtual QString getLastName() const = 0;

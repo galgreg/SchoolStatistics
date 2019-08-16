@@ -2,7 +2,7 @@
 #include "grades.h"
 #include "studentfactory.h"
 
-DataRepositoryMock::DataRepositoryMock(const QString &repositoryPath) :
+DataRepositoryMock::DataRepositoryMock(const QString &repositoryPath) noexcept :
     IDataRepository(repositoryPath) {
 
 }
@@ -34,6 +34,6 @@ void DataRepositoryMock::write(const IStudentClass &studentClass) {
     }
 }
 
-bool DataRepositoryMock::exist() {
+bool DataRepositoryMock::exist() noexcept {
     return true;
 }

@@ -12,21 +12,21 @@ StudentMock::StudentMock(const IStudent &originalStudentObject) :
 
 }
 
-unsigned StudentMock::getID() const {
+unsigned StudentMock::getID() const noexcept {
     return 0;
 }
 
-const IPersonalData& StudentMock::getPersonalData() const {
+const IPersonalData& StudentMock::getPersonalData() const noexcept {
     return *mPersonalData;
 }
 
-const IGrades& StudentMock::getGrades() const {
+const IGrades& StudentMock::getGrades() const noexcept {
     return *mGrades;
 }
 
-void StudentMock::setPersonalData(std::unique_ptr<IPersonalData>) {
+void StudentMock::setPersonalData(std::unique_ptr<IPersonalData>) noexcept {
 }
 
-void StudentMock::setGrades(std::unique_ptr<IGrades>) {
+void StudentMock::setGrades(std::unique_ptr<IGrades>) noexcept {
 
 }

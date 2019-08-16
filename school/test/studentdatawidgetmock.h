@@ -7,22 +7,22 @@
 class StudentDataWidgetMock : public IStudentDataWidget
 {
 public:
-    void showWidget() override;
-    void hideWidget() override;
+    void showWidget() noexcept override;
+    void hideWidget() noexcept override;
 
-    QString getID() override;
-    QString getFirstName() override;
-    QString getLastName() override;
-    QString getGender() override;
-    QString getGrades() override;
-    QString getGradesAverage() override;
+    QString getID() noexcept override;
+    QString getFirstName() noexcept override;
+    QString getLastName() noexcept override;
+    QString getGender() noexcept override;
+    QString getGrades() noexcept override;
+    QString getGradesAverage() noexcept override;
 
-    void setID(const QString&) override;
-    void setFirstName(const QString&) override;
-    void setLastName(const QString&) override;
-    void setGender(const QString&) override;
-    void setGrades(const QString&) override;
-    void setGradesAverage(const QString&) override;
+    void setID(const QString&) noexcept override;
+    void setFirstName(const QString&) noexcept override;
+    void setLastName(const QString&) noexcept override;
+    void setGender(const QString&) noexcept override;
+    void setGrades(const QString&) noexcept override;
+    void setGradesAverage(const QString&) noexcept override;
 private:
     QString mStudentID;
     QString mFirstName;

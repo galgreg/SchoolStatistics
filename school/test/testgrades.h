@@ -10,18 +10,18 @@ class TestGrades : public QObject, public TestExecutionCounter
     Q_OBJECT
 
 public:
-    TestGrades(unsigned &passed, unsigned &failed);
+    TestGrades(unsigned &passed, unsigned &failed) noexcept;
 
 private slots:
     void init();
-    void cleanup();
-    void testDefaultState();
-    void testAddGrade_OK();
-    void testAddGrade_GradesOverflow();
-    void testRemoveGrade_OK();
-    void testRemoveGrade_Error_NoSuchGrade();
-    void testEditGrade_OK();
-    void testEditGrade_Error_NoSuchGrade();
+    void cleanup() noexcept;
+    void testDefaultState() noexcept;
+    void testAddGrade_OK() noexcept;
+    void testAddGrade_GradesOverflow() noexcept;
+    void testRemoveGrade_OK() noexcept;
+    void testRemoveGrade_Error_NoSuchGrade() noexcept;
+    void testEditGrade_OK() noexcept;
+    void testEditGrade_Error_NoSuchGrade() noexcept;
 private:
     std::unique_ptr<Grades> grades;
 };

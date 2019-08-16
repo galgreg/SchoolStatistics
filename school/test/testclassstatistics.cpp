@@ -5,10 +5,10 @@
 
 TestClassStatistics::TestClassStatistics(
         unsigned &passed,
-        unsigned &failed) : TestExecutionCounter(passed, failed) {
+        unsigned &failed) noexcept : TestExecutionCounter(passed, failed) {
 }
 
-void TestClassStatistics::cleanup() {
+void TestClassStatistics::cleanup() noexcept {
     if (QTest::currentTestFailed()) {
         incrementFailCounter();
     } else {
@@ -16,7 +16,7 @@ void TestClassStatistics::cleanup() {
     }
 }
 
-void TestClassStatistics::testGetStudentAverage() {
+void TestClassStatistics::testGetStudentAverage() noexcept {
     const double expectedStudentAverage = 4.0;
     std::unique_ptr<IStudentClass> studentClass(
             new StudentClassMock({3.5, 4.0, 4.5}));
@@ -27,7 +27,7 @@ void TestClassStatistics::testGetStudentAverage() {
     QCOMPARE(actualStudentAverage, expectedStudentAverage);
 }
 
-void TestClassStatistics::testGetStudentAverage_NoGrades() {
+void TestClassStatistics::testGetStudentAverage_NoGrades() noexcept {
     const double expectedStudentAverage = 0.0;
     auto studentClass = std::make_unique<StudentClassMock>();
 
@@ -37,7 +37,7 @@ void TestClassStatistics::testGetStudentAverage_NoGrades() {
     QCOMPARE(actualStudentAverage, expectedStudentAverage);
 }
 
-void TestClassStatistics::testGetClassAverage() {
+void TestClassStatistics::testGetClassAverage() noexcept {
     const double expectedClassAverage = 4.0;
     std::unique_ptr<IStudentClass> studentClass(
             new StudentClassMock({3.5, 4.0, 4.5}));
@@ -46,7 +46,7 @@ void TestClassStatistics::testGetClassAverage() {
     QCOMPARE(actualClassAverage, expectedClassAverage);
 }
 
-void TestClassStatistics::testGetClassAverage_EmptyClass() {
+void TestClassStatistics::testGetClassAverage_EmptyClass() noexcept {
     const double expectedClassAverage = 0.0;
      auto studentClass = std::make_unique<StudentClassMock>();
      studentClass->removeAll();

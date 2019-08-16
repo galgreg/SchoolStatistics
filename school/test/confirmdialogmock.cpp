@@ -2,23 +2,23 @@
 
 ConfirmDialogMock::ConfirmDialogMock(
         const QString &defaultAction,
-        const QString &defaultStudentName) :
+        const QString &defaultStudentName) noexcept :
             mActionString(defaultAction),
             mStudentName(defaultStudentName) {
 
 }
 
-void ConfirmDialogMock::showDialog() {
+void ConfirmDialogMock::showDialog() noexcept {
 
 }
 
-void ConfirmDialogMock::hideDialog() {
+void ConfirmDialogMock::hideDialog() noexcept {
 
 }
 
 void ConfirmDialogMock::customizeDialogMessage(
         StudentDataAction actionToDo,
-        const QString &studentName) {
+        const QString &studentName) noexcept {
     if (actionToDo == ADD_STUDENT) {
         mActionString = "add";
     } else if (actionToDo == EDIT_STUDENT) {
@@ -31,10 +31,10 @@ void ConfirmDialogMock::customizeDialogMessage(
     mStudentName = studentName;
 }
 
-QString ConfirmDialogMock::getCurrentActionString() {
+QString ConfirmDialogMock::getCurrentActionString() noexcept {
     return mActionString;
 }
 
-QString ConfirmDialogMock::getCurrentStudentName() {
+QString ConfirmDialogMock::getCurrentStudentName() noexcept {
     return mStudentName;
 }

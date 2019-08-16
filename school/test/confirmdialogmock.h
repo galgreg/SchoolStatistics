@@ -9,17 +9,17 @@ class ConfirmDialogMock : public IConfirmDialog
 public:
     ConfirmDialogMock(
             const QString &defaultAction = "",
-            const QString &defaultStudentName = "");
+            const QString &defaultStudentName = "") noexcept;
 
-    void showDialog() override;
-    void hideDialog() override;
+    void showDialog() noexcept override;
+    void hideDialog() noexcept override;
 
     void customizeDialogMessage(
             StudentDataAction actionToDo,
-            const QString &studentName) override;
+            const QString &studentName) noexcept override;
 
-    QString getCurrentActionString() override;
-    QString getCurrentStudentName() override;
+    QString getCurrentActionString() noexcept override;
+    QString getCurrentStudentName() noexcept override;
 
 private:
     QString mActionString;

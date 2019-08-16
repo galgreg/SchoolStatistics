@@ -4,9 +4,9 @@
 class TestExecutionCounter
 {
 protected:
-    TestExecutionCounter(unsigned &passed, unsigned &failed);
-    void incrementPassCounter();
-    void incrementFailCounter();
+    TestExecutionCounter(unsigned &passed, unsigned &failed) noexcept;
+    void incrementPassCounter() noexcept;
+    void incrementFailCounter() noexcept;
 private:
     unsigned &mPassed;
     unsigned &mFailed;

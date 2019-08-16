@@ -1,26 +1,26 @@
 #include "personaldatamock.h"
 
-PersonalDataMock::PersonalDataMock(const IPersonalData &) {
+PersonalDataMock::PersonalDataMock(const IPersonalData &) noexcept {
 
 }
 
-QString PersonalDataMock::getFirstName() const {
+QString PersonalDataMock::getFirstName() const noexcept {
     return "";
 }
 
-QString PersonalDataMock::getLastName() const {
+QString PersonalDataMock::getLastName() const noexcept {
     return "";
 }
 
-Gender PersonalDataMock::getGender() const {
+Gender PersonalDataMock::getGender() const noexcept {
     return UNKNOWN;
 }
 
-void PersonalDataMock::setFirstName(const QString &) {
+void PersonalDataMock::setFirstName(const QString &) noexcept {
 }
 
-void PersonalDataMock::setLastName(const QString &) {
+void PersonalDataMock::setLastName(const QString &) noexcept {
 }
 
-void PersonalDataMock::setGender(Gender) {
+void PersonalDataMock::setGender(Gender) noexcept {
 }

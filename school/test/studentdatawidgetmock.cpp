@@ -1,58 +1,58 @@
 #include "studentdatawidgetmock.h"
 
-void StudentDataWidgetMock::showWidget() {
+void StudentDataWidgetMock::showWidget() noexcept {
 
 }
 
-void StudentDataWidgetMock::hideWidget() {
+void StudentDataWidgetMock::hideWidget() noexcept {
 
 }
 
-QString StudentDataWidgetMock::getID() {
+QString StudentDataWidgetMock::getID() noexcept {
     return mStudentID;
 }
 
-QString StudentDataWidgetMock::getFirstName() {
+QString StudentDataWidgetMock::getFirstName() noexcept {
     return mFirstName;
 }
 
-QString StudentDataWidgetMock::getLastName() {
+QString StudentDataWidgetMock::getLastName() noexcept {
     return mLastName;
 }
 
-QString StudentDataWidgetMock::getGender() {
+QString StudentDataWidgetMock::getGender() noexcept {
     return mGender;
 }
 
-QString StudentDataWidgetMock::getGrades() {
+QString StudentDataWidgetMock::getGrades() noexcept {
     return mGrades;
 }
 
-QString StudentDataWidgetMock::getGradesAverage() {
+QString StudentDataWidgetMock::getGradesAverage() noexcept {
     return mGradesAverage;
 }
 
-void StudentDataWidgetMock::setID(const QString &newID) {
+void StudentDataWidgetMock::setID(const QString &newID) noexcept {
     mStudentID = newID;
 }
 
-void StudentDataWidgetMock::setFirstName(const QString &newFirstName) {
+void StudentDataWidgetMock::setFirstName(const QString &newFirstName) noexcept {
     mFirstName = newFirstName;
 }
 
-void StudentDataWidgetMock::setLastName(const QString &newLastName) {
+void StudentDataWidgetMock::setLastName(const QString &newLastName) noexcept {
     mLastName = newLastName;
 }
 
-void StudentDataWidgetMock::setGender(const QString &newGender) {
+void StudentDataWidgetMock::setGender(const QString &newGender) noexcept {
     mGender = newGender;
 }
 
-void StudentDataWidgetMock::setGrades(const QString &newGrades) {
+void StudentDataWidgetMock::setGrades(const QString &newGrades) noexcept {
     mGrades = newGrades;
 }
 
-void StudentDataWidgetMock::setGradesAverage(const QString &newGradesAverage) {
+void StudentDataWidgetMock::setGradesAverage(const QString &newGradesAverage) noexcept {
     mGradesAverage = newGradesAverage;
 }
 
