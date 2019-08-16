@@ -83,7 +83,7 @@ void TestStudentClass::testRemoveStudent_Error_NoSuchElement() {
 void TestStudentClass::testGetStudent_OK() {
     const size_t maxAllowedCount = 20;
     StudentClass studentClass(maxAllowedCount);
-    std::unique_ptr<IStudent> expectedStudent(new StudentMock);
+    auto expectedStudent = std::make_unique<StudentMock>();
     studentClass.addStudent(std::make_unique<StudentMock>());
 
     const size_t whichStudent = 0;
@@ -111,8 +111,7 @@ void TestStudentClass::testEditStudent_OK() {
     StudentClass studentClass(maxAllowedCount);
 
     std::unique_ptr<IStudent> tempStudent(new StudentMock({3.0, 3.0, 3.0}));
-    std::unique_ptr<IStudent> expectedStudent_BeforeEdit(
-                new StudentMock(*tempStudent));
+    auto expectedStudent_BeforeEdit = std::make_unique<StudentMock>(*tempStudent);
 
     studentClass.addStudent(std::move(tempStudent));
 
@@ -122,8 +121,8 @@ void TestStudentClass::testEditStudent_OK() {
     QCOMPARE(actualStudent_BeforeEdit, *expectedStudent_BeforeEdit);
 
     tempStudent.reset(new StudentMock({5.0, 5.0, 5.0}));
-    std::unique_ptr<IStudent> expectedStudent_AfterEdit(
-                new StudentMock(*tempStudent));
+    std::unique_ptr<IStudent> expectedStudent_AfterEdit =
+                std::make_unique<StudentMock>(*tempStudent);
     QVERIFY(*expectedStudent_BeforeEdit != *expectedStudent_AfterEdit);
 
     studentClass.editStudent(whichStudent, std::move(tempStudent));

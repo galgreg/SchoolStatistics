@@ -10,8 +10,7 @@ DataRepositoryMock::DataRepositoryMock(const QString &repositoryPath) :
 std::unique_ptr<IStudentClass> DataRepositoryMock::read(
         size_t maxStudentCount,
         size_t maxGradesCount) {
-    std::unique_ptr<IStudentClass> classFromFile(
-            new StudentClass(maxStudentCount));
+    auto classFromFile = std::make_unique<StudentClass>(maxStudentCount);
     for (size_t i = 0; i < maxStudentCount && i < mStudentClass.count(); ++i) {
         std::unique_ptr<IStudent> studentCopy(
                 StudentFactory::copy(mStudentClass.getStudent(i)));
@@ -22,7 +21,7 @@ std::unique_ptr<IStudentClass> DataRepositoryMock::read(
         studentCopy->setGrades(std::move(studentGrades));
         classFromFile->addStudent(std::move(studentCopy));
     }
-    return classFromFile;
+    return std::move(classFromFile);
 }
 
 void DataRepositoryMock::write(const IStudentClass &studentClass) {

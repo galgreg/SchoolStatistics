@@ -29,7 +29,7 @@ void TestClassStatistics::testGetStudentAverage() {
 
 void TestClassStatistics::testGetStudentAverage_NoGrades() {
     const double expectedStudentAverage = 0.0;
-    std::unique_ptr<IStudentClass> studentClass(new StudentClassMock);
+    auto studentClass = std::make_unique<StudentClassMock>();
 
     const size_t whichStudent = 3;
     const double actualStudentAverage =
@@ -48,7 +48,7 @@ void TestClassStatistics::testGetClassAverage() {
 
 void TestClassStatistics::testGetClassAverage_EmptyClass() {
     const double expectedClassAverage = 0.0;
-     std::unique_ptr<IStudentClass> studentClass(new StudentClassMock);
+     auto studentClass = std::make_unique<StudentClassMock>();
      studentClass->removeAll();
      const double actualClassAverage =
              ClassStatistics::getClassAverage(*studentClass);

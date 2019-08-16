@@ -33,7 +33,7 @@ void TestMainWindow::init() {
     mStudentClassData->addStudent(StudentFactory::create(
             3, "Gal", "Anonim", UNKNOWN, {2.0, 2.0, 2.0}));
 
-    std::unique_ptr<IDataRepository> dataRepository(new DataRepositoryMock);
+    auto dataRepository = std::make_unique<DataRepositoryMock>();
     dataRepository->write(*mStudentClassData);
 
     mMainWindow.reset(
@@ -54,13 +54,13 @@ void TestMainWindow::cleanup() {
 }
 
 void TestMainWindow::testInitialState_WhenRepositoryIsEmpty() {
-    std::unique_ptr<MainWindow> tempWindow(
-            new MainWindow(
+    std::unique_ptr<MainWindow> tempWindow =
+            std::make_unique<MainWindow>(
                 std::make_unique<DataRepositoryMock>(),
                 std::make_unique<StudentDataWidgetMock>(),
                 std::make_unique<ConfirmDialogMock>(),
                 std::make_unique<StudentDataFormMock>(),
-                std::make_shared<SignalTransmitter>()));
+                std::make_shared<SignalTransmitter>());
 
     unsigned expectedInitialNextStudentID = 1;
     unsigned actualInitialNextStudentID = tempWindow->mNextStudentID;
@@ -68,13 +68,13 @@ void TestMainWindow::testInitialState_WhenRepositoryIsEmpty() {
 }
 
 void TestMainWindow::testMaxCounts_Default() {
-    std::unique_ptr<MainWindow> tempWindow(
-            new MainWindow(
+    std::unique_ptr<MainWindow> tempWindow =
+            std::make_unique<MainWindow>(
                 std::make_unique<DataRepositoryMock>(),
                 std::make_unique<StudentDataWidgetMock>(),
                 std::make_unique<ConfirmDialogMock>(),
                 std::make_unique<StudentDataFormMock>(),
-                std::make_shared<SignalTransmitter>()));
+                std::make_shared<SignalTransmitter>());
 
     size_t expectedStudentMaxCount = 20;
     size_t actualStudentMaxCount = tempWindow->mMaxStudentCount;
@@ -93,15 +93,15 @@ void TestMainWindow::testMaxCounts_SetValues() {
     size_t windowStudentMaxCount = 13;
     size_t windowGradesMaxCount = 5;
 
-    std::unique_ptr<MainWindow> tempWindow(
-            new MainWindow(
+    std::unique_ptr<MainWindow> tempWindow =
+            std::make_unique<MainWindow>(
                 std::make_unique<DataRepositoryMock>(),
                 std::make_unique<StudentDataWidgetMock>(),
                 std::make_unique<ConfirmDialogMock>(),
                 std::make_unique<StudentDataFormMock>(),
                 std::make_shared<SignalTransmitter>(),
                 windowStudentMaxCount,
-                windowGradesMaxCount));
+                windowGradesMaxCount);
 
     size_t expectedStudentMaxCount = windowStudentMaxCount;
     size_t actualStudentMaxCount = tempWindow->mMaxStudentCount;

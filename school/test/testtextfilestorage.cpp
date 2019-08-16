@@ -68,8 +68,8 @@ void TestTextFileStorage::testRead_OK() {
 
     const size_t maximumStudentsCount = 3;
     const size_t maximumGradesCount = 3;
-    std::unique_ptr<IStudentClass> expectedStudentClass(
-            new StudentClass(maximumStudentsCount));
+    std::unique_ptr<IStudentClass> expectedStudentClass =
+            std::make_unique<StudentClass>(maximumStudentsCount);
 
     expectedStudentClass->addStudent(std::move(expectedStudent_1));
     expectedStudentClass->addStudent(std::move(expectedStudent_2));

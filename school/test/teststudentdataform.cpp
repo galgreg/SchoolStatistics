@@ -117,8 +117,9 @@ void TestStudentDataForm::testSetGender() {
 }
 
 void TestStudentDataForm::testSetMaxGradesCount() {
-    std::unique_ptr<StudentDataForm> studentDataForm(
-                new StudentDataForm(std::make_shared<SignalTransmitter>()));
+    auto studentDataForm =
+            std::make_unique<StudentDataForm>(
+                std::make_shared<SignalTransmitter>());
     const size_t expectedMaxCountBeforeSet = 0;
     const size_t actualMaxCountBeforeSet_1 =
             studentDataForm->getMaxGradesCount();

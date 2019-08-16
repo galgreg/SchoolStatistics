@@ -24,8 +24,7 @@ std::unique_ptr<IStudentClass> TextFileStorage::read(
     }
     QFile textFile(getPath());
     if (textFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
-        std::unique_ptr<IStudentClass> studentClass(
-                    new StudentClass(maxStudentCount));
+        auto studentClass = std::make_unique<StudentClass>(maxStudentCount);
         QTextStream textStream(&textFile);
         QString line;
         while (textStream.readLineInto(&line)) {
@@ -69,7 +68,7 @@ std::unique_ptr<IStudentClass> TextFileStorage::read(
                             grades));
             studentClass->addStudent(std::move(newStudent));
         }
-        return studentClass;
+        return std::move(studentClass);
     } else {
         return nullptr;
     }

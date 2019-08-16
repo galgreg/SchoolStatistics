@@ -8,17 +8,14 @@ std::unique_ptr<Student> StudentFactory::create(
         const QString &lastName,
         Gender gender,
         const QList<double> &grades) {    
-    std::unique_ptr<IGrades> studentGrades(
-            new Grades(static_cast<size_t>(grades.size())));
+    auto studentGrades = std::make_unique<Grades>(grades.size());
     for (int i = 0; i < grades.size(); ++i) {
         studentGrades->add(grades.at(i));
     }
-
-    std::unique_ptr<Student> student(
-            new Student(
-                ID,
-                std::make_unique<PersonalData>(firstName, lastName, gender),
-                std::move(studentGrades)));
+    auto student = std::make_unique<Student>(
+            ID,
+            std::make_unique<PersonalData>(firstName, lastName, gender),
+            std::move(studentGrades));
     return student;
 }
 
